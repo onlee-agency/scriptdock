@@ -1,0 +1,17 @@
+/**
+ * Stop emails about successful automatic updates. Failures are still reported.
+ */
+add_filter( 'auto_core_update_send_email', function ( $send, $type ) {
+	return 'success' === $type ? false : $send;
+}, 10, 2 );
+
+$only_on_failure = function ( $enabled, $results ) {
+	foreach ( (array) $results as $result ) {
+		if ( empty( $result->result ) || is_wp_error( $result->result ) ) {
+			return $enabled;
+		}
+	}
+	return false;
+};
+add_filter( 'auto_plugin_update_send_email', $only_on_failure, 10, 2 );
+add_filter( 'auto_theme_update_send_email', $only_on_failure, 10, 2 );

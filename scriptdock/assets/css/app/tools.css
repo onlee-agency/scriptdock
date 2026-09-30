@@ -1,0 +1,145 @@
+/**
+ * S12 Import & Export: the plugin rows, the drop zone and the export card.
+ */
+
+.sd-app .sd-tools {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-inline-size: 820px;
+	padding-block: 4px 32px;
+}
+
+.sd-app .sd-tools__head {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.sd-app .sd-tools__intro {
+	margin: 0;
+	max-inline-size: 62ch;
+	color: var(--sd-gray-600);
+	font: 400 13.5px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-sources {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-sources__row {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 12px;
+	padding-block: 12px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-sources__row:first-child {
+	border-block-start: 0;
+}
+
+.sd-app .sd-sources__mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 34px;
+	block-size: 34px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-sources__text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-sources__name {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-sources__count {
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-tools__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-block-start: 12px;
+}
+
+.sd-app .sd-tools__hint,
+.sd-app .sd-tools__empty {
+	margin: 0;
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-tools__cli {
+	margin: 12px 0 0;
+}
+
+.sd-app .sd-tools__cli code {
+	display: inline-block;
+	padding: 6px 10px;
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 400 12.5px/18px var(--sd-font-mono);
+}
+
+.sd-app .sd-tools__warnings {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-tools__warnings li {
+	display: flex;
+	align-items: start;
+	gap: 8px;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-tools__warnings svg {
+	flex-shrink: 0;
+	margin-block-start: 3px;
+	color: var(--sd-warning-text);
+}
+
+.sd-app .sd-tools__clean {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-sources__row {
+		grid-template-columns: auto minmax(0, 1fr);
+	}
+
+	.sd-app .sd-sources__row > :nth-child(3),
+	.sd-app .sd-sources__row > :nth-child(4) {
+		grid-column: 2;
+	}
+}

@@ -1,0 +1,1056 @@
+/**
+ * Data display: sd-TypeChip, sd-Badge, sd-StatusDot, sd-StatTile, sd-Table,
+ * sd-BulkBar, sd-Pagination, sd-Avatar, sd-Tooltip, sd-KeyValueList,
+ * sd-TargetingSentence, sd-EmptyState, sd-Skeleton, sd-ProgressBar and
+ * sd-ProgressRing.
+ */
+
+/* Type chip: always the label, colour is never alone. -------------------- */
+
+.sd-app .sd-type-chip {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 6px;
+	inline-size: fit-content;
+	block-size: 28px;
+	padding-inline: 9px 12px;
+	border-radius: var(--sd-radius-pill);
+	font: 700 12px/1 var(--sd-font-sans);
+	white-space: nowrap;
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+.sd-app .sd-type-chip svg {
+	inline-size: 15px;
+	block-size: 15px;
+	stroke-width: 1.8;
+}
+
+/* In table rows: a little smaller, icon kept. */
+.sd-app .sd-type-chip--row {
+	block-size: 26px;
+	padding-inline: 8px 11px;
+	font-size: 11px;
+}
+
+.sd-app .sd-type-chip--row svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 1.9;
+}
+
+.sd-app .sd-type-chip--sm {
+	block-size: 24px;
+	padding-inline: 10px;
+	font-size: 11px;
+}
+
+.sd-app .sd-type-chip--xs {
+	block-size: 22px;
+	padding-inline: 9px;
+	font-size: 11px;
+}
+
+.sd-app .sd-type-chip--php {
+	background: var(--sd-type-php-bg);
+	color: var(--sd-type-php-fg);
+}
+
+.sd-app .sd-type-chip--html {
+	background: var(--sd-type-html-bg);
+	color: var(--sd-type-html-fg);
+}
+
+.sd-app .sd-type-chip--css {
+	background: var(--sd-type-css-bg);
+	color: var(--sd-type-css-fg);
+}
+
+.sd-app .sd-type-chip--js {
+	background: var(--sd-type-js-bg);
+	color: var(--sd-type-js-fg);
+}
+
+.sd-app .sd-type-chip--universal {
+	background: var(--sd-type-universal-bg);
+	color: var(--sd-type-universal-fg);
+}
+
+/* Badge. Status badges keep an icon so colour is never alone. ------------ */
+
+.sd-app .sd-badge {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 6px;
+	inline-size: fit-content;
+	max-inline-size: 100%;
+	block-size: 26px;
+	padding-inline: 11px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-info-bg);
+	color: var(--sd-ink-900);
+	font: 700 12px/1 var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-badge svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 2;
+}
+
+.sd-app .sd-badge--sm {
+	gap: 5px;
+	block-size: 24px;
+	padding-inline: 10px;
+	font-size: 11px;
+}
+
+.sd-app .sd-badge--danger {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-badge--warning {
+	background: var(--sd-warning-bg);
+	color: var(--sd-warning-text);
+}
+
+.sd-app .sd-badge--success {
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+}
+
+.sd-app .sd-badge--muted {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-badge--ember {
+	background: var(--sd-ember-100);
+	color: var(--sd-ember-800);
+}
+
+/* Outlined: the Error badge inside a tinted row. */
+.sd-app .sd-badge--outline-danger {
+	border: 1px solid var(--sd-danger);
+	background: var(--sd-white);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-badge--outline {
+	border: 1px solid var(--sd-gray-300);
+	background: var(--sd-white);
+	color: var(--sd-gray-700);
+}
+
+/* Status: Running (pulsing dot), Inactive, Error. ------------------------ */
+
+.sd-app .sd-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sd-ink-900);
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-status__dot {
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	inline-size: 9px;
+	block-size: 9px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+}
+
+.sd-app .sd-status--running .sd-status__dot::before {
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	animation: sd-pulse 2.4s ease-in-out infinite;
+	content: "";
+}
+
+.sd-app .sd-status--inactive {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-status--inactive .sd-status__dot {
+	background: var(--sd-gray-400);
+}
+
+.sd-app .sd-status--error {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-status--error .sd-status__dot {
+	align-items: center;
+	justify-content: center;
+	inline-size: 14px;
+	block-size: 14px;
+	background: var(--sd-danger);
+	color: var(--sd-white);
+	font: 800 10px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-status--sm .sd-status__dot {
+	inline-size: 8px;
+	block-size: 8px;
+}
+
+/* Stat tile. The error tile is the only one that changes colour. --------- */
+
+.sd-app .sd-stat {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-inline-size: 0;
+	padding: 20px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	text-align: start;
+	text-decoration: none;
+	transition:
+		border-color var(--sd-duration-base) var(--sd-ease),
+		transform var(--sd-duration-base) var(--sd-ease),
+		box-shadow var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app a.sd-stat:hover,
+.sd-app button.sd-stat:hover {
+	transform: translateY(-2px);
+	border-color: var(--sd-ink-900);
+	box-shadow: var(--sd-shadow-md);
+	color: var(--sd-ink-900);
+	text-decoration: none;
+}
+
+.sd-app a.sd-stat:focus,
+.sd-app button.sd-stat {
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-stat__label {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-stat__label .sd-status__dot {
+	inline-size: 8px;
+	block-size: 8px;
+}
+
+.sd-app .sd-stat__value {
+	font: 800 36px/40px var(--sd-font-sans);
+	letter-spacing: var(--sd-tracking-display);
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-stat__caption {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	text-overflow: ellipsis;
+}
+
+.sd-app .sd-stat--danger,
+.sd-app a.sd-stat--danger:focus {
+	border-color: var(--sd-danger);
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app a.sd-stat--danger:hover {
+	border-color: var(--sd-danger-text);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-stat--danger .sd-stat__label,
+.sd-app .sd-stat--danger .sd-stat__value {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-stat--danger .sd-stat__caption {
+	color: var(--sd-danger-text);
+	font-weight: 600;
+}
+
+/* Illustrations: thin ink lines and one ember dot, as one set. ------------ */
+
+.sd-app .sd-illustration {
+	display: block;
+	flex-shrink: 0;
+	max-inline-size: 100%;
+	block-size: auto;
+}
+
+.sd-app .sd-illustration__line {
+	fill: none;
+	stroke: var(--sd-ink-900);
+	stroke-width: 1.2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.sd-app .sd-illustration__soft {
+	opacity: 0.5;
+}
+
+.sd-app .sd-illustration__faint {
+	opacity: 0.35;
+}
+
+.sd-app .sd-illustration__ink {
+	fill: var(--sd-ink-900);
+}
+
+.sd-app .sd-illustration__glow {
+	fill: var(--sd-ember-200);
+	opacity: 0.4;
+}
+
+.sd-app .sd-illustration__check {
+	fill: none;
+	stroke: var(--sd-ink-900);
+	stroke-width: 1.6;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* The one unlit centre in the set: "no access", where the code is not
+   the viewer's to see. */
+.sd-app .sd-illustration__locked {
+	fill: var(--sd-gray-600);
+}
+
+.sd-app .sd-illustration__stop-1 {
+	stop-color: var(--sd-dot-start);
+}
+
+.sd-app .sd-illustration__stop-2 {
+	stop-color: var(--sd-ember-500);
+}
+
+.sd-app .sd-illustration__stop-3 {
+	stop-color: var(--sd-ember-600);
+}
+
+/* The brand mark: the dot and the wordmark. Used by the top bar, by setup
+   and anywhere else ScriptDock signs its name. ---------------------------- */
+
+.sd-app .sd-brand-dot {
+	flex-shrink: 0;
+	inline-size: 20px;
+	block-size: 20px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	box-shadow: var(--sd-shadow-dot);
+}
+
+.sd-app .sd-wordmark {
+	font: 800 19px/1 var(--sd-font-sans);
+	letter-spacing: var(--sd-tracking-wordmark);
+}
+
+/* Table. ----------------------------------------------------------------- */
+
+.sd-app .sd-table-wrap {
+	overflow-x: auto;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-table {
+	inline-size: 100%;
+	margin: 0;
+	border: 0;
+	border-collapse: separate;
+	border-spacing: 0;
+	table-layout: fixed;
+	color: var(--sd-ink-900);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-table th,
+.sd-app .sd-table td {
+	padding-block: 0;
+	padding-inline: 6px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	vertical-align: middle;
+	text-align: start;
+}
+
+.sd-app .sd-table :is(th, td):first-child {
+	padding-inline-start: 18px;
+}
+
+.sd-app .sd-table :is(th, td):last-child {
+	padding-inline-end: 18px;
+}
+
+.sd-app .sd-table thead th {
+	block-size: 44px;
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-600);
+	font: 700 11px/16px var(--sd-font-sans);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.sd-app .sd-table thead th:first-child {
+	border-start-start-radius: var(--sd-radius-card);
+}
+
+.sd-app .sd-table thead th:last-child {
+	border-start-end-radius: var(--sd-radius-card);
+}
+
+.sd-app .sd-table__sort {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 0;
+	border: 0;
+	border-radius: var(--sd-radius-sm);
+	background: none;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+	cursor: pointer;
+}
+
+.sd-app .sd-table__sort:hover,
+.sd-app th[aria-sort="ascending"] .sd-table__sort,
+.sd-app th[aria-sort="descending"] .sd-table__sort {
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-table__sort svg {
+	inline-size: 11px;
+	block-size: 11px;
+	stroke-width: 2.6;
+}
+
+.sd-app .sd-table tbody tr {
+	transition: background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-table tbody td {
+	block-size: 64px;
+}
+
+.sd-app .sd-table--compact tbody td {
+	block-size: 44px;
+}
+
+.sd-app .sd-table tbody tr:last-child td {
+	border-block-end: 0;
+}
+
+.sd-app .sd-table tbody tr.is-clickable {
+	cursor: pointer;
+}
+
+.sd-app .sd-table tbody tr.is-clickable:hover {
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-table tbody tr.is-selected {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-table tbody tr.is-danger,
+.sd-app .sd-table tbody tr.is-danger:hover {
+	background: var(--sd-danger-bg);
+}
+
+/* The keyboard route into a row is its title link; show the ring on the
+   whole row while that link has focus. */
+.sd-app .sd-table tbody tr:has(.sd-table__primary:focus-visible) {
+	box-shadow: var(--sd-focus-ring-inset);
+}
+
+.sd-app .sd-table__primary:focus-visible {
+	box-shadow: none;
+}
+
+.sd-app .sd-table__title {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-table__title-text,
+.sd-app .sd-table__primary {
+	overflow: hidden;
+	color: var(--sd-ink-900);
+	font: 700 14px/20px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-table__primary:hover,
+.sd-app .sd-table__primary:focus {
+	color: var(--sd-ink-900);
+	text-decoration: none;
+}
+
+.sd-app .sd-table__sub {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-table__sub.is-danger {
+	color: var(--sd-danger-text);
+	font-weight: 600;
+}
+
+.sd-app .sd-table__muted {
+	color: var(--sd-gray-600);
+	font-size: 12px;
+}
+
+/* Skeleton row. */
+.sd-app .sd-table tr.is-skeleton td {
+	block-size: 44px;
+}
+
+/* Bulk bar: floats over the list while rows are selected. ---------------- */
+
+.sd-app .sd-bulkbar {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+	min-block-size: 52px;
+	padding-block: 8px;
+	padding-inline: 20px 10px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-ink-900);
+	box-shadow: var(--sd-shadow-lg);
+}
+
+.sd-app .sd-bulkbar__count {
+	margin-inline-end: 8px;
+	color: var(--sd-white);
+	font: 700 14px/20px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-bulkbar .sd-button {
+	block-size: var(--sd-control-height-compact);
+	font-size: 13px;
+}
+
+.sd-app .sd-bulkbar .sd-icon-button {
+	inline-size: var(--sd-control-height-compact);
+	block-size: var(--sd-control-height-compact);
+}
+
+.sd-app .sd-bulkbar .sd-icon-button svg {
+	inline-size: 14px;
+	block-size: 14px;
+	stroke-width: 2.2;
+}
+
+/* Pagination. ------------------------------------------------------------ */
+
+.sd-app .sd-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 18px;
+}
+
+.sd-app .sd-pagination__range {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-pagination__pages {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-pagination .sd-icon-button {
+	inline-size: 32px;
+	block-size: 32px;
+}
+
+.sd-app .sd-pagination .sd-icon-button svg {
+	inline-size: 15px;
+	block-size: 15px;
+	stroke-width: 1.8;
+}
+
+/* Avatar: initials. ------------------------------------------------------ */
+
+.sd-app .sd-avatar {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 32px;
+	block-size: 32px;
+	overflow: hidden;
+	border-radius: 50%;
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+	font: 700 12px/1 var(--sd-font-sans);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-avatar img {
+	inline-size: 100%;
+	block-size: 100%;
+	object-fit: cover;
+}
+
+.sd-app .sd-avatar--md {
+	inline-size: 28px;
+	block-size: 28px;
+	font-size: 11px;
+}
+
+.sd-app .sd-avatar--sm {
+	inline-size: 24px;
+	block-size: 24px;
+	font-size: 10px;
+}
+
+.sd-app .sd-avatar--muted {
+	background: var(--sd-gray-200);
+	color: var(--sd-gray-700);
+}
+
+/* Tooltip. --------------------------------------------------------------- */
+
+.sd-app .sd-tooltip-anchor {
+	position: relative;
+	display: inline-flex;
+}
+
+.sd-app .sd-tooltip {
+	position: absolute;
+	inset-block-end: calc(100% + 8px);
+	inset-inline-start: 50%;
+	z-index: var(--sd-z-popover);
+	display: inline-flex;
+	align-items: center;
+	inline-size: max-content;
+	max-inline-size: 280px;
+	min-block-size: 26px;
+	padding: 4px 11px;
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+	font: 500 12px/18px var(--sd-font-sans);
+	white-space: normal;
+	pointer-events: none;
+	translate: -50% 0;
+}
+
+.rtl .sd-app .sd-tooltip,
+.sd-app [dir="rtl"] .sd-tooltip {
+	translate: 50% 0;
+}
+
+.sd-app .sd-tooltip--below {
+	inset-block: calc(100% + 8px) auto;
+}
+
+.sd-app .sd-tooltip[hidden] {
+	display: none;
+}
+
+/* Key-value list: "Where it runs" rows. ---------------------------------- */
+
+.sd-app .sd-kv {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.sd-app .sd-kv__title,
+.sd-app .sd-kv__key {
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-kv__list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-kv__row {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.sd-app .sd-kv__row > svg {
+	inline-size: 19px;
+	block-size: 19px;
+	margin-block-start: 2px;
+	color: var(--sd-ink-900);
+	stroke-width: 1.5;
+}
+
+.sd-app .sd-kv__text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-kv__value {
+	color: var(--sd-ink-900);
+	font: 600 14px/22px var(--sd-font-sans);
+}
+
+.sd-app .sd-kv__value.is-muted {
+	color: var(--sd-gray-600);
+	font-weight: 500;
+}
+
+.sd-app .sd-kv__edit {
+	margin-inline-start: auto;
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+/* Targeting sentence: plain language with inline chips. Chips never break
+   across lines. Parts not chosen yet are neutral. ----------------------- */
+
+.sd-app .sd-sentence {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 500 14px/28px var(--sd-font-sans);
+}
+
+.sd-app .sd-sentence--lg {
+	font-size: 18px;
+	line-height: 32px;
+}
+
+.sd-app .sd-sentence__chip {
+	display: inline-block;
+	padding: 2px 9px;
+	border: 1px solid var(--sd-ember-200);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-ember-50);
+	color: var(--sd-ink-900);
+	font-weight: 700;
+	line-height: 1.4;
+	white-space: nowrap;
+	vertical-align: baseline;
+	text-decoration: none;
+}
+
+.sd-app a.sd-sentence__chip,
+.sd-app button.sd-sentence__chip {
+	font-family: inherit;
+	font-size: inherit;
+	cursor: pointer;
+}
+
+.sd-app a.sd-sentence__chip:hover,
+.sd-app a.sd-sentence__chip:focus,
+.sd-app button.sd-sentence__chip:hover {
+	border-color: var(--sd-ember-500);
+	color: var(--sd-ink-900);
+	text-decoration: none;
+}
+
+.sd-app .sd-sentence__chip--code {
+	font-family: var(--sd-font-mono);
+	font-size: 0.86em;
+	font-weight: 500;
+}
+
+.sd-app .sd-sentence__chip.is-unset {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-gray-200);
+	color: var(--sd-gray-700);
+	font-weight: 600;
+}
+
+/* Empty state: glow, line illustration, headline, actions. --------------- */
+
+.sd-app .sd-empty {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	overflow: hidden;
+	padding: 40px 32px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-empty__glow {
+	position: absolute;
+	inset: -80px -100px auto auto;
+	inline-size: 300px;
+	block-size: 240px;
+	background: var(--sd-gradient-glow);
+	pointer-events: none;
+}
+
+.rtl .sd-app .sd-empty__glow,
+.sd-app [dir="rtl"] .sd-empty__glow {
+	inset: -80px auto auto -100px;
+}
+
+.sd-app .sd-empty__art,
+.sd-app .sd-empty__body,
+.sd-app .sd-empty__actions {
+	position: relative;
+}
+
+.sd-app .sd-empty__body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sd-app .sd-empty__title {
+	color: var(--sd-ink-900);
+	font: 800 24px/32px var(--sd-font-sans);
+	letter-spacing: var(--sd-tracking-h1);
+}
+
+.sd-app .sd-empty__text {
+	max-inline-size: 44ch;
+	color: var(--sd-gray-700);
+	font: var(--sd-text-body);
+}
+
+.sd-app .sd-empty__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-block-start: 4px;
+}
+
+/* Compact: "No results", inside a list. */
+.sd-app .sd-empty--compact {
+	align-items: center;
+	gap: 10px;
+	padding: 32px 24px;
+	border: 0;
+	text-align: center;
+}
+
+.sd-app .sd-empty--compact .sd-empty__title {
+	font: var(--sd-text-h3);
+	letter-spacing: 0;
+}
+
+.sd-app .sd-empty--compact .sd-empty__body {
+	align-items: center;
+}
+
+.sd-app .sd-empty--compact .sd-empty__actions {
+	justify-content: center;
+}
+
+/* Skeleton: shimmer on the first line, flat gray on the rest. ------------ */
+
+.sd-app .sd-skeleton {
+	display: block;
+	block-size: 12px;
+	border-radius: 6px;
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-skeleton--shimmer {
+	background: var(--sd-skeleton-shimmer);
+	background-size: 320px 100%;
+	animation: sd-shimmer 1.2s linear infinite;
+}
+
+.sd-app .sd-skeleton--title {
+	block-size: 14px;
+	border-radius: 7px;
+}
+
+.sd-app .sd-skeleton--line {
+	block-size: 10px;
+	border-radius: 5px;
+}
+
+.sd-app .sd-skeleton--pill {
+	inline-size: 44px;
+	block-size: 20px;
+	border-radius: var(--sd-radius-pill);
+}
+
+.sd-app .sd-skeleton--box {
+	inline-size: 18px;
+	block-size: 18px;
+	border-radius: 5px;
+}
+
+.sd-app .sd-skeleton-card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 20px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+/* A loading row takes a list row's height, so nothing jumps when the real
+   rows arrive. */
+.sd-app .sd-skeleton-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	block-size: 64px;
+	padding-inline: 16px;
+	border-block-end: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-skeleton-row .sd-skeleton--box,
+.sd-app .sd-skeleton-row .sd-skeleton--pill {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-skeleton-row .sd-skeleton--line {
+	flex: 1;
+}
+
+.sd-app .sd-skeleton-row .sd-skeleton--line:last-child {
+	flex: 0 0 80px;
+}
+
+.sd-app .sd-skeleton-editor {
+	display: grid;
+	grid-template-columns: 36px minmax(0, 1fr);
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-editor);
+	overflow: hidden;
+}
+
+.sd-app .sd-skeleton-editor__gutter {
+	background: var(--sd-gray-50);
+	border-inline-end: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-skeleton-editor__code {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	padding: 12px 14px;
+}
+
+/* Progress. -------------------------------------------------------------- */
+
+.sd-app .sd-progress {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sd-app .sd-progress__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	color: var(--sd-ink-900);
+	font: 600 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-progress__count {
+	color: var(--sd-gray-600);
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-progress__track {
+	block-size: 8px;
+	overflow: hidden;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-200);
+}
+
+.sd-app .sd-progress__fill {
+	display: block;
+	block-size: 100%;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gradient-dot);
+	transition: inline-size var(--sd-duration-slow) var(--sd-ease);
+}
+
+/* Ink fill for the wizard's compact step bar. */
+.sd-app .sd-progress--ink .sd-progress__track {
+	block-size: 6px;
+}
+
+.sd-app .sd-progress--ink .sd-progress__fill {
+	border-radius: 0;
+	background: var(--sd-ink-900);
+}
+
+.sd-app .sd-ring {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-ring__track {
+	stroke: var(--sd-gray-200);
+}
+
+.sd-app .sd-ring__fill {
+	stroke: var(--sd-ember-500);
+	transition: stroke-dashoffset var(--sd-duration-slow) var(--sd-ease);
+}
+
+.sd-app .sd-ring__label {
+	fill: var(--sd-ink-900);
+	font: 800 17px/1 var(--sd-font-sans);
+}
+
+/* Count chip: the number beside a page title ("Snippets 24"). ----------- */
+
+.sd-app .sd-count-chip {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	block-size: 26px;
+	padding-inline: 11px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 700 13px/1 var(--sd-font-sans);
+	font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,350 @@
+/**
+ * Surfaces: sd-Card, sd-SaveBar, sd-SettingsRow, sd-PluginSourceRow and
+ * sd-TemplateCard.
+ */
+
+/* Card. ------------------------------------------------------------------ */
+
+.sd-app .sd-card {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	min-inline-size: 0;
+	padding: 24px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-sm);
+}
+
+.sd-app .sd-card__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+}
+
+.sd-app .sd-card__title {
+	color: var(--sd-ink-900);
+	font: var(--sd-text-h3);
+}
+
+.sd-app .sd-card__subtitle {
+	color: var(--sd-gray-600);
+	font: var(--sd-text-small);
+}
+
+.sd-app .sd-card__action {
+	margin-inline-start: auto;
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-card--flush {
+	padding: 0;
+	overflow: hidden;
+}
+
+/* Save bar: appears when something changed; sticks to the bottom. ------- */
+
+.sd-app .sd-savebar {
+	position: sticky;
+	inset-block-end: 16px;
+	z-index: var(--sd-z-sticky);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	min-block-size: 64px;
+	padding-block: 12px;
+	padding-inline: 22px 12px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-ink-900);
+	box-shadow: var(--sd-shadow-lg);
+	animation: sd-rise var(--sd-duration-slow) var(--sd-ease);
+}
+
+.sd-app .sd-savebar__label {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	color: var(--sd-white);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-savebar__label::before {
+	flex-shrink: 0;
+	inline-size: 8px;
+	block-size: 8px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	content: "";
+}
+
+.sd-app .sd-savebar__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-savebar .sd-button--on-ink {
+	padding-inline: 16px;
+}
+
+/* Settings row: title, consequence, switch at the end. ------------------ */
+
+.sd-app .sd-setting {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 18px 20px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-setting__text {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 3px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-setting__title {
+	color: var(--sd-ink-900);
+	font: 700 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-setting__desc {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-setting__control {
+	flex-shrink: 0;
+	margin-block-start: 2px;
+}
+
+/* Rows grouped in one card: dividers instead of separate borders. */
+.sd-app .sd-settings-group {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-settings-group > .sd-setting {
+	border: 0;
+	border-radius: 0;
+}
+
+.sd-app .sd-settings-group > .sd-setting + .sd-setting {
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+/* Plugin source row: a detected plugin to import from. ------------------ */
+
+.sd-app .sd-source {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	padding: 16px 20px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-source__icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 40px;
+	block-size: 40px;
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-source__icon svg {
+	inline-size: 20px;
+	block-size: 20px;
+	stroke-width: 1.5;
+}
+
+.sd-app .sd-source__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-source__name {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	color: var(--sd-ink-900);
+	font: 700 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-source__meta {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-source__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	margin-inline-start: auto;
+}
+
+/* Template card: a library entry. Default, added and blocked. ----------- */
+
+.sd-app .sd-template {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-inline-size: 0;
+	padding: 22px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	transition:
+		border-color var(--sd-duration-base) var(--sd-ease),
+		transform var(--sd-duration-base) var(--sd-ease),
+		box-shadow var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-template:not(.is-added, .is-blocked):hover {
+	transform: translateY(-2px);
+	border-color: var(--sd-ink-900);
+	box-shadow: var(--sd-shadow-md);
+}
+
+.sd-app .sd-template__art {
+	inline-size: 48px;
+	block-size: 48px;
+}
+
+.sd-app .sd-template__text {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.sd-app .sd-template__title {
+	color: var(--sd-ink-900);
+	font: var(--sd-text-h3);
+}
+
+.sd-app .sd-template__desc {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-template__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.sd-app .sd-template__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	block-size: 24px;
+	padding-inline: 10px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 600 11px/1 var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-template__chip--faster {
+	background: var(--sd-ember-100);
+	color: var(--sd-ember-800);
+}
+
+.sd-app .sd-template__footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	margin-block-start: auto;
+}
+
+.sd-app .sd-template.is-added {
+	border-color: var(--sd-success);
+	background: var(--sd-success-bg);
+}
+
+.sd-app .sd-template__added {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	block-size: 32px;
+	padding-inline: 13px;
+	border: 1px solid var(--sd-success);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	color: var(--sd-success-text);
+	font: 700 13px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-template__added svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 3;
+}
+
+/* Blocked: tokens, never opacity. The reason stays at full strength. */
+.sd-app .sd-template.is-blocked {
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-template.is-blocked .sd-template__title {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-template.is-blocked .sd-template__desc {
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-template__blocked {
+	display: inline-flex;
+	align-items: center;
+	align-self: flex-start;
+	gap: 6px;
+	block-size: 30px;
+	padding-inline: 12px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	color: var(--sd-gray-700);
+	font: 700 12px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-template__blocked svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 2;
+}
+
+/* Screen heading, shared by the screens that have their own H1. ---------- */
+
+.sd-app .sd-screen__title {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-ink-900);
+	font: var(--sd-text-h1);
+	letter-spacing: var(--sd-tracking-h1);
+}

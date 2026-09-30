@@ -1,0 +1,982 @@
+/**
+ * S03 Snippets: the list, its quick view (S03b) and the tags manager (S14).
+ *
+ * The shared components style themselves; this file lays out the screen and
+ * styles the parts only it has. The quick view, the filter sheet and the
+ * tags manager open in a layer outside #sd-snippets, so their rules hang
+ * off .sd-app rather than the screen.
+ */
+
+/* Screen ------------------------------------------------------------------- */
+
+.sd-app .sd-snippets__screen {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-block: 4px 32px;
+}
+
+/* Header: title, count and the page actions. */
+
+.sd-app .sd-snippets__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 16px;
+	padding-inline: 4px;
+}
+
+.sd-app .sd-snippets__heading {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-snippets__title-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.sd-app .sd-snippets__title {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-ink-900);
+	font: var(--sd-text-h1);
+	letter-spacing: var(--sd-tracking-h1);
+}
+
+.sd-app .sd-snippets__subtitle {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: var(--sd-text-body);
+}
+
+.sd-app .sd-snippets__actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-inline-start: auto;
+}
+
+/* Toolbar: search, filters, applied chips, sort and density. */
+
+.sd-app .sd-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	padding-inline: 4px;
+}
+
+.sd-app .sd-toolbar__search {
+	display: flex;
+	flex: 1 1 280px;
+	min-inline-size: 200px;
+}
+
+.sd-app .sd-toolbar__search .sd-search {
+	flex: 1;
+}
+
+.sd-app .sd-toolbar__end {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-inline-start: auto;
+}
+
+/* Table -------------------------------------------------------------------- */
+
+/*
+ * The card is the frame, with the pagination inside it. Row menus have to
+ * reach past its edges, so nothing inside clips; the columns share the
+ * width and always fit, so nothing needs to scroll either.
+ */
+.sd-app .sd-snippets__table {
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-snippets__table .sd-table-wrap {
+	overflow: visible;
+	border: 0;
+	border-radius: 0;
+	background: none;
+}
+
+.sd-app .sd-snippets__table .sd-table thead th:not(:first-child) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sd-app .sd-snippets__table .sd-table thead th:first-child {
+	border-start-start-radius: calc(var(--sd-radius-card) - 1px);
+}
+
+.sd-app .sd-snippets__table .sd-table thead th:last-child {
+	border-start-end-radius: calc(var(--sd-radius-card) - 1px);
+}
+
+.sd-app .sd-snippets__table .sd-pagination {
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+/* The line under the title: the most useful fact, then tags. */
+.sd-app .sd-snippets__sub {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	min-inline-size: 0;
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-snippets__sub-text {
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-snippets__sub-extra {
+	flex-shrink: 0;
+	max-inline-size: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-snippets__sub.is-error {
+	gap: 6px;
+	color: var(--sd-danger-text);
+	font-weight: 600;
+}
+
+.sd-app .sd-snippets__sub.is-review {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-snippets__sub.is-locked {
+	gap: 6px;
+}
+
+.sd-app .sd-snippets__sub.is-shortcode .sd-snippets__sub-text {
+	padding: 1px 7px;
+	border-radius: 5px;
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 400 11px/16px var(--sd-font-mono);
+}
+
+.sd-app .sd-snippets__tag {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	block-size: 19px;
+	padding-inline: 8px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 600 11px/1 var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+/* A hovered row is gray-100 too; keep the tags visible on it. */
+.sd-app .sd-table tbody tr.is-clickable:hover:not(.is-selected, .is-danger) .sd-snippets__tag,
+.sd-app .sd-table tbody tr.is-clickable:hover:not(.is-selected, .is-danger) .sd-snippets__sub.is-shortcode .sd-snippets__sub-text {
+	background: var(--sd-gray-200);
+}
+
+/* The type chip opens the quick view. */
+.sd-app .sd-snippets__type {
+	display: inline-flex;
+	flex-shrink: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: var(--sd-radius-pill);
+	background: none;
+	cursor: pointer;
+}
+
+.sd-app .sd-snippets__type:hover .sd-type-chip {
+	box-shadow: inset 0 0 0 1px currentcolor;
+}
+
+.sd-app .sd-snippets__type:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-snippets__where {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-snippets__place {
+	overflow: hidden;
+	color: var(--sd-ink-900);
+	font: 600 13px/18px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-snippets__reach {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-snippets__badge-cell {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-snippets__badges {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-snippets__more-badges {
+	display: inline-flex;
+	align-items: center;
+	block-size: 22px;
+	padding-inline: 7px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 700 11px/1 var(--sd-font-sans);
+	white-space: nowrap;
+	cursor: default;
+}
+
+.sd-app .sd-snippets__none {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-snippets__priority {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-mono);
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-snippets__updated {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+/* Compact rows: each cell's two lines sit side by side. The first keeps
+   its room; the second takes what is left, and tags step aside. */
+.sd-app .sd-table--compact .sd-table__title,
+.sd-app .sd-table--compact .sd-snippets__where {
+	flex-direction: row;
+	align-items: baseline;
+	gap: 10px;
+}
+
+.sd-app .sd-table--compact :is(.sd-table__primary, .sd-snippets__place) {
+	flex: 0 1 auto;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-table--compact :is(.sd-snippets__sub, .sd-snippets__reach) {
+	flex: 1 1 0;
+	min-inline-size: 0;
+	overflow: hidden;
+}
+
+.sd-app .sd-table--compact .sd-snippets__tag {
+	display: none;
+}
+
+/* Rows per page, beside the page buttons. */
+.sd-app .sd-snippets__per-page .sd-field {
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-snippets__per-page .sd-field__label {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-snippets__per-page .sd-select__control {
+	block-size: 32px;
+	padding-inline: 10px 30px;
+	border-radius: var(--sd-radius-sm);
+	font: 400 13px/20px var(--sd-font-sans);
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-snippets__per-page .sd-select__chevron {
+	inset-inline-end: 9px;
+}
+
+.sd-app .sd-snippets__per-page .sd-select__chevron svg {
+	inline-size: 14px;
+	block-size: 14px;
+}
+
+/* Bulk bar: an ink pill at the bottom centre while rows are selected. It
+   sticks to the bottom of the window, then settles below the list. */
+.sd-app .sd-snippets__bulk {
+	position: sticky;
+	inset-block-end: 22px;
+	z-index: var(--sd-z-sticky);
+	display: flex;
+	justify-content: center;
+	pointer-events: none;
+	animation: sd-rise var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-snippets__bulk > * {
+	pointer-events: auto;
+}
+
+/* States: no results, nothing in a view. ----------------------------------- */
+
+.sd-app .sd-snippets__state {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 32px 28px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-snippets__state-title {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-ink-900);
+	font: 700 17px/24px var(--sd-font-sans);
+}
+
+.sd-app .sd-snippets__state-text {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-snippets__state .sd-button {
+	margin-block-start: 4px;
+}
+
+/* Trash -------------------------------------------------------------------- */
+
+.sd-app .sd-trash {
+	overflow: hidden;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-trash__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	padding: 14px 18px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-trash__title {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-ink-900);
+	font: 700 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-trash__note {
+	color: var(--sd-gray-700);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-trash__header .sd-button {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-trash__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-trash__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	padding: 12px 18px;
+	border-block-end: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-trash__row:last-child {
+	border-block-end: 0;
+}
+
+.sd-app .sd-trash__name {
+	min-inline-size: 0;
+	overflow: hidden;
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-trash__when {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-trash__actions {
+	display: flex;
+	gap: 8px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-trash__empty {
+	margin: 0;
+	padding: 32px 18px;
+	color: var(--sd-gray-700);
+	font: var(--sd-text-body);
+	text-align: center;
+}
+
+/* Quick view (S03b) -------------------------------------------------------- */
+
+.sd-app .sd-quick {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.sd-app .sd-quick__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-quick__priority {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__loading {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 16px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-editor);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-quick__section {
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+}
+
+.sd-app .sd-quick__label {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-quick__facts {
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-quick__fact {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-quick__fact > svg {
+	margin-block-start: 1px;
+}
+
+.sd-app .sd-quick__fact-text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-quick__fact-title {
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__fact-detail {
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+	overflow-wrap: anywhere;
+}
+
+.sd-app .sd-quick__fact-detail.is-code {
+	font: 400 11px/16px var(--sd-font-mono);
+	unicode-bidi: isolate;
+}
+
+.sd-app .sd-quick__signature {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__signature.is-error {
+	align-items: flex-start;
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-quick__history {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding-block-start: 4px;
+}
+
+.sd-app .sd-quick__history-text {
+	min-inline-size: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__history-link {
+	flex-shrink: 0;
+	margin-inline-start: auto;
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-drawer__footer .sd-quick__trash {
+	margin-inline-start: auto;
+}
+
+/* What changed outside ScriptDock, with Approve. */
+.sd-app .sd-quick__changes {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 16px 18px;
+	border: 1px solid var(--sd-danger);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-danger-bg);
+}
+
+.sd-app .sd-quick__changes-head {
+	display: flex;
+	gap: 12px;
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-quick__changes-text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-quick__changes-title {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-danger-text);
+	font: 700 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__changes-summary,
+.sd-app .sd-quick__changes-base {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-quick__changes .sd-diff {
+	align-self: stretch;
+}
+
+.sd-app .sd-quick__changes-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-quick__changes-locked {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+/* Cards, for phones -------------------------------------------------------- */
+
+.sd-app .sd-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-cards__card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px 16px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-cards__card.is-danger {
+	border-color: var(--sd-danger);
+	background: var(--sd-danger-bg);
+}
+
+.sd-app .sd-cards__top {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.sd-app .sd-cards__text {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 3px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-cards__title-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 7px;
+}
+
+.sd-app .sd-cards__title,
+.sd-app .sd-cards__title:focus {
+	color: var(--sd-ink-900);
+	font: 700 15px/22px var(--sd-font-sans);
+	text-decoration: none;
+	overflow-wrap: anywhere;
+}
+
+.sd-app .sd-cards__title:hover {
+	color: var(--sd-ink-900);
+	text-decoration: underline;
+}
+
+.sd-app .sd-cards__sub {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-cards__sub.is-error {
+	color: var(--sd-danger-text);
+	font-weight: 600;
+	white-space: normal;
+}
+
+.sd-app .sd-cards__sub.is-review {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-cards__sub.is-shortcode {
+	align-self: flex-start;
+	max-inline-size: 100%;
+	padding: 1px 7px;
+	border-radius: 5px;
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 400 11px/16px var(--sd-font-mono);
+}
+
+.sd-app .sd-cards__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 7px;
+}
+
+.sd-app .sd-cards__where {
+	min-inline-size: 0;
+	color: var(--sd-gray-700);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-cards__menu {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-cards__fix {
+	inline-size: 100%;
+}
+
+/* Filter sheet (phones and tablets) ---------------------------------------- */
+
+.sd-app .sd-filter-sheet {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.sd-app .sd-filter-sheet__group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-inline-size: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.sd-app .sd-filter-sheet__group legend {
+	margin: 0 0 10px;
+	padding: 0;
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+/* The sheet scrolls; its actions stay in reach at the bottom. */
+.sd-app .sd-filter-sheet__footer {
+	position: sticky;
+	inset-block-end: -22px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0 -20px -22px;
+	padding: 14px 20px 22px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-filter-sheet__footer .sd-button--primary {
+	flex: 1;
+}
+
+/* Tags manager (S14) ------------------------------------------------------- */
+
+.sd-app .sd-modal.sd-tags-manager {
+	max-inline-size: 520px;
+}
+
+.sd-app .sd-tags-manager .sd-modal__body {
+	padding: 0;
+}
+
+.sd-app .sd-tags-manager .sd-modal__footer {
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-tags-manager__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-tags-manager__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	padding: 13px 24px;
+	border-block-end: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-tags-manager__row:last-child {
+	border-block-end: 0;
+}
+
+.sd-app .sd-tags-manager__row.is-editing {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-tags-manager__row.is-editing .sd-input {
+	flex: 1 1 160px;
+	inline-size: auto;
+	min-inline-size: 0;
+	block-size: 38px;
+}
+
+/* A block, not a flex box, so a long name ends in an ellipsis. */
+.sd-app .sd-tags-manager__name {
+	display: inline-block;
+	max-inline-size: 100%;
+	block-size: 28px;
+	overflow: hidden;
+	padding-inline: 12px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+	font: 600 13px/28px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-tags-manager__count {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-tags-manager__buttons {
+	display: flex;
+	flex-shrink: 0;
+	gap: 6px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-tags-manager__buttons .sd-icon-button--ghost:hover {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-tags-manager__problem {
+	display: flex;
+	flex-basis: 100%;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	color: var(--sd-danger-text);
+	font: 600 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags-manager__empty {
+	margin: 0;
+	padding: 24px;
+	color: var(--sd-gray-700);
+	font: var(--sd-text-body);
+}
+
+.sd-app .sd-button.sd-tags-manager__new,
+.sd-app .sd-button.sd-tags-manager__new:focus {
+	border-style: dashed;
+	border-color: var(--sd-gray-400);
+	background: transparent;
+}
+
+.sd-app .sd-button.sd-tags-manager__new:hover {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-white);
+}
+
+/* Tablet ------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+
+	.sd-app .sd-snippets__title {
+		font-size: 24px;
+		line-height: 30px;
+	}
+
+	.sd-app .sd-snippets__header {
+		align-items: center;
+	}
+
+	.sd-app .sd-snippets__screen {
+		gap: 14px;
+	}
+}
+
+/* Phone -------------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-snippets__screen {
+		gap: 12px;
+	}
+
+	/* Status pills scroll sideways in one row. */
+	.sd-app .sd-snippets__screen > nav > .sd-pills {
+		flex-wrap: nowrap;
+		margin-inline: -4px;
+		padding: 4px;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+
+	.sd-app .sd-snippets__screen > nav > .sd-pills .sd-pills__pill {
+		block-size: 34px;
+		padding-inline: 14px;
+	}
+
+	.sd-app .sd-toolbar__search {
+		flex-basis: 180px;
+		min-inline-size: 0;
+	}
+
+	.sd-app .sd-toolbar__search .sd-input {
+		block-size: 42px;
+	}
+
+	.sd-app .sd-snippets__bulk .sd-bulkbar {
+		justify-content: center;
+		max-inline-size: 100%;
+		border-radius: var(--sd-radius-card);
+	}
+
+	.sd-app .sd-snippets__bulk {
+		inset-block-end: 12px;
+	}
+
+	.sd-app .sd-cards + .sd-pagination {
+		padding-inline: 4px;
+	}
+
+	.sd-app .sd-trash__actions {
+		inline-size: 100%;
+		margin-inline-start: 0;
+	}
+
+	.sd-app .sd-tags-manager__row {
+		padding-inline: 16px;
+	}
+}

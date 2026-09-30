@@ -1,0 +1,173 @@
+/**
+ * S20: the command palette.
+ *
+ * It sits high on the screen rather than dead centre, so the results have
+ * room to grow downwards and the box does not jump as you type.
+ */
+
+.sd-app .sd-palette-layer {
+	position: relative;
+	inline-size: 100%;
+	max-inline-size: 620px;
+	margin-block-start: min(12vh, 120px);
+	align-self: flex-start;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-modal);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-lg);
+	overflow: hidden;
+}
+
+.sd-app .sd-palette {
+	display: flex;
+	flex-direction: column;
+	min-block-size: 0;
+}
+
+/* The search box ------------------------------------------------------- */
+
+.sd-app .sd-palette__head {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 18px 22px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-palette__input {
+	flex: 1;
+	min-inline-size: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+	color: var(--sd-ink-900);
+	font: 400 17px/24px var(--sd-font-sans);
+}
+
+.sd-app .sd-palette__input:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.sd-app .sd-palette__input::placeholder {
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-palette__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 32px;
+	block-size: 32px;
+	flex-shrink: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-palette__close:hover {
+	background: var(--sd-gray-200);
+}
+
+/* Results --------------------------------------------------------------- */
+
+.sd-app .sd-palette__results {
+	padding-block: 8px;
+	max-block-size: min(46vh, 380px);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+.sd-app .sd-palette__group {
+	padding: 9px 22px 5px;
+	color: var(--sd-gray-600);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.sd-app .sd-palette__row {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	padding: 10px 22px;
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+/* The highlighted row: a tint, not a colour change, so the text keeps its
+   contrast whether it got there by mouse or by arrow key. */
+.sd-app .sd-palette__row.is-active {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-palette__label {
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.sd-app .sd-palette__row .sd-type-chip {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-palette__row > .sd-icon {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-palette__note,
+.sd-app .sd-palette__state {
+	margin-inline-start: auto;
+	padding-inline-start: 12px;
+	flex-shrink: 0;
+	color: var(--sd-gray-700);
+	font-size: 12px;
+}
+
+.sd-app .sd-palette__none {
+	padding: 18px 22px 22px;
+	color: var(--sd-gray-700);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+/* Keyboard hints -------------------------------------------------------- */
+
+.sd-app .sd-palette__foot {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 12px 22px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	font-size: 11px;
+}
+
+.sd-app .sd-palette__foot-end {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-palette__foot .sd-kbd {
+	margin-inline-end: 2px;
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-palette-layer {
+		margin-block-start: 0;
+	}
+
+	.sd-app .sd-palette__foot {
+		display: none;
+	}
+}

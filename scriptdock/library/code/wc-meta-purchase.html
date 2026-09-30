@@ -1,0 +1,24 @@
+<!-- Meta Pixel purchase event (order-received page) -->
+<script>
+( function () {
+	var orderId = '{{wc_order_id|js}}';
+	if ( ! orderId || typeof window.fbq !== 'function' ) {
+		return;
+	}
+	// Only send once, even if the customer reloads the page.
+	var key = 'scriptdock_meta_purchase_' + orderId;
+	try {
+		if ( window.localStorage.getItem( key ) ) {
+			return;
+		}
+		window.localStorage.setItem( key, '1' );
+	} catch ( e ) {}
+
+	window.fbq( 'track', 'Purchase', {
+		value: Number( '{{wc_order_total|js}}' ),
+		currency: '{{wc_order_currency|js}}',
+		content_ids: {{wc_order_item_ids|json}},
+		content_type: 'product'
+	}, { eventID: 'order_' + orderId } );
+} )();
+</script>

@@ -1,0 +1,10 @@
+/**
+ * Point the login logo at the home page and use the site title as its text.
+ */
+add_filter( 'login_headerurl', function () {
+	return home_url( '/' );
+} );
+
+add_filter( 'login_headertext', function () {
+	return get_bloginfo( 'name' );
+} );

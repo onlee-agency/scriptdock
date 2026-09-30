@@ -1,0 +1,38 @@
+<!-- GA4 purchase event (order-received page) -->
+<script>
+( function () {
+	var orderId = '{{wc_order_id|js}}';
+	if ( ! orderId ) {
+		return;
+	}
+	// Only send once, even if the customer reloads the page.
+	var key = 'scriptdock_ga4_purchase_' + orderId;
+	try {
+		if ( window.localStorage.getItem( key ) ) {
+			return;
+		}
+		window.localStorage.setItem( key, '1' );
+	} catch ( e ) {}
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { window.dataLayer.push( arguments ); }
+
+	var items = {{wc_order_items|json}};
+	gtag( 'event', 'purchase', {
+		transaction_id: '{{wc_order_number|js}}',
+		value: Number( '{{wc_order_total|js}}' ),
+		tax: Number( '{{wc_order_tax|js}}' ),
+		shipping: Number( '{{wc_order_shipping|js}}' ),
+		currency: '{{wc_order_currency|js}}',
+		coupon: '{{wc_order_coupons|js}}',
+		items: items.map( function ( item ) {
+			return {
+				item_id: item.sku || String( item.id ),
+				item_name: item.name,
+				quantity: item.quantity,
+				price: item.price
+			};
+		} )
+	} );
+} )();
+</script>

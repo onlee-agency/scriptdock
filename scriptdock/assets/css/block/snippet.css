@@ -1,0 +1,204 @@
+/**
+ * S16: the ScriptDock Snippet block in the editor canvas.
+ *
+ * The canvas is its own document — the design system is not loaded there —
+ * so this file stands on its own. The handful of brand values it needs are
+ * copied onto the block itself rather than reaching for tokens that are not
+ * in scope. Everything else follows the block editor's own look: 2px radii,
+ * #949494 borders, 13px text.
+ */
+
+.sd-snippetblock {
+	--sd-block-dot: linear-gradient(135deg, #fb8e01, #c2410c);
+	--sd-block-warning-bg: #fff8e5;
+	--sd-block-warning: #dba617;
+	--sd-block-warning-text: #8a6100;
+	--sd-block-ink: #1e1e1e;
+	--sd-block-muted: #757575;
+	--sd-block-line: #949494;
+}
+
+.sd-snippetblock__card {
+	display: flex;
+	gap: 10px;
+	box-sizing: border-box;
+	padding: 18px 20px;
+	border-radius: 2px;
+	color: var(--sd-block-ink);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.sd-snippetblock__card--empty {
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 22px;
+	border: 1px dashed var(--sd-block-line);
+	background: #f0f0f0;
+}
+
+.sd-snippetblock__card--set {
+	align-items: center;
+	gap: 12px;
+	border: 1px solid var(--sd-block-line);
+	background: #fff;
+}
+
+.sd-snippetblock__card--gone {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+	border: 1px dashed var(--sd-block-line);
+	background: var(--sd-block-warning-bg);
+}
+
+/* The dot ------------------------------------------------------------- */
+
+.sd-snippetblock__dot {
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--sd-block-dot);
+}
+
+.sd-snippetblock__dot.is-small {
+	width: 16px;
+	height: 16px;
+}
+
+.sd-snippetblock__dot.is-dim {
+	background: #c8c8c6;
+}
+
+/* Text ---------------------------------------------------------------- */
+
+.sd-snippetblock__head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-snippetblock__title {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.sd-snippetblock__title.is-dim {
+	color: var(--sd-block-muted);
+}
+
+.sd-snippetblock__text {
+	color: var(--sd-block-muted);
+}
+
+.sd-snippetblock__gone {
+	color: var(--sd-block-warning-text);
+	font-weight: 700;
+}
+
+.sd-snippetblock__detail {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-width: 0;
+}
+
+/* dir="auto" in the markup: a long title in the other script direction is
+   cut at its own end. match-parent keeps short ones lined up. */
+.sd-snippetblock__name {
+	font-size: 14px;
+	font-weight: 600;
+	overflow: hidden;
+	text-align: -webkit-match-parent;
+	text-align: match-parent;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-snippetblock__meta {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+
+.sd-snippetblock__where {
+	color: var(--sd-block-muted);
+	font-size: 12px;
+}
+
+/* Type chips. The same colours as the snippet list, as flat values. ----- */
+
+.sd-snippetblock__chip {
+	display: inline-flex;
+	align-items: center;
+	height: 19px;
+	padding: 0 7px;
+	border-radius: 2px;
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.sd-snippetblock__chip--html {
+	background: #fdecef;
+	color: #be2d48;
+}
+
+.sd-snippetblock__chip--css {
+	background: #e8f2fc;
+	color: #1b63b0;
+}
+
+.sd-snippetblock__chip--js {
+	background: #fff6d6;
+	color: #8a6a00;
+}
+
+.sd-snippetblock__chip--php {
+	background: #efedfb;
+	color: #5b4bc4;
+}
+
+.sd-snippetblock__chip--universal {
+	background: #e6f6ef;
+	color: #0f7c5a;
+}
+
+/* Controls ------------------------------------------------------------- */
+
+.sd-snippetblock__select {
+	box-sizing: border-box;
+	height: 36px;
+	min-width: 220px;
+	max-width: 100%;
+	padding: 0 12px;
+	border: 1px solid var(--sd-block-line);
+	border-radius: 2px;
+	background: #fff;
+	color: inherit;
+	font-family: inherit;
+	font-size: 13px;
+}
+
+.sd-snippetblock__link {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: #2271b1;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.sd-snippetblock__link--end {
+	margin-inline-start: auto;
+	flex-shrink: 0;
+}
+
+.sd-snippetblock__link:hover,
+.sd-snippetblock__link:focus {
+	color: #135e96;
+}

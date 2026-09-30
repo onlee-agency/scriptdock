@@ -1,0 +1,525 @@
+/**
+ * ScriptDock app shell: the canvas, the top bar and the notice zone.
+ *
+ * Layout inside WordPress's content area:
+ *
+ *   .sd-app.sd-shell       the top bar, printed on in_admin_header
+ *   .wrap                  our page container
+ *     hr.wp-header-end     WordPress moves notices to just after this
+ *     (notices)            the notice zone: WordPress-styled, outside .sd-app
+ *     page content
+ */
+
+/*
+ * Outside .sd-app. Only four things live here, all scoped to our own body
+ * class or our own markup: the gray-50 canvas, the layout variables, scroll
+ * padding for the pinned top bar, and the alignment of our .wrap
+ * containers. The toolbar and sidebar paint their own backgrounds, so
+ * neither changes.
+ */
+
+body.sd-screen {
+	--sd-shell-inset: 16px; /* design inset from the content area's edges */
+	--sd-wp-gutter: 20px; /* WordPress's start padding on #wpcontent */
+	--sd-topbar-height: 64px;
+	--sd-admin-bar: var(--wp-admin--admin-bar--height, 32px); /* pinned height of WordPress's admin bar */
+
+	/* Where anything else that sticks goes: just below the top bar. */
+	--sd-sticky-top: calc(var(--sd-admin-bar) + var(--sd-shell-inset) + var(--sd-topbar-height) + 12px);
+	background: #f9f8f6; /* --sd-gray-50 */
+}
+
+/* Keyboard focus and anchor jumps land below the pinned top bar, never
+   under it (WCAG 2.2, 2.4.11). Inset + bar + 12px gap, per size. */
+html:has(> body.sd-screen) {
+	scroll-padding-top: calc(var(--wp-admin--admin-bar--height, 32px) + 92px);
+}
+
+@media (max-width: 1024px) {
+
+	body.sd-screen {
+		--sd-shell-inset: 14px;
+		--sd-topbar-height: 60px;
+	}
+
+	html:has(> body.sd-screen) {
+		scroll-padding-top: calc(var(--wp-admin--admin-bar--height, 32px) + 86px);
+	}
+}
+
+@media (max-width: 782px) {
+
+	body.sd-screen {
+		--sd-shell-inset: 12px;
+		--sd-wp-gutter: 10px;
+		--sd-topbar-height: 56px;
+	}
+
+	html:has(> body.sd-screen) {
+		scroll-padding-top: calc(var(--wp-admin--admin-bar--height, 46px) + 80px);
+	}
+}
+
+/* Below 601px WordPress's admin bar scrolls away with the page. */
+@media (max-width: 600px) {
+
+	body.sd-screen {
+		--sd-admin-bar: 0px;
+	}
+
+	html:has(> body.sd-screen) {
+		scroll-padding-top: 80px;
+	}
+}
+
+/* Our own page containers line up with the top bar. The notice zone lives
+   inside them, so core notices line up too. */
+body.sd-screen .wrap.scriptdock-wrap,
+body.sd-screen .wrap.sd-wrap {
+	margin-inline: calc(var(--sd-shell-inset) - var(--sd-wp-gutter)) var(--sd-shell-inset);
+}
+
+/* Shell host ------------------------------------------------------------- */
+
+/*
+ * The top bar is pinned below WordPress's admin bar, 16px inset. Its host
+ * is a full-width gray-50 band as tall as the inset plus the bar, so the
+ * notice zone and the page scroll underneath it without showing through
+ * the gap. Padding, not margin, sits above the bar: a top margin would
+ * collapse through #wpcontent and move WordPress's admin bar on phones.
+ */
+.sd-app.sd-shell {
+	position: sticky;
+	top: var(--sd-admin-bar);
+	z-index: var(--sd-z-sticky);
+	margin-inline-start: calc(0px - var(--sd-wp-gutter));
+	padding-block-start: var(--sd-shell-inset);
+	padding-inline: var(--sd-shell-inset);
+	background: var(--sd-gray-50);
+}
+
+/* WordPress slides #wpbody aside when its phone menu opens; move with it. */
+@media (max-width: 782px) {
+
+	.wp-responsive-open .sd-app.sd-shell {
+		transform: translateX(calc(16 * 13px)); /* WordPress's 16em at 13px */
+	}
+
+	.rtl .wp-responsive-open .sd-app.sd-shell {
+		transform: translateX(calc(-16 * 13px));
+	}
+}
+
+/*
+ * Phones below 601px: WordPress's admin bar scrolls away with the page and
+ * #wpbody pads itself 46px to clear it. The host clears the admin bar
+ * itself, takes up that padding underneath, and pins to the top of the
+ * screen once the admin bar has scrolled away.
+ */
+@media (max-width: 600px) {
+
+	.sd-app.sd-shell {
+		top: -46px;
+		margin-block-end: -46px;
+		padding-block-start: calc(46px + var(--sd-shell-inset));
+	}
+}
+
+/* Top bar ---------------------------------------------------------------- */
+
+.sd-app .sd-topbar {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	block-size: var(--sd-topbar-height, 64px);
+	padding-inline: 20px 12px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-md);
+}
+
+.sd-app .sd-topbar__brand,
+.sd-app .sd-topbar__brand:focus,
+.sd-app .sd-topbar__brand:hover {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 9px;
+	border-radius: var(--sd-radius-pill);
+	color: var(--sd-ink-900);
+	text-decoration: none;
+}
+
+.sd-app .sd-topbar.is-safe-mode .sd-brand-dot {
+	box-shadow: none;
+}
+
+/* Section tabs. The list scrolls sideways only as a last resort; the
+   script collapses it into "More" first. The padding keeps focus rings from
+   being clipped by the scroll container. */
+
+.sd-app .sd-topbar__nav {
+	display: flex;
+	align-items: center;
+	min-inline-size: 0;
+	margin-inline-start: 6px;
+}
+
+.sd-app .sd-topbar.is-safe-mode .sd-topbar__nav {
+	margin-inline-start: 0;
+}
+
+.sd-app .sd-topbar__tabs {
+	display: flex;
+	align-items: center;
+	gap: 1px;
+	min-inline-size: 0;
+	margin: -4px;
+	padding: 4px;
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.sd-app .sd-topbar__tabs::-webkit-scrollbar {
+	display: none;
+}
+
+.sd-app .sd-topbar__item {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-topbar__tab,
+.sd-app .sd-topbar__tab:focus {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	block-size: 40px;
+	padding-block: 0;
+	padding-inline: 12px;
+	border: 0;
+	border-radius: var(--sd-radius-pill);
+	background: transparent;
+	color: var(--sd-gray-700);
+	font: 500 14px/1 var(--sd-font-sans);
+	white-space: nowrap;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		background-color var(--sd-duration-fast) var(--sd-ease),
+		color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-topbar__tab:hover {
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	text-decoration: none;
+}
+
+.sd-app .sd-topbar__tab[aria-current="page"],
+.sd-app .sd-topbar__more-toggle.is-current {
+	color: var(--sd-ink-900);
+	font-weight: 700;
+}
+
+/* The active tab carries a small ember dot beneath its label. */
+.sd-app .sd-topbar__tab[aria-current="page"]::after,
+.sd-app .sd-topbar__more-toggle.is-current::after {
+	position: absolute;
+	inset-block-end: 5px;
+	inset-inline: 0;
+	inline-size: 5px;
+	block-size: 5px;
+	margin-inline: auto;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	content: "";
+}
+
+.sd-app .sd-topbar__more {
+	position: relative;
+	display: none;
+	flex-shrink: 0;
+	margin-inline-start: 1px;
+}
+
+.sd-app .sd-topbar__more-toggle svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 2.4;
+	transition: transform var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-topbar__more-toggle[aria-expanded="true"] svg {
+	transform: rotate(180deg);
+}
+
+/* Collapsed: set by the script when the full row does not fit. Only the
+   primary tabs stay; the rest move into "More", and search becomes an icon
+   button. */
+
+.sd-app .sd-topbar.is-collapsed .sd-topbar__item:not(.is-primary) {
+	display: none;
+}
+
+.sd-app .sd-topbar.is-collapsed .sd-topbar__more {
+	display: block;
+}
+
+.sd-app .sd-topbar.is-collapsed .sd-topbar__search {
+	inline-size: 40px;
+	padding: 0;
+	border-radius: 50%;
+}
+
+.sd-app .sd-topbar.is-collapsed .sd-topbar__search-label {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.sd-app .sd-topbar.is-collapsed .sd-topbar__search .sd-kbd {
+	display: none;
+}
+
+/* Actions ---------------------------------------------------------------- */
+
+.sd-app .sd-topbar__actions {
+	position: relative;
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 10px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-topbar__search {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	block-size: 40px;
+	padding-block: 0;
+	padding-inline: 14px 10px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	color: var(--sd-gray-600);
+	font: 400 13px/1 var(--sd-font-sans);
+	cursor: pointer;
+	transition:
+		border-color var(--sd-duration-fast) var(--sd-ease),
+		background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-topbar__search[hidden] {
+	display: none;
+}
+
+.sd-app .sd-topbar__search:hover {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-topbar__search svg {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+/* Shown only at the sizes that use them (see the media queries below). */
+.sd-app .sd-topbar .sd-topbar__new-short,
+.sd-app .sd-topbar .sd-topbar__menu-toggle,
+.sd-app .sd-topbar .sd-topbar__new-icon {
+	display: none;
+}
+
+/* Safe-mode pill. Danger colours; Exit is white on #D63638 (4.7:1). */
+
+.sd-app .sd-safe-pill {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 8px;
+	block-size: 36px;
+	padding-inline: 14px 6px;
+	border: 1px solid var(--sd-danger);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+	font: 700 13px/1 var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-safe-pill--forced {
+	padding-inline-end: 14px;
+}
+
+.sd-app .sd-safe-pill svg {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+.sd-app .sd-safe-pill__exit,
+.sd-app .sd-safe-pill__exit:focus,
+.sd-app .sd-safe-pill__exit:hover {
+	display: inline-flex;
+	align-items: center;
+	block-size: 24px;
+	padding-inline: 10px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-danger);
+	color: var(--sd-white);
+	font: 700 12px/1 var(--sd-font-sans);
+	text-decoration: none;
+}
+
+.sd-app .sd-safe-pill__exit:hover {
+	background: var(--sd-danger-text);
+}
+
+/* 1024px and below: the compact bar from the tablet design. ------------- */
+
+@media (max-width: 1024px) {
+
+	.sd-app .sd-topbar {
+		gap: 12px;
+		padding-inline: 18px 10px;
+	}
+
+	.sd-app .sd-topbar__brand,
+	.sd-app .sd-topbar__brand:focus,
+	.sd-app .sd-topbar__brand:hover {
+		gap: 8px;
+	}
+
+	.sd-app .sd-brand-dot {
+		inline-size: 18px;
+		block-size: 18px;
+	}
+
+	.sd-app .sd-wordmark {
+		font-size: 17px;
+	}
+
+	.sd-app .sd-topbar__tab,
+	.sd-app .sd-topbar__tab:focus {
+		block-size: 38px;
+		padding-inline: 11px;
+		font-size: 13px;
+	}
+
+	.sd-app .sd-topbar__tab[aria-current="page"]::after,
+	.sd-app .sd-topbar__more-toggle.is-current::after {
+		inset-block-end: 4px;
+	}
+
+	.sd-app .sd-topbar__more-toggle svg {
+		inline-size: 12px;
+		block-size: 12px;
+	}
+
+	.sd-app .sd-topbar__actions {
+		gap: 8px;
+	}
+
+	.sd-app .sd-topbar__search {
+		block-size: 38px;
+	}
+
+	.sd-app .sd-topbar.is-collapsed .sd-topbar__search {
+		inline-size: 38px;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__new {
+		gap: 7px;
+		block-size: 38px;
+		padding-inline: 15px 5px;
+		font-size: 13px;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__new .sd-button__dot {
+		inline-size: 26px;
+		block-size: 26px;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__new .sd-button__dot svg {
+		inline-size: 13px;
+		block-size: 13px;
+		stroke-width: 2.6;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__new-full {
+		display: none;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__new-short {
+		display: inline;
+	}
+}
+
+/* Phones: logo, menu button and a round New button. --------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-topbar {
+		gap: 10px;
+		padding-inline: 16px 8px;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__nav,
+	.sd-app .sd-topbar .sd-topbar__actions > .sd-topbar__search,
+	.sd-app .sd-topbar .sd-topbar__new {
+		display: none;
+	}
+
+	.sd-app .sd-topbar__actions {
+		gap: 6px;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__menu-toggle,
+	.sd-app .sd-topbar .sd-topbar__new-icon {
+		display: inline-flex;
+	}
+
+	.sd-app .sd-topbar .sd-topbar__menu-toggle,
+	.sd-app .sd-topbar .sd-topbar__menu-toggle:hover {
+		color: var(--sd-ink-900);
+	}
+
+	.sd-app .sd-topbar__menu-toggle svg,
+	.sd-app .sd-topbar__new-icon svg {
+		inline-size: 17px;
+		block-size: 17px;
+	}
+
+	.sd-app .sd-topbar__new-icon svg {
+		stroke-width: 2.4;
+	}
+
+	/* The pill keeps its icon and Exit; the label moves to screen readers. */
+	.sd-app .sd-safe-pill {
+		padding-inline-start: 10px;
+	}
+
+	.sd-app .sd-safe-pill__label {
+		position: absolute;
+		inline-size: 1px;
+		block-size: 1px;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.sd-app .sd-menu__item,
+	.sd-app .sd-menu__item:focus {
+		min-block-size: var(--sd-control-height-touch);
+		padding-block: 12px;
+	}
+}

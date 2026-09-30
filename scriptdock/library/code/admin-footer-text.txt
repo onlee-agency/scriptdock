@@ -1,0 +1,11 @@
+/**
+ * Replace the admin footer text. Edit the text and link below.
+ */
+add_filter( 'admin_footer_text', function () {
+	return sprintf(
+		'%s <a href="%s">%s</a>',
+		esc_html( 'Website built and maintained by' ),
+		esc_url( 'https://example.com/' ),
+		esc_html( 'Your Agency' )
+	);
+} );

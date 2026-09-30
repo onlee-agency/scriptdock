@@ -1,0 +1,10 @@
+.DS_Store
+dist/
+node_modules/
+vendor/
+*.log
+
+# Local tools and working notes, not part of the project.
+.claude/
+docs/qa-plan.md
+dev/mu-plugins/axe.min.js

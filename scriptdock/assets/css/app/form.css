@@ -1,0 +1,1153 @@
+/**
+ * Form controls: sd-Field, sd-TextField, sd-TextArea, sd-Select,
+ * sd-SearchField, sd-NumberStepper, sd-Switch, sd-Checkbox, sd-Radio,
+ * sd-SegmentedControl, sd-WeekdayChips, sd-TokenInput, sd-Combobox,
+ * sd-KeyValueField, sd-TimeRange and sd-FileDropzone.
+ *
+ * WordPress styles form elements across the admin (input[type="text"],
+ * select, textarea and their :focus states). Every rule here carries enough
+ * specificity to replace those inside .sd-app.
+ */
+
+/* Field: label, control, help, error. ------------------------------------ */
+
+.sd-app .sd-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-field__label {
+	color: var(--sd-ink-900);
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-field__label .sd-field__required {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-field.is-disabled .sd-field__label {
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-field__help,
+.sd-app .sd-field__counter {
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-field__footer {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.sd-app .sd-field__counter {
+	flex-shrink: 0;
+	margin-inline-start: auto;
+	font-variant-numeric: tabular-nums;
+}
+
+.sd-app .sd-field__error {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--sd-danger-text);
+	font: 600 12px/18px var(--sd-font-sans);
+}
+
+/* Text inputs, textareas and selects. ------------------------------------ */
+
+.sd-app .sd-input,
+.sd-app .sd-select__control,
+.sd-app .sd-textarea {
+	display: block;
+	inline-size: 100%;
+	min-block-size: 0;
+	margin: 0;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	box-shadow: none;
+	color: var(--sd-ink-900);
+	font: 400 14px/22px var(--sd-font-sans);
+	transition:
+		border-color var(--sd-duration-fast) var(--sd-ease),
+		box-shadow var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-input,
+.sd-app .sd-select__control {
+	block-size: var(--sd-control-height);
+	padding-block: 0;
+	padding-inline: 14px;
+}
+
+.sd-app .sd-textarea {
+	min-block-size: 76px;
+	padding: 10px 14px;
+	resize: vertical;
+}
+
+.sd-app .sd-input::placeholder,
+.sd-app .sd-textarea::placeholder {
+	color: var(--sd-gray-600);
+	opacity: 1;
+}
+
+.sd-app .sd-input:focus,
+.sd-app .sd-select__control:focus,
+.sd-app .sd-textarea:focus {
+	border-color: var(--sd-ink-900);
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-input--mono,
+.sd-app .sd-textarea--mono {
+	font: 400 13px/20px var(--sd-font-mono);
+}
+
+.sd-app .sd-input[aria-invalid="true"],
+.sd-app .sd-textarea[aria-invalid="true"],
+.sd-app .sd-select__control[aria-invalid="true"] {
+	border-color: var(--sd-danger);
+}
+
+.sd-app .sd-input:disabled,
+.sd-app .sd-select__control:disabled,
+.sd-app .sd-textarea:disabled,
+.sd-app .sd-input[readonly].is-locked {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-500);
+	cursor: not-allowed;
+}
+
+/* An input with a trailing icon (the error mark) or leading icon. */
+.sd-app .sd-input-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-input-wrap > .sd-input {
+	flex: 1;
+}
+
+.sd-app .sd-input-wrap__end,
+.sd-app .sd-input-wrap__start {
+	position: absolute;
+	display: inline-flex;
+	pointer-events: none;
+}
+
+.sd-app .sd-input-wrap__end {
+	inset-inline-end: 12px;
+}
+
+.sd-app .sd-input-wrap__start {
+	inset-inline-start: 14px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-input-wrap--end > .sd-input {
+	padding-inline-end: 40px;
+}
+
+.sd-app .sd-input-wrap--start > .sd-input {
+	padding-inline-start: 38px;
+}
+
+.sd-app .sd-input-wrap__end svg,
+.sd-app .sd-input-wrap__start svg {
+	inline-size: 17px;
+	block-size: 17px;
+}
+
+.sd-app .sd-input-wrap--error .sd-input-wrap__end {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-input-wrap--error .sd-input-wrap__end svg {
+	inline-size: 18px;
+	block-size: 18px;
+}
+
+/* Select: native element, our chevron. */
+.sd-app .sd-select {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-select__control {
+	padding-inline-end: 38px;
+	background-image: none;
+	cursor: pointer;
+	appearance: none;
+}
+
+.sd-app .sd-select__control:hover {
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-select__chevron {
+	position: absolute;
+	inset-inline-end: 12px;
+	display: inline-flex;
+	color: var(--sd-ink-900);
+	pointer-events: none;
+}
+
+.sd-app .sd-select__chevron svg {
+	inline-size: 16px;
+	block-size: 16px;
+	stroke-width: 2;
+}
+
+/* Search field: a pill with the magnifier at the start and an optional
+   keyboard hint at the end. */
+.sd-app .sd-search {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-search__icon {
+	position: absolute;
+	inset-inline-start: 14px;
+	display: inline-flex;
+	color: var(--sd-gray-600);
+	pointer-events: none;
+}
+
+.sd-app .sd-search__icon svg {
+	inline-size: 17px;
+	block-size: 17px;
+}
+
+.sd-app .sd-search .sd-input {
+	padding-inline: 40px 14px;
+	border-radius: var(--sd-radius-pill);
+}
+
+.sd-app .sd-search--kbd .sd-input {
+	padding-inline-end: 56px;
+}
+
+.sd-app .sd-search .sd-kbd {
+	position: absolute;
+	inset-inline-end: 12px;
+	padding: 3px 7px;
+	pointer-events: none;
+}
+
+.sd-app .sd-search--sm .sd-input {
+	block-size: var(--sd-control-height-compact);
+	font-size: 13px;
+}
+
+/* Hide the browser's own clear button; ours is the Clear action. */
+.sd-app .sd-search input::-webkit-search-cancel-button {
+	appearance: none;
+}
+
+/* Number stepper: − value + in one field. */
+.sd-app .sd-number {
+	display: inline-flex;
+	align-items: stretch;
+	inline-size: 132px;
+	block-size: var(--sd-control-height);
+	overflow: hidden;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	transition: box-shadow var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-number:focus-within {
+	border-color: var(--sd-ink-900);
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-number__step {
+	flex-shrink: 0;
+	inline-size: 38px;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--sd-ink-900);
+	font: 400 18px/1 var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-number__step:hover {
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-number__step:focus-visible {
+	box-shadow: var(--sd-focus-ring-inset);
+}
+
+.sd-app .sd-number__step:disabled {
+	color: var(--sd-gray-500);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-number .sd-number__value {
+	flex: 1;
+	inline-size: 100%;
+	min-inline-size: 0;
+	block-size: 100%;
+	min-block-size: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	color: var(--sd-ink-900);
+	font: 500 14px/1 var(--sd-font-mono);
+	text-align: center;
+	appearance: textfield;
+}
+
+.sd-app .sd-number .sd-number__value:focus {
+	border: 0;
+	box-shadow: none;
+}
+
+.sd-app .sd-number .sd-number__value::-webkit-inner-spin-button,
+.sd-app .sd-number .sd-number__value::-webkit-outer-spin-button {
+	margin: 0;
+	appearance: none;
+}
+
+/* Switch: 44 x 24 track, 20px knob, 2px inset. On is an ink track with the
+   gradient knob and a check inside it, so state is never colour alone. ---- */
+
+.sd-app .sd-switch {
+	--sd-switch-travel: 20px;
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	inline-size: 44px;
+	block-size: 24px;
+	padding: 2px;
+	border: 0;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-200);
+	cursor: pointer;
+	transition: background-color var(--sd-duration-base) var(--sd-ease);
+}
+
+.rtl .sd-app .sd-switch,
+.sd-app [dir="rtl"] .sd-switch {
+	--sd-switch-travel: -20px;
+}
+
+.sd-app .sd-switch:hover {
+	background: var(--sd-gray-300);
+}
+
+.sd-app .sd-switch__knob {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 20px;
+	block-size: 20px;
+	border-radius: 50%;
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-sm);
+	color: var(--sd-ink-900);
+	transition: transform var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-switch__knob svg {
+	inline-size: 11px;
+	block-size: 11px;
+	stroke-width: 3;
+}
+
+.sd-app .sd-switch__check {
+	display: none;
+}
+
+.sd-app .sd-switch[aria-checked="true"] {
+	background: var(--sd-ink-900);
+}
+
+.sd-app .sd-switch[aria-checked="true"] .sd-switch__knob {
+	transform: translateX(var(--sd-switch-travel));
+	background: var(--sd-gradient-dot);
+	box-shadow: none;
+}
+
+.sd-app .sd-switch[aria-checked="true"] .sd-switch__check {
+	display: block;
+}
+
+/* Busy: saving. A spinner replaces the knob. */
+.sd-app .sd-switch[aria-busy="true"] {
+	justify-content: center;
+	background: var(--sd-gray-700);
+	cursor: progress;
+}
+
+.sd-app .sd-switch[aria-busy="true"] .sd-switch__knob {
+	display: none;
+}
+
+.sd-app .sd-switch .sd-switch__spinner {
+	display: none;
+	inline-size: 14px;
+	block-size: 14px;
+	border-color: rgba(255, 255, 255, 0.35);
+	border-block-start-color: var(--sd-ember-400);
+}
+
+.sd-app .sd-switch[aria-busy="true"] .sd-switch__spinner {
+	display: inline-block;
+}
+
+/* Locked: can't be changed here (no PHP rights). A padlock in the knob;
+   on keeps a solid gray-400 track, off a dashed outline. */
+.sd-app .sd-switch__lock {
+	display: none;
+}
+
+.sd-app .sd-switch.is-locked {
+	cursor: not-allowed;
+}
+
+.sd-app .sd-switch.is-locked .sd-switch__lock {
+	display: block;
+	inline-size: 10px;
+	block-size: 10px;
+	color: var(--sd-gray-600);
+	stroke-width: 2.2;
+}
+
+.sd-app .sd-switch.is-locked .sd-switch__check {
+	display: none;
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="true"] {
+	background: var(--sd-gray-400);
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="true"] .sd-switch__knob {
+	background: var(--sd-white);
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="false"] {
+	background: var(--sd-gray-100);
+}
+
+/* Edges are drawn on a layer of their own, so the focus ring (which uses
+   outline and box-shadow) never hides them. Off gets a solid gray-400 edge:
+   the gray-200 track alone is 1.3:1 on white, the edge 3.3:1 (3.1:1 on the
+   gray-50 page). Locked off and paused switches use dashed edges instead. */
+.sd-app .sd-switch:where([aria-checked="false"]:not([aria-busy="true"]))::before,
+.sd-app .sd-switch.is-paused::before {
+	position: absolute;
+	inset: 0;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: inherit;
+	pointer-events: none;
+	content: "";
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="false"]::before {
+	border-style: dashed;
+	border-color: var(--sd-gray-300);
+}
+
+.sd-app .sd-switch.is-paused::before {
+	border-style: dashed;
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="false"] .sd-switch__knob {
+	box-shadow: none;
+}
+
+.sd-app .sd-switch.is-locked[aria-checked="false"] .sd-switch__lock {
+	color: var(--sd-gray-500);
+}
+
+/* Paused by tamper protection: off because ScriptDock stopped it, not
+   because you did. White track, dashed gray-400 edge, padlock centred. */
+.sd-app .sd-switch.is-paused,
+.sd-app .sd-switch.is-paused:hover {
+	justify-content: center;
+	background: var(--sd-white);
+}
+
+.sd-app .sd-switch.is-paused .sd-switch__knob {
+	transform: none;
+	background: var(--sd-gray-100);
+	box-shadow: none;
+}
+
+.sd-app .sd-switch.is-paused .sd-switch__lock {
+	display: block;
+	inline-size: 10px;
+	block-size: 10px;
+	color: var(--sd-gray-600);
+	stroke-width: 2.2;
+}
+
+.sd-app .sd-switch.is-paused .sd-switch__check {
+	display: none;
+}
+
+/* Keep the focus ring outside the dashed edge. */
+.sd-app .sd-switch:focus-visible {
+	box-shadow: var(--sd-focus-ring);
+}
+
+/* Small: 34 x 18, 14px knob. */
+.sd-app .sd-switch--sm {
+	--sd-switch-travel: 16px;
+	inline-size: 34px;
+	block-size: 18px;
+}
+
+.rtl .sd-app .sd-switch--sm,
+.sd-app [dir="rtl"] .sd-switch--sm {
+	--sd-switch-travel: -16px;
+}
+
+.sd-app .sd-switch--sm .sd-switch__knob {
+	inline-size: 14px;
+	block-size: 14px;
+}
+
+.sd-app .sd-switch--sm .sd-switch__knob svg {
+	inline-size: 8px;
+	block-size: 8px;
+}
+
+.sd-app .sd-switch--sm[aria-checked="true"] .sd-switch__check {
+	display: none;
+}
+
+.sd-app .sd-switch--sm .sd-switch__spinner {
+	inline-size: 10px;
+	block-size: 10px;
+}
+
+/* A switch with its label ("Keep active", "Activate now"). */
+.sd-app .sd-switch-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--sd-ink-900);
+	font: 600 12px/16px var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-switch-label--md {
+	gap: 10px;
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+/* Checkbox and radio: native inputs, drawn boxes. ------------------------ */
+
+.sd-app .sd-check {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: var(--sd-ink-900);
+	font: 500 14px/20px var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-check__input {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	margin: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	opacity: 0;
+}
+
+.sd-app .sd-check__box {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 20px;
+	block-size: 20px;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: 6px;
+	background: var(--sd-white);
+	color: var(--sd-white);
+	transition:
+		background-color var(--sd-duration-fast) var(--sd-ease),
+		border-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-check__box svg {
+	display: none;
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 3;
+}
+
+.sd-app .sd-check__input:checked + .sd-check__box,
+.sd-app .sd-check__input:indeterminate + .sd-check__box {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-ink-900);
+}
+
+.sd-app .sd-check__input:checked + .sd-check__box svg {
+	display: block;
+}
+
+.sd-app .sd-check__input:indeterminate + .sd-check__box::after {
+	inline-size: 10px;
+	block-size: 2px;
+	border-radius: 2px;
+	background: var(--sd-white);
+	content: "";
+}
+
+.sd-app .sd-check__input:indeterminate + .sd-check__box svg {
+	display: none;
+}
+
+.sd-app .sd-check__input:focus-visible + .sd-check__box {
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-check:hover .sd-check__input:not(:checked, :disabled) + .sd-check__box {
+	border-color: var(--sd-ink-900);
+}
+
+.sd-app .sd-check__input:disabled + .sd-check__box {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-check:has(.sd-check__input:disabled) {
+	color: var(--sd-gray-500);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-check__hint {
+	color: var(--sd-gray-600);
+	font-size: 12px;
+}
+
+/* Radio: circle, 2px ink ring and the gradient dot when chosen. */
+.sd-app .sd-check--radio .sd-check__box {
+	border-radius: 50%;
+}
+
+.sd-app .sd-check--radio .sd-check__input:checked + .sd-check__box {
+	border: 2px solid var(--sd-ink-900);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-check--radio .sd-check__input:checked + .sd-check__box::after {
+	inline-size: 9px;
+	block-size: 9px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	content: "";
+}
+
+.sd-app .sd-check--radio .sd-check__input:checked + .sd-check__box svg {
+	display: none;
+}
+
+/* Table size: 18px boxes. */
+.sd-app .sd-check--sm .sd-check__box {
+	inline-size: 18px;
+	block-size: 18px;
+	border-radius: 5px;
+}
+
+.sd-app .sd-check--sm .sd-check__box svg {
+	inline-size: 12px;
+	block-size: 12px;
+}
+
+/* Segmented control. ----------------------------------------------------- */
+
+.sd-app .sd-segmented {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 2px;
+	padding: 3px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-segmented__option {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	block-size: 34px;
+	padding-inline: 16px;
+	border: 0;
+	border-radius: var(--sd-radius-pill);
+	background: transparent;
+	color: var(--sd-gray-700);
+	font: 500 13px/1 var(--sd-font-sans);
+	white-space: nowrap;
+	cursor: pointer;
+	transition:
+		background-color var(--sd-duration-fast) var(--sd-ease),
+		color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-segmented__option:hover {
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-segmented__option[aria-checked="true"] {
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+	font-weight: 600;
+}
+
+/* Unavailable option: gray-600 with a padlock. No opacity. */
+.sd-app .sd-segmented__option[aria-disabled="true"] {
+	color: var(--sd-gray-600);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-segmented__option svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 2;
+}
+
+.sd-app .sd-segmented--sm .sd-segmented__option {
+	block-size: 26px;
+	padding-inline: 12px;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.sd-app .sd-segmented--sm .sd-segmented__option[aria-checked="true"] {
+	font-weight: 700;
+}
+
+.sd-app .sd-segmented--outline {
+	gap: 0;
+	padding: 2px;
+	border: 1px solid var(--sd-gray-200);
+	background: var(--sd-white);
+}
+
+/* Weekday chips. --------------------------------------------------------- */
+
+.sd-app .sd-weekdays {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.sd-app .sd-weekdays__day {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 44px;
+	block-size: 36px;
+	padding-inline: 12px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	color: var(--sd-gray-700);
+	font: 500 13px/1 var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-weekdays__day:hover {
+	border-color: var(--sd-ink-900);
+}
+
+.sd-app .sd-weekdays__day[aria-pressed="true"] {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+	font-weight: 700;
+}
+
+/* Token input: tags. ----------------------------------------------------- */
+
+.sd-app .sd-tokens {
+	position: relative;
+}
+
+.sd-app .sd-tokens__box {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	min-block-size: var(--sd-control-height);
+	padding: 6px 10px;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	cursor: text;
+}
+
+.sd-app .sd-tokens__box:focus-within {
+	border-color: var(--sd-ink-900);
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-token {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	max-inline-size: 100%;
+	block-size: 26px;
+	padding-inline: 10px 6px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+	font: 600 12px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-token__label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-token__remove {
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 16px;
+	block-size: 16px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--sd-gray-300);
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-token__remove::before {
+	position: absolute;
+	inset: -6px;
+	content: "";
+}
+
+.sd-app .sd-token__remove:hover {
+	background: var(--sd-gray-400);
+}
+
+.sd-app .sd-token__remove svg {
+	inline-size: 9px;
+	block-size: 9px;
+	stroke-width: 3;
+}
+
+.sd-app .sd-tokens .sd-tokens__input {
+	flex: 1;
+	min-inline-size: 80px;
+	block-size: 26px;
+	min-block-size: 0;
+	margin: 0;
+	padding: 0 4px;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+	color: var(--sd-ink-900);
+	font: 400 14px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-tokens .sd-tokens__input:focus {
+	border: 0;
+	outline: 0;
+	box-shadow: none;
+}
+
+/* Listbox: the popup under a combobox or token input. -------------------- */
+
+.sd-app .sd-combobox {
+	position: relative;
+}
+
+.sd-app .sd-listbox {
+	position: absolute;
+	inset-block-start: calc(100% + 6px);
+	inset-inline: 0;
+	z-index: var(--sd-z-popover);
+	max-block-size: 320px;
+	overflow: auto;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-md);
+}
+
+.sd-app .sd-listbox[hidden] {
+	display: none;
+}
+
+.sd-app .sd-listbox__option {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 14px;
+	color: var(--sd-ink-900);
+	font: 500 13px/20px var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-listbox__option:hover,
+.sd-app .sd-listbox__option.is-active {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-listbox__option[aria-selected="true"] {
+	font-weight: 600;
+}
+
+.sd-app .sd-listbox__meta {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 11px/16px var(--sd-font-mono);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-listbox__count {
+	margin-inline-start: auto;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-listbox__create {
+	color: var(--sd-ember-700);
+	font-weight: 600;
+}
+
+.sd-app .sd-listbox__status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 14px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-listbox__status:first-child {
+	border-block-start: 0;
+}
+
+/* Tag suggestions: neutral highlight, 38px rows. */
+.sd-app .sd-listbox--neutral .sd-listbox__option {
+	min-block-size: 38px;
+	padding-block: 0;
+}
+
+.sd-app .sd-listbox--neutral .sd-listbox__option:hover,
+.sd-app .sd-listbox--neutral .sd-listbox__option.is-active {
+	background: var(--sd-gray-100);
+	font-weight: 600;
+}
+
+/* Key and value pair ("Custom field"). ------------------------------------ */
+
+.sd-app .sd-keyvalue {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-keyvalue__key {
+	flex: 1 1 0;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-keyvalue__operator {
+	flex: 0 0 auto;
+}
+
+.sd-app .sd-keyvalue__value {
+	flex: 0 1 100px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-keyvalue__remove {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: var(--sd-control-height);
+	block-size: var(--sd-control-height);
+	padding: 0;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-keyvalue__remove:hover {
+	border-color: var(--sd-danger);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-keyvalue__remove svg {
+	inline-size: 15px;
+	block-size: 15px;
+	stroke-width: 2;
+}
+
+/* Time range. ------------------------------------------------------------ */
+
+.sd-app .sd-timerange {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+.sd-app .sd-timerange .sd-input {
+	inline-size: 92px;
+	font: 400 13px/20px var(--sd-font-mono);
+}
+
+.sd-app .sd-timerange__to {
+	color: var(--sd-gray-600);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+/* File dropzone. --------------------------------------------------------- */
+
+.sd-app .sd-dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-block-size: 96px;
+	padding: 16px;
+	border: 2px dashed var(--sd-gray-300);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-50);
+	text-align: center;
+	transition:
+		border-color var(--sd-duration-fast) var(--sd-ease),
+		background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-dropzone__title {
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-dropzone__sub {
+	color: var(--sd-gray-600);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-dropzone__browse {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--sd-ember-700);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.sd-app .sd-dropzone__browse:hover {
+	color: var(--sd-ember-800);
+	text-decoration: underline;
+}
+
+.sd-app .sd-dropzone.is-dragging {
+	border-color: var(--sd-ember-500);
+	background: var(--sd-ember-50);
+	box-shadow: var(--sd-shadow-glow);
+}
+
+.sd-app .sd-dropzone.is-dragging .sd-dropzone__title {
+	color: var(--sd-ember-800);
+	font-weight: 700;
+}
+
+.sd-app .sd-dropzone.is-dragging .sd-dropzone__sub {
+	color: var(--sd-ember-700);
+	font-size: 12px;
+}
+
+.sd-app .sd-dropzone:has(:focus-visible) {
+	box-shadow: var(--sd-focus-ring);
+}
+
+/* The chosen file. */
+.sd-app .sd-file {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-file__icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 32px;
+	block-size: 32px;
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-file__icon svg {
+	inline-size: 17px;
+	block-size: 17px;
+	stroke-width: 1.6;
+}
+
+.sd-app .sd-file__text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-file__name {
+	overflow: hidden;
+	color: var(--sd-ink-900);
+	font: 500 13px/20px var(--sd-font-mono);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-file__meta {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-file .sd-icon-button {
+	margin-inline-start: auto;
+}

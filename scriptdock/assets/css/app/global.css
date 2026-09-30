@@ -1,0 +1,62 @@
+/**
+ * S09 Header & Footer: three code cards and the bar that saves them. The
+ * cards, the code editor and the save bar style themselves; this file lays
+ * the screen out.
+ */
+
+.sd-app .sd-global {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-inline-size: 900px;
+	padding-block: 4px 96px;
+}
+
+.sd-app .sd-global__head {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.sd-app .sd-global__intro {
+	margin: 0;
+	max-inline-size: 60ch;
+	color: var(--sd-gray-600);
+	font: 400 13.5px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-global__row {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 12px;
+	margin-block-start: 12px;
+}
+
+.sd-app .sd-global__hook {
+	margin: 0 0 8px;
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-mono);
+}
+
+.sd-app .sd-global__foot {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	color: var(--sd-gray-600);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-global__row {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.sd-app .sd-global__foot {
+		flex-direction: column;
+		align-items: start;
+	}
+}

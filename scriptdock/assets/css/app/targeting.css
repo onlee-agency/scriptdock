@@ -1,0 +1,1257 @@
+/**
+ * S05 Targeting wizard: the full-screen overlay, its five steps, the picker
+ * cards and the summary rail. The modal, tabs, stepper, fields and banners
+ * style themselves; this file lays the wizard out and styles what only it
+ * has.
+ */
+
+/* Shell -------------------------------------------------------------------- */
+
+.sd-app .sd-wizard .sd-modal__header {
+	flex-wrap: wrap;
+	row-gap: 10px;
+	padding-block: 16px;
+}
+
+.sd-app .sd-wizard__head {
+	display: flex;
+	flex: 1 1 100%;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	order: 3;
+}
+
+.sd-app .sd-wizard__steps {
+	min-inline-size: 0;
+	overflow-x: auto;
+}
+
+.sd-app .sd-wizard .sd-stepper-compact {
+	display: none;
+}
+
+.sd-app .sd-wizard .sd-modal__body {
+	padding: 0;
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-wizard__body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 360px;
+	align-items: start;
+	min-block-size: 100%;
+}
+
+.sd-app .sd-wizard__body.is-advanced {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.sd-app .sd-wizard__body.is-advanced .sd-wizard__rail {
+	display: none;
+}
+
+.sd-app .sd-wizard__main {
+	padding: 24px;
+}
+
+.sd-app .sd-wizard .sd-modal__footer {
+	display: block;
+}
+
+.sd-app .sd-wizard__bar {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.sd-app .sd-wizard__spacer {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-wizard__count {
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+/* Steps -------------------------------------------------------------------- */
+
+.sd-app .sd-step {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	max-inline-size: 900px;
+}
+
+.sd-app .sd-step__section {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sd-app .sd-step__card {
+	padding: 16px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-step__heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-step__hint,
+.sd-app .sd-step__cache {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-step__cache svg,
+.sd-app .sd-step__hint svg {
+	flex-shrink: 0;
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-step__row {
+	display: grid;
+	grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+	align-items: start;
+	gap: 12px;
+}
+
+.sd-app .sd-step__pair {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.sd-app .sd-step__panel {
+	padding: 16px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-step__disclosure {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 0;
+	border: 0;
+	background: none;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-step__disclosure:hover {
+	color: var(--sd-ember-700);
+}
+
+.sd-app .sd-step__more {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding-block-start: 4px;
+}
+
+.sd-app .sd-step__php {
+	display: flex;
+	align-items: start;
+	gap: 8px;
+}
+
+.sd-app .sd-step__php.is-locked svg {
+	margin-block-start: 30px;
+	color: var(--sd-gray-500);
+}
+
+/* Cards -------------------------------------------------------------------- */
+
+.sd-app .sd-pickgrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 12px;
+}
+
+.sd-app .sd-pickcard-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sd-app .sd-pickcard-wrap.has-extras {
+	grid-row: span 2;
+}
+
+.sd-app .sd-pickcard {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	gap: 4px;
+	block-size: 100%;
+	padding: 14px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	text-align: start;
+	cursor: pointer;
+}
+
+.sd-app .sd-pickcard:hover {
+	border-color: var(--sd-gray-400);
+}
+
+.sd-app .sd-pickcard.is-selected {
+	border-color: var(--sd-ember-500);
+	box-shadow: 0 0 0 1px var(--sd-ember-500);
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-pickcard.is-unavailable {
+	border-style: dashed;
+	background: var(--sd-gray-50);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-pickcard.is-unavailable .sd-pickcard__title {
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-pickcard__title {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-pickcard__note {
+	font-size: 12.5px;
+	line-height: 1.45;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-pickcard__reason {
+	font-size: 12px;
+	line-height: 1.4;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-pickcard__check {
+	display: flex;
+	position: absolute;
+	inset-block-start: 10px;
+	inset-inline-end: 10px;
+	align-items: center;
+	justify-content: center;
+	inline-size: 18px;
+	block-size: 18px;
+	border-radius: 50%;
+	background: var(--sd-ember-500);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-pickcard__art {
+	display: block;
+	margin-block-end: 6px;
+}
+
+.sd-app .sd-pickcard__extras {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 12px;
+	border: 1px solid var(--sd-ember-200);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+}
+
+/* The little page on a placement card ------------------------------------- */
+
+.sd-app .sd-wire {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	gap: 3px;
+	inline-size: 100%;
+	block-size: 54px;
+	padding: 5px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-wire__bar,
+.sd-app .sd-wire__foot {
+	block-size: 6px;
+	border-radius: 2px;
+	background: var(--sd-gray-200);
+}
+
+.sd-app .sd-wire__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: center;
+	gap: 3px;
+}
+
+.sd-app .sd-wire__line {
+	block-size: 3px;
+	border-radius: 2px;
+	background: var(--sd-gray-200);
+}
+
+.sd-app .sd-wire__line--short {
+	inline-size: 60%;
+}
+
+.sd-app .sd-wire__dot {
+	position: absolute;
+	inline-size: 7px;
+	block-size: 7px;
+	border-radius: 50%;
+	background: var(--sd-ember-500);
+	inset-inline-start: 50%;
+	inset-block-start: 50%;
+	margin-inline-start: -3.5px;
+	margin-block-start: -3.5px;
+}
+
+.sd-app .sd-wire--head .sd-wire__dot {
+	inset-block-start: 8px;
+	margin-block-start: 0;
+}
+
+.sd-app .sd-wire--top .sd-wire__dot {
+	inset-block-start: 18px;
+	margin-block-start: 0;
+}
+
+.sd-app .sd-wire--bottom .sd-wire__dot {
+	inset-block-start: 34px;
+	margin-block-start: 0;
+}
+
+.sd-app .sd-wire--foot .sd-wire__dot {
+	inset-block-end: 8px;
+	inset-block-start: auto;
+	margin-block-start: 0;
+}
+
+.sd-app .sd-wire--list .sd-wire__dot,
+.sd-app .sd-wire--free .sd-wire__dot {
+	inset-inline-start: auto;
+	inset-inline-end: 8px;
+	margin-inline-start: 0;
+}
+
+.sd-app .sd-wire--all {
+	border-color: var(--sd-ember-200);
+	background: var(--sd-ember-50);
+}
+
+/* Scope and device cards --------------------------------------------------- */
+
+.sd-app .sd-scopes {
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.sd-app .sd-scopeart {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 3px;
+	inline-size: 42px;
+}
+
+.sd-app .sd-scopeart span {
+	block-size: 14px;
+	border-radius: 3px;
+	background: var(--sd-gray-200);
+}
+
+.sd-app .sd-scopeart--all span {
+	background: var(--sd-ember-400);
+}
+
+.sd-app .sd-scopeart--only span:nth-child(1),
+.sd-app .sd-scopeart--only span:nth-child(4) {
+	background: var(--sd-ember-400);
+}
+
+.sd-app .sd-scopeart--except span:nth-child(2),
+.sd-app .sd-scopeart--except span:nth-child(3) {
+	background: var(--sd-ember-400);
+}
+
+.sd-app .sd-devices {
+	grid-template-columns: repeat(2, minmax(0, 220px));
+}
+
+.sd-app .sd-deviceart {
+	display: flex;
+	align-items: end;
+	gap: 4px;
+	block-size: 34px;
+}
+
+.sd-app .sd-deviceart span {
+	border: 1.5px solid var(--sd-gray-400);
+	border-radius: 3px;
+}
+
+.sd-app .sd-deviceart--desktop span:first-child {
+	inline-size: 40px;
+	block-size: 26px;
+}
+
+.sd-app .sd-deviceart--desktop span:last-child {
+	inline-size: 14px;
+	block-size: 4px;
+}
+
+.sd-app .sd-deviceart--mobile span:first-child {
+	inline-size: 16px;
+	block-size: 26px;
+}
+
+.sd-app .sd-deviceart--mobile span:last-child {
+	inline-size: 22px;
+	block-size: 18px;
+}
+
+/* Content picker ----------------------------------------------------------- */
+
+.sd-app .sd-picker {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.sd-app .sd-picker__all {
+	padding: 12px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-picker__allnote {
+	margin: 4px 0 0;
+	font-size: 12.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-picker__tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: 10px;
+}
+
+.sd-app .sd-picker__tools .sd-field {
+	min-inline-size: 150px;
+}
+
+.sd-app .sd-picker__tools > :first-child {
+	flex: 1 1 220px;
+}
+
+.sd-app .sd-picker__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 12px;
+}
+
+.sd-app .sd-picker__list {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	overflow: hidden;
+}
+
+.sd-app .sd-picker__empty {
+	margin: 0;
+	padding: 24px 0;
+	font-size: 13px;
+	text-align: center;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-picker__more {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-content-card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	overflow: hidden;
+}
+
+.sd-app .sd-content-card.is-selected {
+	border-color: var(--sd-ember-500);
+	box-shadow: 0 0 0 1px var(--sd-ember-500);
+}
+
+.sd-app .sd-content-card__main {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0 0 10px;
+	border: 0;
+	background: none;
+	text-align: start;
+	cursor: pointer;
+}
+
+.sd-app .sd-content-card__thumb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 16 / 10;
+	background-position: center;
+	background-size: cover;
+	background-image: linear-gradient(135deg, #eef1f6, #dfe4ec);
+	color: #8a93a6;
+}
+
+.sd-app .sd-content-card__thumb.is-post {
+	background-image: linear-gradient(135deg, #fdeade, #f8d7c0);
+	color: #b4704a;
+}
+
+.sd-app .sd-content-card__thumb.is-product {
+	background-image: linear-gradient(135deg, #e2efe4, #c9dfcd);
+	color: #5d8467;
+}
+
+.sd-app .sd-content-card__thumb.is-workshop {
+	background-image: linear-gradient(135deg, #e9e6f7, #d3cdee);
+	color: #6b62a3;
+}
+
+.sd-app .sd-content-card__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding-inline: 12px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-content-card__parent {
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-content-card__title {
+	display: -webkit-box;
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.35;
+	color: var(--sd-ink-900);
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.sd-app .sd-content-card__path,
+.sd-app .sd-content-row__path {
+	font-family: var(--sd-font-mono);
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-content-card__meta {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-content-card__check {
+	display: flex;
+	position: absolute;
+	inset-block-start: 8px;
+	inset-inline-end: 8px;
+	align-items: center;
+	justify-content: center;
+	inline-size: 20px;
+	block-size: 20px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: 50%;
+	background: var(--sd-white);
+	color: transparent;
+}
+
+.sd-app .sd-content-card.is-selected .sd-content-card__check {
+	border-color: var(--sd-ember-500);
+	background: var(--sd-ember-500);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-content-card__children {
+	padding: 8px 12px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-content-row {
+	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) auto;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	font-size: 13px;
+}
+
+.sd-app .sd-content-row:last-child {
+	border-block-end: 0;
+}
+
+.sd-app .sd-content-row.is-selected {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-content-row__title {
+	min-inline-size: 0;
+	font-weight: 600;
+}
+
+.sd-app .sd-content-row__title > span:last-child,
+.sd-app .sd-termtree__name > span:last-child {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-content-row__meta {
+	display: flex;
+	gap: 8px;
+	font-size: 12px;
+	color: var(--sd-gray-600);
+}
+
+/* Terms, special pages and URL rules --------------------------------------- */
+
+.sd-app .sd-terms {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.sd-app .sd-termtree,
+.sd-app .sd-termtree__children {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-termtree__children {
+	padding-inline-start: 22px;
+}
+
+.sd-app .sd-termtree__row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 5px 6px;
+	border-radius: var(--sd-radius-sm);
+	font-size: 13.5px;
+}
+
+.sd-app .sd-termtree__row:hover {
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-termtree__name {
+	flex: 1;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-termtree__count {
+	font-size: 12px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-terms__apply {
+	margin: 0;
+	padding: 12px 0 0;
+	border: 0;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-terms__apply legend {
+	padding: 0 0 8px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-specials {
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.sd-app .sd-urlrules {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: start;
+}
+
+.sd-app .sd-urlrules__list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	inline-size: 100%;
+	list-style: none;
+}
+
+.sd-app .sd-urlrules__row {
+	display: grid;
+	grid-template-columns: 170px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-urlrules__test {
+	display: flex;
+	align-items: end;
+	gap: 10px;
+	inline-size: 100%;
+	padding-block-start: 12px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-urlrules__test .sd-field {
+	flex: 1;
+}
+
+.sd-app .sd-urlrules__result {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin: 0 0 8px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.sd-app .sd-urlrules__result.is-match {
+	color: var(--sd-success-text);
+}
+
+.sd-app .sd-urlrules__result.is-miss {
+	color: var(--sd-gray-600);
+}
+
+/* Chips, searched chips and pairs ------------------------------------------ */
+
+.sd-app .sd-chipset {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.sd-app .sd-chipset__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	min-block-size: 30px;
+	padding: 4px 11px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: 999px;
+	background: var(--sd-white);
+	font-size: 13px;
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-chipset__chip:hover {
+	border-color: var(--sd-gray-500);
+}
+
+.sd-app .sd-chipset__chip.is-on {
+	border-color: var(--sd-ember-500);
+	background: var(--sd-ember-50);
+	color: var(--sd-ember-700);
+}
+
+.sd-app .sd-searchchips {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sd-app .sd-searchchips__results {
+	position: absolute;
+	inset-block-start: 100%;
+	inset-inline: 0;
+	z-index: 5;
+	max-block-size: 220px;
+	margin: 2px 0 0;
+	padding: 4px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-md);
+	list-style: none;
+	overflow-y: auto;
+}
+
+.sd-app .sd-searchchips__results button {
+	inline-size: 100%;
+	padding: 7px 9px;
+	border: 0;
+	border-radius: var(--sd-radius-sm);
+	background: none;
+	text-align: start;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.sd-app .sd-searchchips__results button:hover {
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-searchchips__chosen {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-searchchips__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+	padding: 2px 4px 2px 10px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: 999px;
+	background: var(--sd-white);
+	font-size: 12.5px;
+}
+
+.sd-app .sd-pairs {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: start;
+}
+
+.sd-app .sd-pairs__row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 8px;
+	inline-size: 100%;
+}
+
+.sd-app .sd-pairs__add {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 4px 0;
+	border: 0;
+	background: none;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--sd-ember-700);
+	cursor: pointer;
+}
+
+/* Advanced rules ----------------------------------------------------------- */
+
+.sd-app .sd-advanced {
+	max-inline-size: 1000px;
+}
+
+.sd-app .sd-advanced__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+}
+
+.sd-app .sd-advanced__reads {
+	margin: 0;
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-advanced__group {
+	position: relative;
+}
+
+.sd-app .sd-advanced__or {
+	display: inline-block;
+	margin-block-end: 8px;
+	padding: 2px 10px;
+	border-radius: 999px;
+	background: var(--sd-ink-900);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	color: var(--sd-white);
+}
+
+.sd-app .sd-advanced__card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: start;
+	padding: 14px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-advanced__rule {
+	inline-size: 100%;
+}
+
+.sd-app .sd-advanced__and {
+	display: block;
+	padding-block: 6px 8px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-advanced__row {
+	display: grid;
+	grid-template-columns: minmax(0, 220px) minmax(0, 160px) minmax(0, 1fr) auto;
+	align-items: start;
+	gap: 8px;
+}
+
+.sd-app .sd-advanced__pair {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+}
+
+.sd-app .sd-advanced__empty {
+	margin: 0;
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+/* Review ------------------------------------------------------------------- */
+
+.sd-app .sd-review__sentence {
+	padding: 18px;
+	border: 1px solid var(--sd-ember-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-review__hint {
+	margin: 8px 0 0;
+	font-size: 12.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-review__cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 12px;
+}
+
+.sd-app .sd-review__card {
+	padding: 14px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-review__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 0 6px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-review__line {
+	margin: 0;
+	font-size: 13.5px;
+	line-height: 1.5;
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-review__note {
+	margin: 4px 0 0;
+	font-size: 12.5px;
+	color: var(--sd-gray-600);
+}
+
+/* Rail --------------------------------------------------------------------- */
+
+.sd-app .sd-wizard__rail {
+	display: flex;
+	position: sticky;
+	inset-block-start: 0;
+	flex-direction: column;
+	gap: 12px;
+	padding: 24px 24px 24px 0;
+}
+
+.sd-app .sd-rail__card {
+	padding: 14px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-rail__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 0 8px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-rail__clear {
+	border: 0;
+	background: none;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-transform: none;
+	color: var(--sd-ember-700);
+	cursor: pointer;
+}
+
+.sd-app .sd-rail__empty {
+	margin: 0;
+	font-size: 13px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-rail__estimate {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	padding: 14px;
+	border: 1px solid var(--sd-ember-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-rail__estimate.is-busy {
+	opacity: 1;
+}
+
+.sd-app .sd-rail__count {
+	font-size: 22px;
+	font-weight: 700;
+	white-space: nowrap;
+	color: var(--sd-ember-700);
+}
+
+.sd-app .sd-rail__countnote {
+	font-size: 12.5px;
+	line-height: 1.4;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-rail__countmore {
+	display: block;
+	margin-block-start: 4px;
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-rail__tip {
+	display: flex;
+	gap: 8px;
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-gray-100);
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-rail__tip svg {
+	flex-shrink: 0;
+	margin-block-start: 2px;
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-tray {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-tray__head {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	inline-size: 100%;
+	padding: 4px 0;
+	border: 0;
+	background: none;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--sd-ink-900);
+	cursor: pointer;
+}
+
+.sd-app .sd-tray__count {
+	margin-inline-start: auto;
+	padding: 1px 8px;
+	border-radius: 999px;
+	background: var(--sd-gray-100);
+	font-size: 11.5px;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-tray__items {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0 0 0 20px;
+	list-style: none;
+}
+
+.sd-app .sd-tray__item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 3px 0;
+	font-size: 13px;
+}
+
+.sd-app .sd-tray__label {
+	flex: 1;
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-tray__note {
+	margin-inline-start: 6px;
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+}
+
+/* Tablet ------------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+	.sd-app .sd-wizard__body {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-wizard__rail {
+		position: static;
+		padding: 0 24px 24px;
+	}
+
+	.sd-app .sd-advanced__row {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	}
+
+	.sd-app .sd-advanced__value {
+		grid-column: 1 / -1;
+	}
+}
+
+/* Phone -------------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-wizard__steps {
+		display: none;
+	}
+
+	.sd-app .sd-wizard .sd-stepper-compact {
+		display: flex;
+		flex: 1;
+	}
+
+	.sd-app .sd-wizard__main {
+		padding: 16px;
+	}
+
+	.sd-app .sd-wizard__rail {
+		padding: 0 16px 16px;
+	}
+
+	.sd-app .sd-pickgrid,
+	.sd-app .sd-picker__grid {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	}
+
+	.sd-app .sd-step__row,
+	.sd-app .sd-urlrules__row,
+	.sd-app .sd-pairs__row,
+	.sd-app .sd-advanced__row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-content-row {
+		grid-template-columns: auto minmax(0, 1fr);
+	}
+
+	.sd-app .sd-content-row__path,
+	.sd-app .sd-content-row__meta {
+		grid-column: 2;
+	}
+
+	.sd-app .sd-wizard__count {
+		display: none;
+	}
+
+	.sd-app .sd-wizard__bar > :last-child {
+		margin-inline-start: auto;
+	}
+}

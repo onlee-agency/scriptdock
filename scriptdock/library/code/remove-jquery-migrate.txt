@@ -1,0 +1,11 @@
+/**
+ * Remove jQuery Migrate on the front end.
+ * Test your site afterwards: some old themes and plugins still need it.
+ */
+add_action( 'wp_default_scripts', function ( $scripts ) {
+	if ( is_admin() || empty( $scripts->registered['jquery'] ) ) {
+		return;
+	}
+	$jquery       = $scripts->registered['jquery'];
+	$jquery->deps = array_diff( $jquery->deps, array( 'jquery-migrate' ) );
+} );

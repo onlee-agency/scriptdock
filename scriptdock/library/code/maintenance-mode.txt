@@ -1,0 +1,16 @@
+/**
+ * Maintenance mode: visitors who are not logged in see a "back soon" page.
+ * Logged-in users, the login screen, REST, AJAX and cron keep working.
+ * Deactivate this snippet to go live.
+ */
+add_action( 'template_redirect', function () {
+	if ( is_user_logged_in() || wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+	header( 'Retry-After: 3600' );
+	wp_die(
+		'<h1>We’ll be back soon</h1><p>We are doing some scheduled maintenance. Please check back in a little while.</p>',
+		esc_html( get_bloginfo( 'name' ) ),
+		array( 'response' => 503 )
+	);
+} );

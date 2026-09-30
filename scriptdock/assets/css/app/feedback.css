@@ -1,0 +1,297 @@
+/**
+ * Feedback: sd-Banner and sd-Toast.
+ *
+ * Banners sit in the notice zone or inside a screen. Tones match
+ * WordPress's notice hues; info is ink. Every banner keeps its icon, so
+ * colour is never the only signal.
+ */
+
+/* Banner. ---------------------------------------------------------------- */
+
+.sd-app .sd-banner {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 16px 20px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-info-bg);
+	color: var(--sd-gray-700);
+	font: 400 14px/22px var(--sd-font-sans);
+}
+
+.sd-app .sd-banner__icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-self: flex-start;
+	margin-block-start: 1px;
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-banner__icon svg {
+	inline-size: 20px;
+	block-size: 20px;
+	stroke-width: 1.8;
+}
+
+.sd-app .sd-banner__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 6px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-banner__title {
+	color: var(--sd-ink-900);
+	font: 700 15px/22px var(--sd-font-sans);
+}
+
+.sd-app .sd-banner__text {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-banner__text strong {
+	font-weight: 700;
+}
+
+.sd-app .sd-banner code {
+	padding: 0;
+	background: none;
+	font: 400 12px/20px var(--sd-font-mono);
+}
+
+.sd-app .sd-banner__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Actions sit at the end of a one-line banner, under the text of a
+   stacked one. */
+.sd-app .sd-banner > .sd-banner__actions {
+	flex-shrink: 0;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-banner__body > .sd-banner__actions {
+	margin-block-start: 4px;
+}
+
+/* Side actions: a stacked banner that keeps its buttons beside the text
+   ("Approve all", "Jump to line 12"), then under it on phones. */
+.sd-app .sd-banner--side-actions .sd-banner__body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	column-gap: 16px;
+}
+
+.sd-app .sd-banner--side-actions .sd-banner__body > * {
+	grid-column: 1;
+}
+
+.sd-app .sd-banner--side-actions .sd-banner__body > .sd-banner__actions {
+	grid-row: 1 / span 2;
+	grid-column: 2;
+	margin: 0;
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-banner--side-actions .sd-banner__body {
+		display: flex;
+	}
+
+	.sd-app .sd-banner--side-actions .sd-banner__body > .sd-banner__actions {
+		margin-block-start: 4px;
+	}
+}
+
+/* Stacked: a title line and a detail line, as in the crash banner. */
+.sd-app .sd-banner--stacked {
+	align-items: flex-start;
+	padding: 18px 20px;
+}
+
+.sd-app .sd-banner--stacked .sd-banner__icon svg {
+	inline-size: 22px;
+	block-size: 22px;
+}
+
+.sd-app .sd-banner--stacked .sd-banner__text {
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+/* Tones. */
+.sd-app .sd-banner--danger {
+	border-color: var(--sd-danger);
+	background: var(--sd-danger-bg);
+}
+
+.sd-app .sd-banner--danger :is(.sd-banner__icon, .sd-banner__title, .sd-banner__text strong) {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-banner--warning {
+	border-color: var(--sd-warning);
+	background: var(--sd-warning-bg);
+}
+
+.sd-app .sd-banner--warning :is(.sd-banner__icon, .sd-banner__title, .sd-banner__text strong) {
+	color: var(--sd-warning-text);
+}
+
+.sd-app .sd-banner--success {
+	border-color: var(--sd-success);
+	background: var(--sd-success-bg);
+}
+
+.sd-app .sd-banner--success :is(.sd-banner__icon, .sd-banner__title, .sd-banner__text strong) {
+	color: var(--sd-success-text);
+}
+
+.sd-app .sd-banner--success .sd-banner__icon svg {
+	stroke-width: 2.2;
+}
+
+/* Inline: the narrow size, for banners inside cards and sidebars. */
+.sd-app .sd-banner--inline {
+	gap: 10px;
+	padding: 12px 14px;
+	border-radius: var(--sd-radius-input);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.sd-app .sd-banner--inline .sd-banner__icon svg {
+	inline-size: 17px;
+	block-size: 17px;
+}
+
+.sd-app .sd-banner--inline .sd-banner__title {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+/* A banner's dismiss button. */
+.sd-app .sd-banner__dismiss {
+	flex-shrink: 0;
+	align-self: flex-start;
+}
+
+/* Toast: bottom-left (the start corner), ink, 4 seconds. ------------------ */
+
+.sd-app.sd-toasts {
+	position: fixed;
+	inset-block-end: 24px;
+	inset-inline-start: 24px;
+	z-index: var(--sd-z-toast);
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 10px;
+	max-inline-size: min(440px, calc(100vw - 48px));
+	pointer-events: none;
+}
+
+/* Clear WordPress's sidebar: 160px wide, 36px folded, gone on phones. */
+@media (min-width: 961px) {
+
+	body:not(.folded) .sd-app.sd-toasts {
+		inset-inline-start: calc(160px + 24px);
+	}
+
+	body.folded .sd-app.sd-toasts {
+		inset-inline-start: calc(36px + 24px);
+	}
+}
+
+@media (min-width: 783px) and (max-width: 960px) {
+
+	.sd-app.sd-toasts {
+		inset-inline-start: calc(36px + 24px);
+	}
+}
+
+@media (max-width: 782px) {
+
+	.sd-app.sd-toasts {
+		inset-inline: 12px;
+		inset-block-end: 12px;
+		max-inline-size: none;
+	}
+}
+
+.sd-app .sd-toast {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-ink-900);
+	box-shadow: var(--sd-shadow-lg);
+	color: var(--sd-white);
+	font: 600 14px/20px var(--sd-font-sans);
+	pointer-events: auto;
+	animation: sd-toast-in var(--sd-duration-slow) var(--sd-ease);
+}
+
+@keyframes sd-toast-in {
+
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+
+.sd-app .sd-toast__icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 22px;
+	block-size: 22px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	color: var(--sd-ink-900);
+	font: 800 13px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-toast__icon svg {
+	inline-size: 12px;
+	block-size: 12px;
+	stroke-width: 3;
+}
+
+.sd-app .sd-toast--error .sd-toast__icon {
+	background: var(--sd-danger);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-toast__message {
+	flex: 1;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-toast__action,
+.sd-app .sd-toast__action:focus {
+	flex-shrink: 0;
+	block-size: 30px;
+	padding-inline: 12px;
+	border: 0;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-on-ink-strong);
+	color: var(--sd-white);
+	font: 700 12px/1 var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-toast__action:hover {
+	background: var(--sd-on-ink-divider);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-toast__action:focus-visible {
+	box-shadow: 0 0 0 2px var(--sd-white), 0 0 0 4px var(--sd-ember-200);
+}

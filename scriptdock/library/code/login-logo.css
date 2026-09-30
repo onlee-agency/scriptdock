@@ -1,0 +1,9 @@
+/* Replace the logo on the login page. */
+.login h1 a {
+	background-image: url("%%logo_url%%");
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	max-width: 320px;
+	height: 84px;
+}

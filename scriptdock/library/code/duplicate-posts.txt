@@ -1,0 +1,58 @@
+/**
+ * Add a "Duplicate" link to posts and pages. The copy is saved as a draft
+ * with the same terms and custom fields.
+ */
+$duplicate_link = function ( $actions, $post ) {
+	if ( in_array( $post->post_type, array( 'post', 'page' ), true ) && current_user_can( 'edit_post', $post->ID ) ) {
+		$url                  = wp_nonce_url( admin_url( 'admin-post.php?action=snippet_duplicate_post&post=' . $post->ID ), 'snippet_duplicate_post_' . $post->ID );
+		$actions['duplicate'] = '<a href="' . esc_url( $url ) . '">' . esc_html( 'Duplicate' ) . '</a>';
+	}
+	return $actions;
+};
+add_filter( 'post_row_actions', $duplicate_link, 10, 2 );
+add_filter( 'page_row_actions', $duplicate_link, 10, 2 );
+
+add_action( 'admin_post_snippet_duplicate_post', function () {
+	$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0;
+	check_admin_referer( 'snippet_duplicate_post_' . $post_id );
+
+	$post = get_post( $post_id );
+	if ( ! $post || ! current_user_can( 'edit_post', $post_id ) || ! current_user_can( 'edit_posts' ) ) {
+		wp_die( esc_html( 'Sorry, you are not allowed to duplicate this item.' ), '', array( 'response' => 403 ) );
+	}
+
+	$new_id = wp_insert_post(
+		wp_slash(
+			array(
+				'post_type'    => $post->post_type,
+				'post_status'  => 'draft',
+				'post_title'   => $post->post_title . ' (copy)',
+				'post_content' => $post->post_content,
+				'post_excerpt' => $post->post_excerpt,
+				'post_parent'  => $post->post_parent,
+				'menu_order'   => $post->menu_order,
+				'post_author'  => get_current_user_id(),
+			)
+		),
+		true
+	);
+	if ( is_wp_error( $new_id ) ) {
+		wp_die( esc_html( $new_id->get_error_message() ) );
+	}
+
+	foreach ( get_object_taxonomies( $post->post_type ) as $taxonomy ) {
+		wp_set_object_terms( $new_id, wp_get_object_terms( $post_id, $taxonomy, array( 'fields' => 'ids' ) ), $taxonomy );
+	}
+
+	foreach ( get_post_meta( $post_id ) as $key => $values ) {
+		if ( in_array( $key, array( '_edit_lock', '_edit_last', '_wp_old_slug', '_wp_old_date' ), true ) ) {
+			continue;
+		}
+		foreach ( $values as $value ) {
+			add_post_meta( $new_id, $key, wp_slash( maybe_unserialize( $value ) ) );
+		}
+	}
+
+	wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $new_id ) );
+	exit;
+} );

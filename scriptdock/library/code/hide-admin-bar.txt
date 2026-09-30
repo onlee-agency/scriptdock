@@ -1,0 +1,6 @@
+/**
+ * Only administrators see the admin bar on the front end.
+ */
+add_filter( 'show_admin_bar', function ( $show ) {
+	return current_user_can( 'manage_options' ) ? $show : false;
+} );

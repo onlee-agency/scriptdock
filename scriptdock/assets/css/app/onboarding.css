@@ -1,0 +1,404 @@
+/**
+ * S02: first run.
+ *
+ * One card, centred, the same size at every step so nothing jumps as you
+ * move through it. The card is a fixed height on a roomy screen and grows
+ * with its content on a short one, because a scrolling setup screen is
+ * better than a clipped one.
+ */
+
+/* Setup fills the content area rather than sitting in .wrap's gutters. The
+   pull-out matches the gutters WordPress uses on wide screens; below 782px
+   they are narrower, so it would push the page sideways and is dropped. */
+@media (min-width: 783px) {
+
+	.sd-app.sd-onboarding-screen {
+		margin-inline: -20px;
+		margin-block-start: -10px;
+	}
+}
+
+.sd-app .sd-onboarding {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	min-block-size: calc(100vh - 100px);
+	padding: 24px 20px 40px;
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-onboarding__card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	inline-size: 100%;
+	max-inline-size: 720px;
+	min-block-size: min(560px, calc(100vh - 160px));
+	border-radius: var(--sd-radius-modal);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-lg);
+	overflow: hidden;
+}
+
+.sd-app .sd-onboarding__body {
+	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 20px;
+	min-block-size: 0;
+	padding: 44px 48px;
+}
+
+.sd-app .sd-onboarding__body--welcome {
+	gap: 22px;
+}
+
+/* The peach glow, the same one the Overview and empty states carry. */
+.sd-app .sd-onboarding__glow {
+	position: absolute;
+	inset-block-start: -140px;
+	inset-inline-end: -120px;
+	inline-size: 480px;
+	block-size: 380px;
+	background: var(--sd-gradient-glow);
+	pointer-events: none;
+}
+
+.sd-app .sd-onboarding__glow--low {
+	inset-block-start: auto;
+	inset-block-end: -140px;
+	inline-size: 460px;
+	block-size: 360px;
+}
+
+.sd-app .sd-onboarding__brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Words ----------------------------------------------------------------- */
+
+.sd-app .sd-onboarding__step {
+	color: var(--sd-ember-700);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.sd-app .sd-onboarding__words {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-onboarding__h1 {
+	font: 800 36px/42px var(--sd-font-sans);
+	letter-spacing: -0.03em;
+}
+
+.sd-app .sd-onboarding__h1--sm {
+	font-size: 30px;
+	line-height: 36px;
+	letter-spacing: -0.02em;
+}
+
+.sd-app .sd-onboarding__accent {
+	background: var(--sd-gradient-headline);
+	background-clip: text;
+	color: transparent;
+}
+
+.sd-app .sd-onboarding__text {
+	max-inline-size: 58ch;
+	color: var(--sd-gray-700);
+	font: 400 15px/24px var(--sd-font-sans);
+}
+
+/* More than one import warning: one per line, with the banner's own type. */
+.sd-app .sd-onboarding__warnings {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0;
+	padding-inline-start: 18px;
+	list-style: disc;
+}
+
+/* Step 1 ---------------------------------------------------------------- */
+
+.sd-app .sd-onboarding__lead {
+	display: flex;
+	gap: 32px;
+	align-items: flex-start;
+}
+
+.sd-app .sd-onboarding__lead .sd-illustration {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-onboarding__points {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 14px;
+	margin: auto 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-onboarding__points li {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sd-app .sd-onboarding__point-title {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.sd-app .sd-onboarding__point-text {
+	color: var(--sd-gray-700);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+/* Step 2 ---------------------------------------------------------------- */
+
+.sd-app .sd-onboarding__link {
+	display: block;
+	padding: 13px 15px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	font: 400 13px/21px var(--sd-font-mono);
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
+.sd-app .sd-onboarding__row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.sd-app .sd-onboarding__to {
+	color: var(--sd-gray-600);
+	font-size: 13px;
+}
+
+/* The one place a checkbox is the point of the screen, so it is drawn as a
+   card rather than a line of text. */
+.sd-app .sd-onboarding__confirm {
+	margin-block-start: auto;
+	padding: 16px 18px;
+	border: 2px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-card);
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.sd-app .sd-onboarding__confirm.is-checked {
+	border-color: var(--sd-ink-900);
+}
+
+/* Step 3 ---------------------------------------------------------------- */
+
+.sd-app .sd-onboarding__sources {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-onboarding__source {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 16px 18px;
+	border: 2px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-card);
+}
+
+.sd-app .sd-onboarding__source.is-on {
+	border-color: var(--sd-ink-900);
+}
+
+.sd-app .sd-onboarding__source-text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-onboarding__source-name {
+	font-size: 15px;
+	font-weight: 700;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-onboarding__source-count {
+	color: var(--sd-gray-700);
+	font-size: 13px;
+}
+
+.sd-app .sd-onboarding__source .sd-switch-label {
+	margin-inline-start: auto;
+	flex-shrink: 0;
+}
+
+/* Step 4 ---------------------------------------------------------------- */
+
+.sd-app .sd-onboarding__choices {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+}
+
+.sd-app .sd-onboarding__choice {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	padding: 20px 18px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	font: inherit;
+	text-align: start;
+	cursor: pointer;
+	transition:
+		border-color var(--sd-duration-base) var(--sd-ease),
+		transform var(--sd-duration-base) var(--sd-ease),
+		box-shadow var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-onboarding__choice:hover {
+	border-color: var(--sd-ink-900);
+	transform: translateY(-2px);
+	box-shadow: var(--sd-shadow-md);
+}
+
+.sd-app .sd-onboarding__choice.is-featured {
+	padding: 19px 17px;
+	border: 2px solid var(--sd-ember-500);
+	background: var(--sd-ember-50);
+	box-shadow: var(--sd-shadow-glow);
+}
+
+.sd-app .sd-onboarding__choice-title {
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.sd-app .sd-onboarding__choice-text {
+	color: var(--sd-gray-700);
+	font-size: 12px;
+	line-height: 19px;
+}
+
+.sd-app .sd-onboarding__tip {
+	margin-block-start: auto;
+	padding: 14px 17px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+/* The footer ------------------------------------------------------------ */
+
+.sd-app .sd-onboarding__foot {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex-shrink: 0;
+	padding: 0 48px;
+	block-size: 84px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-onboarding__foot > .sd-button:last-child {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-onboarding__foot .sd-button--tertiary + .sd-button {
+	margin-inline-start: 0;
+}
+
+.sd-app .sd-onboarding__dots {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+
+.sd-app .sd-onboarding__dots.is-centred {
+	margin-inline: auto;
+}
+
+.sd-app .sd-onboarding__dots + .sd-button--tertiary {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-onboarding__dot {
+	inline-size: 8px;
+	block-size: 8px;
+	border-radius: 50%;
+	background: var(--sd-gray-300);
+}
+
+.sd-app .sd-onboarding__dot.is-here {
+	inline-size: 24px;
+	border-radius: 4px;
+	background: var(--sd-gradient-dot);
+}
+
+/* Narrow ---------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-onboarding {
+		padding: 12px 12px 32px;
+	}
+
+	.sd-app .sd-onboarding__body {
+		padding: 28px 24px;
+	}
+
+	.sd-app .sd-onboarding__h1 {
+		font-size: 28px;
+		line-height: 34px;
+	}
+
+	.sd-app .sd-onboarding__h1--sm {
+		font-size: 24px;
+		line-height: 30px;
+	}
+
+	.sd-app .sd-onboarding__lead .sd-illustration,
+	.sd-app .sd-onboarding__dots {
+		display: none;
+	}
+
+	.sd-app .sd-onboarding__points,
+	.sd-app .sd-onboarding__choices {
+		grid-template-columns: 1fr;
+	}
+
+	.sd-app .sd-onboarding__foot {
+		padding: 16px 24px;
+		block-size: auto;
+		flex-wrap: wrap;
+	}
+}

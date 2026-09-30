@@ -1,0 +1,21 @@
+/**
+ * Mark paid orders that contain only virtual products as completed.
+ */
+add_filter( 'woocommerce_payment_complete_order_status', function ( $status, $order_id, $order = null ) {
+	if ( 'processing' !== $status ) {
+		return $status;
+	}
+	if ( ! $order instanceof WC_Order ) {
+		$order = wc_get_order( $order_id );
+	}
+	if ( ! $order ) {
+		return $status;
+	}
+	foreach ( $order->get_items() as $item ) {
+		$product = $item instanceof WC_Order_Item_Product ? $item->get_product() : null;
+		if ( ! $product || ! $product->is_virtual() ) {
+			return $status;
+		}
+	}
+	return 'completed';
+}, 10, 3 );

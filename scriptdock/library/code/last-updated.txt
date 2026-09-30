@@ -1,0 +1,3 @@
+<?php if ( get_the_modified_time( 'U' ) > get_the_time( 'U' ) + DAY_IN_SECONDS ) : ?>
+<p class="last-updated"><em><?php echo esc_html( 'Last updated on ' . get_the_modified_date() ); ?></em></p>
+<?php endif; ?>

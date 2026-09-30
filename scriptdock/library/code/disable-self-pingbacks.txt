@@ -1,0 +1,11 @@
+/**
+ * Stop WordPress from pinging your own posts.
+ */
+add_action( 'pre_ping', function ( &$links ) {
+	$home = home_url();
+	foreach ( $links as $key => $link ) {
+		if ( 0 === strpos( $link, $home ) ) {
+			unset( $links[ $key ] );
+		}
+	}
+} );

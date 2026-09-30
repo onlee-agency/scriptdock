@@ -1,0 +1,180 @@
+/**
+ * S15: the ScriptDock item in WordPress's toolbar, on the front end.
+ *
+ * The toolbar belongs to WordPress, so every rule here is inside
+ * #wp-admin-bar-scriptdock. Nothing changes the rest of the toolbar, and
+ * nothing here uses the design tokens, which are not loaded on the front
+ * end; the few brand values are written out.
+ *
+ * Colours are WordPress's own toolbar palette (#1d2327 panel, #f0f0f1 text,
+ * #a7aaad and #b4b9be for quieter text), so the panel sits in the toolbar
+ * rather than on top of it.
+ */
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__dot {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-top: 4px;
+	margin-inline-end: 8px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #fb8e01, #c2410c);
+	vertical-align: top;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__warn {
+	display: inline-block;
+	margin-top: 5px;
+	margin-inline-end: 8px;
+	color: #fff;
+	line-height: 0;
+	vertical-align: top;
+}
+
+/* Safe mode: red, and it says so in the label too.
+   WordPress turns toolbar labels light blue on hover and focus, which is
+   only 2:1 on red, so the label keeps white in every state. */
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe > .ab-item {
+	background: #d63638;
+	font-weight: 600;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe:hover > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe.hover > .ab-item {
+	background: #b32d2e;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe > .ab-item .ab-label,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe:hover > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe:hover > .ab-item .ab-label,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe.hover > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe.hover > .ab-item .ab-label,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe > .ab-item:focus,
+#wpadminbar #wp-admin-bar-scriptdock.sd-bar--safe > .ab-item:focus .ab-label {
+	color: #fff;
+}
+
+/* The panel ------------------------------------------------------------- */
+
+/* Capped, so a long title is cut short with an ellipsis instead of
+   stretching the panel off the screen and taking the placements with it. */
+#wpadminbar #wp-admin-bar-scriptdock .ab-sub-wrapper {
+	min-width: 340px;
+	max-width: 400px;
+	padding: 4px 0;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__group {
+	border-top: 1px solid #3c434a;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__group:first-child {
+	border-top: 0;
+}
+
+/* A site with many snippets would push the two actions below the fold, so
+   the list scrolls and they stay where they are. */
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__group--list {
+	max-height: 50vh;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+/* Rows -------------------------------------------------------------------
+   The toolbar sets a fixed 26px line on submenu items, which is too tight
+   for two-line rows; these give them room without touching other menus. */
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__row > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__row > .ab-empty-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: auto;
+	min-height: 0;
+	padding: 7px 14px;
+	line-height: 20px;
+	white-space: normal;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__row--heading > .ab-item,
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__row--heading > .ab-empty-item {
+	padding-bottom: 10px;
+	color: #a7aaad;
+	font-size: 12px;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__name {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__name--muted {
+	color: #b4b9be;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__where {
+	margin-inline-start: auto;
+	padding-inline-start: 12px;
+	flex-shrink: 0;
+	color: #a7aaad;
+	font-size: 12px;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__row--do > .ab-item {
+	color: #b4b9be;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__note {
+	display: block;
+	padding: 2px 0 4px;
+	color: #f0f0f1;
+	line-height: 20px;
+	white-space: normal;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__note--muted {
+	color: #b4b9be;
+}
+
+/* The mark at the start of a row: the snippet's type colour, or an outline
+   for the two rows that are about the page rather than a snippet. */
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark {
+	flex-shrink: 0;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--html {
+	background: #be2d48;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--css {
+	background: #1b63b0;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--js {
+	background: #8a6a00;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--php {
+	background: #5b4bc4;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--universal {
+	background: #0f7c5a;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--page {
+	border: 2px solid #ff8a1f;
+	background: none;
+}
+
+#wpadminbar #wp-admin-bar-scriptdock .sd-bar__mark--off {
+	border: 2px solid #a7aaad;
+	background: none;
+}

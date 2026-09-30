@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  body { margin: 0; background: #E9E7E3; -webkit-font-smoothing: antialiased; }
+  a { color: #C2410C; text-decoration: none; }
+  a:hover { color: #913C05; text-decoration: underline; }
+  @keyframes sdPulse { 0%, 100% { transform: scale(1); opacity: 1 } 50% { transform: scale(1.5); opacity: .25 } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important } }
+</style>
+</helmet>
+
+<div class="sd-app" style="--sd-ember-50:#FFF4EC; --sd-ember-100:#FFE6D5; --sd-ember-200:#FFCDA8; --sd-ember-300:#FEA969; --sd-ember-400:#FF8A1F; --sd-ember-500:#FF6400; --sd-ember-600:#E25300; --sd-ember-700:#C2410C; --sd-ember-800:#913C05; --sd-ink-950:#0C0C0C; --sd-ink-900:#111111; --sd-gray-700:#4F504D; --sd-gray-600:#6B6C69; --sd-gray-500:#8A8B87; --sd-gray-400:#8F8E8A; --sd-gray-300:#D9D8D4; --sd-gray-200:#E7E5E1; --sd-gray-100:#F3F2EF; --sd-gray-50:#F9F8F6; --sd-white:#FFFFFF; --sd-success:#00A32A; --sd-success-text:#007017; --sd-success-bg:#EDFAEF; --sd-warning:#DBA617; --sd-warning-text:#8A6100; --sd-warning-bg:#FCF9E8; --sd-danger:#D63638; --sd-danger-text:#B32D2E; --sd-danger-bg:#FCF0F1; --sd-info-bg:#F3F2EF; --sd-type-php-fg:#5B4BC4; --sd-type-php-bg:#EFEDFB; --sd-type-html-fg:#BE2D48; --sd-type-html-bg:#FDECEF; --sd-type-css-fg:#1B63B0; --sd-type-css-bg:#E8F2FC; --sd-type-js-fg:#8A6A00; --sd-type-js-bg:#FFF6D6; --sd-type-universal-fg:#0F7C5A; --sd-type-universal-bg:#E6F6EF; --sd-gradient-dot:linear-gradient(135deg,#FB8E01 0%,#FF6400 55%,#FE6100 100%); --sd-gradient-headline:linear-gradient(90deg,#1E160F 0%,#562B0C 20%,#913C05 40%,#DD5701 65%,#FD6B00 82%,#F79C02 100%); --sd-font-sans:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; --sd-font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace; --sd-radius-pill:999px; --sd-radius-card:20px; --sd-radius-modal:24px; --sd-radius-input:12px; --sd-radius-editor:16px; --sd-radius-sm:8px; --sd-shadow-sm:0 1px 2px rgba(17,17,17,.06); --sd-shadow-md:0 8px 24px rgba(17,17,17,.06); --sd-shadow-lg:0 24px 48px rgba(17,17,17,.10); --sd-shadow-glow:0 12px 32px rgba(255,100,0,.18); --sd-focus-ring:0 0 0 2px #111111, 0 0 0 4px #FFCDA8; font-family: var(--sd-font-sans); color: var(--sd-ink-900); padding: 48px; display: flex; flex-direction: column; gap: 64px; box-sizing: border-box;">
+
+  <!-- ══════════ A · S09 HEADER & FOOTER ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px; width: 1280px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S09</span>
+      <span style="font-size: 15px; font-weight: 700;">Header &amp; Footer · filled, with a tamper warning on Body</span>
+      <span style="font-size: 13px; color: var(--sd-gray-700);">Content area at 1280. The save bar appears because Header changed.</span>
+    </div>
+
+    <div data-screen-label="S09 Header and Footer" style="width: 1280px; background: var(--sd-gray-50); border-radius: var(--sd-radius-card); padding: 22px; box-shadow: var(--sd-shadow-sm); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; position: relative;">
+
+      <div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding: 0 4px;">
+        <div style="display: flex; flex-direction: column; gap: 5px; max-width: 70ch;">
+          <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 800; letter-spacing: -0.02em;">Header &amp; Footer</h1>
+          <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--sd-gray-700);">The quickest way to add code to every page. For conditions or per-page code, create a snippet instead.</p>
+        </div>
+        <a href="#" style="margin-left: auto; font-size: 13px; font-weight: 600;">Create a snippet instead ↗</a>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; padding: 15px 20px; border-radius: var(--sd-radius-card); background: var(--sd-warning-bg); border: 1px solid var(--sd-warning);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 4.5 19 7v5.5c0 3.6-2.8 6.4-7 7.5-4.2-1.1-7-3.9-7-7.5V7z" /><path d="M12 9v3.6" /><circle cx="12" cy="15.6" r=".9" fill="#8A6100" stroke="none" /></svg>
+        <span style="font-size: 14px; line-height: 22px; color: var(--sd-gray-700);"><strong style="color: var(--sd-warning-text);">The Body code changed outside ScriptDock.</strong> It is still running, because header and footer code is not paused automatically. Review it and save to approve.</span>
+        <button type="button" style="margin-left: auto; flex-shrink: 0; height: 36px; padding: 0 16px; border: 1px solid var(--sd-ink-900); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Jump to Body</button>
+      </div>
+
+      <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--sd-radius-input); background: var(--sd-gray-100); flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16" /><circle cx="7.5" cy="6.8" r=".8" fill="#111111" stroke="none" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 16px; font-weight: 700;">Header</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Printed inside <code style="font-family: var(--sd-font-mono); font-size: 12px;">&lt;head&gt;</code> on every page. Best for verification tags and tracking that must load early.</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--sd-gray-700);">Priority</span>
+            <span style="display: inline-flex; align-items: center; height: 36px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-sm); background: var(--sd-white); overflow: hidden;"><button type="button" aria-label="Decrease header priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">−</button><span style="width: 34px; text-align: center; font-family: var(--sd-font-mono); font-size: 13px;">10</span><button type="button" aria-label="Increase header priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">+</button></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-success-bg); color: var(--sd-success-text); font-size: 12px; font-weight: 700;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>No syntax errors</span>
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: 52px minmax(0, 1fr); font-family: var(--sd-font-mono); font-size: 13px; line-height: 24px; background: var(--sd-white);">
+          <div aria-hidden="true" style="grid-column: 1; padding: 14px 12px; text-align: right; color: var(--sd-gray-700); background: var(--sd-gray-50); border-right: 1px solid var(--sd-gray-200); user-select: none; white-space: nowrap;"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+          <div style="grid-column: 2; padding: 14px 16px; overflow-x: auto; white-space: pre; color: var(--sd-ink-900);"><div style="width: max-content; min-width: 100%;"><span style="color: #6B6C69; font-style: italic;">&lt;!-- Search Console --&gt;</span></div><div style="width: max-content; min-width: 100%;"><span style="color: #BE2D48;">&lt;meta</span> <span style="color: #C2410C;">name</span>=<span style="color: #0F7C5A;">"google-site-verification"</span> <span style="color: #C2410C;">content</span>=<span style="color: #0F7C5A;">"9xK2pQ4mN7vR1tY8"</span><span style="color: #BE2D48;">&gt;</span></div><div style="width: max-content; min-width: 100%;"><span style="color: #BE2D48;">&lt;link</span> <span style="color: #C2410C;">rel</span>=<span style="color: #0F7C5A;">"preconnect"</span> <span style="color: #C2410C;">href</span>=<span style="color: #0F7C5A;">"https://fonts.gstatic.com"</span> <span style="color: #C2410C;">crossorigin</span><span style="color: #BE2D48;">&gt;</span></div><div style="width: max-content; min-width: 100%;"> </div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; padding: 0 16px; height: 38px; background: var(--sd-gray-100); border-top: 1px solid var(--sd-gray-200); font-family: var(--sd-font-mono); font-size: 11px; color: var(--sd-gray-700);">
+          <span>Ln 4, Col 1</span><span>4 lines</span><span>Outputs on wp_head</span><span style="margin-left: auto;">Drag the bottom edge to resize</span>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--sd-warning); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200); background: var(--sd-warning-bg); flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--sd-radius-input); background: var(--sd-white); flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16" /><path d="M9 14h6" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="display: inline-flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 700;">Body<span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-warning); color: var(--sd-warning-text); font-size: 11px; font-weight: 700;">Changed outside ScriptDock</span></span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Printed right after <code style="font-family: var(--sd-font-mono); font-size: 12px;">&lt;body&gt;</code> opens. Used for Tag Manager's noscript frame.</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0;">
+            <a href="#" style="font-size: 13px; font-weight: 600;">Compare with last saved</a>
+            <span style="display: inline-flex; align-items: center; height: 36px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-sm); background: var(--sd-white); overflow: hidden;"><button type="button" aria-label="Decrease body priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">−</button><span style="width: 34px; text-align: center; font-family: var(--sd-font-mono); font-size: 13px;">10</span><button type="button" aria-label="Increase body priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">+</button></span>
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: 52px minmax(0, 1fr); font-family: var(--sd-font-mono); font-size: 13px; line-height: 24px;">
+          <div aria-hidden="true" style="grid-column: 1; padding: 14px 12px; text-align: right; color: var(--sd-gray-700); background: var(--sd-gray-50); border-right: 1px solid var(--sd-gray-200); user-select: none; white-space: nowrap;"><div>1</div><div>2</div><div>3</div></div>
+          <div style="grid-column: 2; padding: 14px 16px; overflow-x: auto; white-space: pre; color: var(--sd-ink-900);"><div style="width: max-content; min-width: 100%;"><span style="color: #6B6C69; font-style: italic;">&lt;!-- Google Tag Manager (noscript) --&gt;</span></div><div style="width: max-content; min-width: 100%;"><span style="color: #BE2D48;">&lt;noscript&gt;&lt;iframe</span> <span style="color: #C2410C;">src</span>=<span style="color: #0F7C5A;">"https://www.googletagmanager.com/ns.html?id=GTM-K9L4M2P"</span></div><div style="width: max-content; min-width: 100%;">  <span style="color: #C2410C;">height</span>=<span style="color: #0F7C5A;">"0"</span> <span style="color: #C2410C;">width</span>=<span style="color: #0F7C5A;">"0"</span> <span style="color: #C2410C;">style</span>=<span style="color: #0F7C5A;">"display:none;visibility:hidden"</span><span style="color: #BE2D48;">&gt;&lt;/iframe&gt;&lt;/noscript&gt;</span></div></div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--sd-radius-input); background: var(--sd-gray-100); flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 15.5h16" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 16px; font-weight: 700;">Footer</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Printed just before <code style="font-family: var(--sd-font-mono); font-size: 12px;">&lt;/body&gt;</code>. The fastest place for anything that is not needed immediately.</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--sd-gray-700);">Priority</span>
+            <span style="display: inline-flex; align-items: center; height: 36px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-sm); background: var(--sd-white); overflow: hidden;"><button type="button" aria-label="Decrease footer priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">−</button><span style="width: 34px; text-align: center; font-family: var(--sd-font-mono); font-size: 13px;">20</span><button type="button" aria-label="Increase footer priority" style="width: 32px; height: 100%; border: 0; background: transparent; font-size: 16px; cursor: pointer;">+</button></span>
+          </span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 32px 22px 34px; background: var(--sd-gray-50);">
+          <span style="font-size: 14px; font-weight: 600; color: var(--sd-gray-700);">Nothing here yet.</span>
+          <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-600); max-width: 62ch;">Paste code, or start from the library. Chat widgets, pop-up scripts and anything non-essential belong here rather than in the header.</span>
+          <button type="button" style="height: 36px; padding: 0 15px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 4px;">Insert an example</button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; height: 64px; padding: 0 12px 0 22px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-shadow: var(--sd-shadow-lg); margin-top: 4px;">
+        <span style="display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: var(--sd-white);"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--sd-gradient-dot);"></span>Unsaved changes in Header</span>
+        <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
+          <button type="button" style="height: 40px; padding: 0 16px; border: 0; border-radius: var(--sd-radius-pill); background: transparent; color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;" style-hover="background: rgba(255,255,255,.14);">Discard</button>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-white); color: var(--sd-ink-900); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">Save changes<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ B · S10 LIBRARY ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px; width: 1280px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S10</span>
+      <span style="font-size: 15px; font-weight: 700;">Library · 47 ready-made snippets</span>
+    </div>
+
+    <div data-screen-label="S10 Library" style="width: 1280px; background: var(--sd-gray-50); border-radius: var(--sd-radius-card); padding: 22px; box-shadow: var(--sd-shadow-sm); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: -140px -100px auto auto; width: 460px; height: 340px; background: radial-gradient(closest-side, rgba(255,156,97,.32), rgba(255,205,168,.2) 45%, rgba(255,239,231,0) 100%); pointer-events: none;"></div>
+
+      <div style="position: relative; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding: 0 4px;">
+        <div style="display: flex; flex-direction: column; gap: 6px; max-width: 64ch;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 800; letter-spacing: -0.02em;">Library</h1>
+            <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 13px; font-weight: 700; color: var(--sd-gray-700);">47 snippets</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--sd-gray-700);">Tested code for the things most sites need. Everything ships with the plugin — nothing is downloaded, and nothing costs extra.</p>
+        </div>
+        <div style="position: relative; display: flex; margin-left: auto; width: 280px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 15px; top: 12px;"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 20 20" /></svg>
+          <input type="text" placeholder="Search the library…" style="flex: 1; min-width: 0; height: 42px; padding: 0 14px 0 40px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-pill); font-family: inherit; font-size: 14px; background: var(--sd-white); box-sizing: border-box;" />
+        </div>
+      </div>
+
+      <div style="position: relative; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding: 0 4px;">
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 13px; font-weight: 700;">All <span style="opacity: .68;">47</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Analytics &amp; pixels <span style="color: var(--sd-gray-600);">14</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Performance <span style="color: var(--sd-gray-600);">7</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Security <span style="color: var(--sd-gray-600);">5</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Admin <span style="color: var(--sd-gray-600);">5</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Content &amp; design <span style="color: var(--sd-gray-600);">9</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">Login page <span style="color: var(--sd-gray-600);">2</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500;">WooCommerce <span style="color: var(--sd-gray-600);">5</span></span>
+      </div>
+
+      <div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 22px; display: flex; flex-direction: column; gap: 14px; transition: all 200ms cubic-bezier(.2,.8,.2,1);" style-hover="border-color: #111111; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(17,17,17,.06);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 40V26" /><path d="M18 40V16" /><path d="M28 40V22" /><path d="M38 40V10" /><path d="M6 40h36" /></g><circle cx="38" cy="10" r="7" fill="#FFCDA8" opacity=".45" /><circle cx="38" cy="10" r="3.6" fill="#FF6400" /></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700;">Google Analytics 4</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Adds the GA4 gtag to every page and passes the page title through as a parameter.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-type-html-bg); color: var(--sd-type-html-fg); font-size: 11px; font-weight: 700;">HTML</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Site header</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Waits for consent</span>
+          </div>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Add<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+        </div>
+
+        <div style="border: 1px solid var(--sd-success); border-radius: var(--sd-radius-card); background: var(--sd-success-bg); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" fill="none"><circle cx="24" cy="24" r="16" /><path d="M8 24h32" /><path d="M24 8c5 5.5 5 26.5 0 32" /><path d="M24 8c-5 5.5-5 26.5 0 32" /></g><circle cx="34" cy="14" r="6" fill="#FFCDA8" opacity=".5" /><circle cx="34" cy="14" r="3.2" fill="#FF6400" /></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700;">Meta Pixel</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Base pixel code for Facebook and Instagram ads, with consent handling built in.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-type-html-bg); color: var(--sd-type-html-fg); font-size: 11px; font-weight: 700;">HTML</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-white); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Site header</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 13px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-success); color: var(--sd-success-text); font-size: 13px; font-weight: 700;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Added</span>
+            <a href="#" style="font-size: 13px; font-weight: 600;">Open snippet</a>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 22px; display: flex; flex-direction: column; gap: 14px;" style-hover="border-color: #111111;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="21" cy="21" r="12" /><path d="M30 30l9 9" /></g><circle cx="21" cy="21" r="7" fill="#FFCDA8" opacity=".45" /><circle cx="21" cy="21" r="3.6" fill="#FF6400" /></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700;">Microsoft Clarity</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Free heatmaps and session recordings. Loads after the visitor interacts.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-type-js-bg); color: var(--sd-type-js-fg); font-size: 11px; font-weight: 700;">JavaScript</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Site footer</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-ember-100); color: var(--sd-ember-800); font-size: 11px; font-weight: 700;">Faster</span>
+          </div>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Add<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-gray-50); padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#6B6C69" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M10 12h4l4 19h18l3.6-13H16" /><circle cx="20" cy="37" r="2.6" /><circle cx="33" cy="37" r="2.6" /></g></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700; color: var(--sd-gray-700);">GA4 purchase event</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-600);">Sends order value and line items to GA4 on the thank-you page.</p>
+          </div>
+          <span style="display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-gray-300); color: var(--sd-gray-700); font-size: 12px; font-weight: 700; align-self: flex-start; margin-top: auto;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="11" width="12" height="8" rx="1.6" /><path d="M9 11V8.5a3 3 0 0 1 6 0V11" /></svg>Requires WooCommerce</span>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 22px; display: flex; flex-direction: column; gap: 14px;" style-hover="border-color: #111111;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M24 8 38 13v11c0 7.2-5.6 12.8-14 15-8.4-2.2-14-7.8-14-15V13z" /><path d="M18 24l4.4 4.4L31 20" /></g><circle cx="35" cy="12" r="5" fill="#FFCDA8" opacity=".5" /><circle cx="35" cy="12" r="2.6" fill="#FF6400" /></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700;">Disable XML-RPC</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Closes a common brute-force entry point. Safe unless you use the WordPress mobile app.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-type-php-bg); color: var(--sd-type-php-fg); font-size: 11px; font-weight: 700;">PHP</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Run everywhere</span>
+          </div>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Add<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 22px; display: flex; flex-direction: column; gap: 14px;" style-hover="border-color: #111111;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="8" y="10" width="32" height="24" rx="3" /><path d="M8 17h32" /><path d="M16 25h9" /></g><circle cx="33" cy="26" r="6" fill="#FFCDA8" opacity=".45" /><circle cx="33" cy="26" r="3" fill="#FF6400" /></svg>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 700;">Custom login logo</h3>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Replaces the WordPress logo on the login page with your own image.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-type-css-bg); color: var(--sd-type-css-fg); font-size: 11px; font-weight: 700;">CSS</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Login page header</span>
+          </div>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Add<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ C · S10b TEMPLATE MODAL + EMPTY SEARCH ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S10b</span>
+      <span style="font-size: 15px; font-weight: 700;">Template modal, with the validation error · empty search</span>
+    </div>
+
+    <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+      <div data-screen-label="S10b Template modal" style="width: 880px; display: flex; flex-direction: column; background: var(--sd-white); border-radius: var(--sd-radius-modal); box-shadow: var(--sd-shadow-lg); overflow: hidden; flex-shrink: 0;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 0 24px; height: 72px; border-bottom: 1px solid var(--sd-gray-200); flex-shrink: 0;">
+          <svg width="30" height="30" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M8 40V26" /><path d="M18 40V16" /><path d="M28 40V22" /><path d="M38 40V10" /><path d="M6 40h36" /></g><circle cx="38" cy="10" r="4" fill="#FF6400" /></svg>
+          <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Google Analytics 4</span><span style="font-size: 13px; color: var(--sd-gray-700);">From the library · Analytics &amp; pixels</span></span>
+          <button type="button" aria-label="Close" style="margin-left: auto; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--sd-gray-300); border-radius: 50%; background: var(--sd-white); cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 360px;">
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--sd-gray-200);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sd-gray-600);">The code it adds</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; margin-left: auto; font-size: 11px; font-weight: 700; color: var(--sd-gray-600);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="11" width="12" height="8" rx="1.6" /><path d="M9 11V8.5a3 3 0 0 1 6 0V11" /></svg>Read-only preview</span>
+            </div>
+            <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-editor); overflow: hidden;">
+              <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); font-family: var(--sd-font-mono); font-size: 12px; line-height: 22px; background: var(--sd-gray-50);">
+                <div aria-hidden="true" style="grid-column: 1; padding: 12px 10px; text-align: right; color: var(--sd-gray-700); background: var(--sd-gray-100); border-right: 1px solid var(--sd-gray-200); user-select: none; white-space: nowrap;"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div></div>
+                <div style="grid-column: 2; padding: 12px 14px; overflow-x: auto; white-space: pre; color: var(--sd-gray-700);"><div style="width: max-content; min-width: 100%;">&lt;!-- Google tag (gtag.js) --&gt;</div><div style="width: max-content; min-width: 100%;">&lt;script async src="https://www.googletagmanager.com/gtag/js?id=<span style="background: var(--sd-ember-100); color: var(--sd-ember-800); font-weight: 700; padding: 1px 4px; border-radius: 4px;">%%MEASUREMENT_ID%%</span>"&gt;&lt;/script&gt;</div><div style="width: max-content; min-width: 100%;">&lt;script&gt;</div><div style="width: max-content; min-width: 100%;">  window.dataLayer = window.dataLayer || [];</div><div style="width: max-content; min-width: 100%;">  function gtag(){dataLayer.push(arguments);}</div><div style="width: max-content; min-width: 100%;">  gtag('js', new Date());</div><div style="width: max-content; min-width: 100%;">  gtag('config', '<span style="background: var(--sd-ember-100); color: var(--sd-ember-800); font-weight: 700; padding: 1px 4px; border-radius: 4px;">%%MEASUREMENT_ID%%</span>');</div></div>
+              </div>
+            </div>
+            <span style="font-size: 12px; line-height: 19px; color: var(--sd-gray-600);">Highlighted parts are filled in from the fields on the right. You can edit the whole snippet after adding it.</span>
+          </div>
+
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 18px;">
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 13px; font-weight: 600;">Measurement ID <span style="color: var(--sd-danger-text);">*</span></span>
+              <div style="position: relative; display: flex;">
+                <input type="text" value="GA-12345" style="flex: 1; min-width: 0; height: 42px; padding: 0 40px 0 14px; border: 1px solid var(--sd-danger); border-radius: var(--sd-radius-input); font-family: var(--sd-font-mono); font-size: 13px; background: var(--sd-white); box-sizing: border-box;" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B32D2E" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="position: absolute; right: 13px; top: 12px;"><circle cx="12" cy="12" r="8.5" /><path d="M12 8v4.5" /><circle cx="12" cy="16" r=".9" fill="#B32D2E" stroke="none" /></svg>
+              </div>
+              <span style="font-size: 12px; font-weight: 600; color: var(--sd-danger-text);">Use the format G-XXXXXXXXXX</span>
+              <span style="font-size: 12px; line-height: 18px; color: var(--sd-gray-600);">Find it in Analytics under Admin › Data streams.</span>
+            </label>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 4px; border-top: 1px solid var(--sd-gray-200);">
+              <span style="font-size: 13px; font-weight: 600; padding-top: 14px;">Where it runs</span>
+              <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--sd-radius-input); background: var(--sd-gray-50);">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16" /></svg>
+                <span style="display: flex; flex-direction: column;"><span style="font-size: 13px; font-weight: 600;">Site header, entire site</span><span style="font-size: 12px; color: var(--sd-gray-600);">The recommended setup</span></span>
+                <button type="button" style="margin-left: auto; flex-shrink: 0; height: 32px; padding: 0 13px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Customize</button>
+              </div>
+            </div>
+
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 13px; font-weight: 600;">Wait for cookie consent</span>
+              <div style="position: relative;">
+                <select style="width: 100%; height: 42px; padding: 0 38px 0 14px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-input); font-family: inherit; font-size: 14px; background: var(--sd-white); appearance: none; box-sizing: border-box;"><option>Statistics</option><option>Not required</option><option>Marketing</option></select>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; right: 13px; top: 13px; pointer-events: none;"><path d="M6 10l6 6 6-6" /></svg>
+              </div>
+              <span style="font-size: 12px; line-height: 18px; color: var(--sd-gray-600);">Complianz is active, so this maps to its Statistics category automatically.</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 12px; padding-top: 4px;">
+              <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Activate now</span><span style="font-size: 12px; color: var(--sd-gray-600);">Starts collecting immediately</span></span>
+              <span role="switch" aria-checked="true" aria-label="Activate now" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding: 0 24px; height: 76px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50); flex-shrink: 0;">
+          <span style="font-size: 13px; color: var(--sd-gray-700);">This adds 1 snippet.</span>
+          <div style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+            <button type="button" style="height: 44px; padding: 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Cancel</button>
+            <button type="button" disabled="disabled" style="display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 22px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-gray-200); color: var(--sd-gray-500); font-family: inherit; font-size: 15px; font-weight: 600;">Add snippet</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 340px; display: flex; flex-direction: column; gap: 14px; flex-shrink: 0;">
+        <div style="position: relative; overflow: hidden; border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 32px 26px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <div style="position: absolute; inset: auto -60px -70px auto; width: 240px; height: 200px; background: radial-gradient(closest-side, rgba(255,156,97,.3), rgba(255,239,231,0) 100%);"></div>
+          <svg width="150" height="112" viewBox="0 0 200 150" fill="none" aria-hidden="true" style="position: relative;">
+            <defs><radialGradient id="sdLibEmpty" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FB8E01" /><stop offset=".55" stop-color="#FF6400" /><stop offset="1" stop-color="#E25300" /></radialGradient></defs>
+            <g stroke="#111111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="88" cy="68" r="34" /><path d="M112 92l26 26" /><path d="M70 60h36" opacity=".4" /><path d="M70 72h24" opacity=".4" /></g>
+            <circle cx="88" cy="68" r="13" fill="#FFCDA8" opacity=".4" /><circle cx="88" cy="68" r="6.5" fill="url(#sdLibEmpty)" />
+          </svg>
+          <div style="position: relative; display: flex; flex-direction: column; gap: 7px;">
+            <span style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Nothing matches "mailchimp"</span>
+            <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">The library covers the most common needs. For anything else, write it yourself — a blank HTML snippet takes a minute.</span>
+          </div>
+          <div style="position: relative; display: flex; gap: 10px; margin-top: 4px;">
+            <button type="button" style="height: 38px; padding: 0 16px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">New snippet</button>
+            <button type="button" style="height: 38px; padding: 0 14px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Clear search</button>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sd-gray-700);">Multi-part template</span>
+          <span style="font-size: 14px; font-weight: 700;">Google Tag Manager</span>
+          <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">This adds 2 snippets:</span>
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <span style="display: flex; align-items: center; gap: 9px; font-size: 13px;"><span style="display: inline-flex; align-items: center; height: 21px; padding: 0 8px; border-radius: var(--sd-radius-pill); background: var(--sd-type-html-bg); color: var(--sd-type-html-fg); font-size: 10px; font-weight: 700;">HTML</span>Tag Manager (head) <span style="margin-left: auto; font-size: 12px; color: var(--sd-gray-600);">Site header</span></span>
+            <span style="display: flex; align-items: center; gap: 9px; font-size: 13px;"><span style="display: inline-flex; align-items: center; height: 21px; padding: 0 8px; border-radius: var(--sd-radius-pill); background: var(--sd-type-html-bg); color: var(--sd-type-html-fg); font-size: 10px; font-weight: 700;">HTML</span>Tag Manager (body) <span style="margin-left: auto; font-size: 12px; color: var(--sd-gray-600);">After body</span></span>
+          </div>
+          <span style="font-size: 12px; line-height: 19px; color: var(--sd-gray-600);">Both use the same container ID. Remove one and the other keeps working, but tracking will be incomplete.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ C2 · S10 MOBILE ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S10 · 390</span>
+      <span style="font-size: 15px; font-weight: 700;">Library on mobile</span>
+      <span style="font-size: 13px; color: var(--sd-gray-700);">Cards go full width, the illustration shrinks and sits beside the title, and category pills scroll sideways.</span>
+    </div>
+
+    <div style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+
+      <div data-screen-label="S10 Library 390" style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--sd-gray-50); box-shadow: var(--sd-shadow-lg); overflow: hidden; border-radius: 6px; flex-shrink: 0; position: relative;">
+        <div style="display: flex; align-items: center; height: 46px; background: #1E1E1E; color: #F0F0F1; font-size: 14px; flex-shrink: 0; padding: 0 12px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0F0F1" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <span style="padding-left: 10px;">Lumen Coffee</span>
+          <span style="margin-left: auto; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: #3858E9; color: #FFFFFF; font-size: 11px; font-weight: 700;">MC</span>
+        </div>
+
+        <div style="padding: 12px 12px 0; flex-shrink: 0;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 8px 0 16px; background: var(--sd-white); border-radius: var(--sd-radius-pill); box-shadow: var(--sd-shadow-md);">
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: var(--sd-gradient-dot); flex-shrink: 0;"></span>
+            <span style="font-size: 17px; font-weight: 800; letter-spacing: -0.03em;">scriptdock</span>
+            <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+              <button type="button" aria-label="Menu" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--sd-gray-300); border-radius: 50%; background: var(--sd-white); cursor: pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+              <button type="button" aria-label="New snippet" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--sd-ink-900); cursor: pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex: 1; min-height: 0; overflow: hidden; padding: 16px 12px 0; display: flex; flex-direction: column; gap: 13px; position: relative;">
+          <div style="position: absolute; inset: -90px -80px auto auto; width: 300px; height: 240px; background: radial-gradient(closest-side, rgba(255,156,97,.32), rgba(255,239,231,0) 100%); pointer-events: none;"></div>
+
+          <div style="position: relative; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <h1 style="margin: 0; font-size: 26px; line-height: 32px; font-weight: 800; letter-spacing: -0.02em;">Library</h1>
+              <span style="display: inline-flex; align-items: center; height: 23px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 12px; font-weight: 700; color: var(--sd-gray-700);">47</span>
+            </div>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Tested code for the things most sites need. Nothing is downloaded.</p>
+          </div>
+
+          <div style="position: relative; display: flex;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 15px; top: 13px;"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 20 20" /></svg>
+            <input type="text" placeholder="Search the library…" style="flex: 1; min-width: 0; height: 42px; padding: 0 14px 0 40px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-pill); font-family: inherit; font-size: 14px; background: var(--sd-white); box-sizing: border-box;" />
+          </div>
+
+          <div style="position: relative; display: flex; gap: 6px; overflow: hidden;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 13px; font-weight: 700; flex-shrink: 0;">All 47</span>
+            <span style="display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500; flex-shrink: 0;">Analytics 14</span>
+            <span style="display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500; flex-shrink: 0;">Performance 7</span>
+          </div>
+
+          <div style="position: relative; display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: flex-start; gap: 13px;">
+                <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M8 40V26" /><path d="M18 40V16" /><path d="M28 40V22" /><path d="M38 40V10" /><path d="M6 40h36" /></g><circle cx="38" cy="10" r="6" fill="#FFCDA8" opacity=".45" /><circle cx="38" cy="10" r="3.2" fill="#FF6400" /></svg>
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                  <h3 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700;">Google Analytics 4</h3>
+                  <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Adds the GA4 gtag to every page.</p>
+                </div>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="display: inline-flex; align-items: center; height: 23px; padding: 0 9px; border-radius: var(--sd-radius-pill); background: var(--sd-type-html-bg); color: var(--sd-type-html-fg); font-size: 11px; font-weight: 700;">HTML</span>
+                <span style="display: inline-flex; align-items: center; height: 23px; padding: 0 9px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Site header</span>
+                <span style="display: inline-flex; align-items: center; height: 23px; padding: 0 9px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 600;">Waits for consent</span>
+              </div>
+              <button type="button" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 6px 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Add<span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+            </div>
+
+            <div style="border: 1px solid var(--sd-success); border-radius: var(--sd-radius-card); background: var(--sd-success-bg); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: flex-start; gap: 13px;">
+                <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.5" stroke-linecap="round" fill="none"><circle cx="24" cy="24" r="16" /><path d="M8 24h32" /><path d="M24 8c5 5.5 5 26.5 0 32" /><path d="M24 8c-5 5.5-5 26.5 0 32" /></g><circle cx="34" cy="14" r="5" fill="#FFCDA8" opacity=".5" /><circle cx="34" cy="14" r="2.8" fill="#FF6400" /></svg>
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                  <h3 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700;">Meta Pixel</h3>
+                  <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Base pixel for Facebook and Instagram ads.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 13px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-success); color: var(--sd-success-text); font-size: 13px; font-weight: 700;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Added</span>
+                <a href="#" style="font-size: 13px; font-weight: 600;">Open snippet</a>
+              </div>
+            </div>
+
+            <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-gray-50); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: flex-start; gap: 13px;">
+                <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#6B6C69" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M10 12h4l4 19h18l3.6-13H16" /><circle cx="20" cy="37" r="2.6" /><circle cx="33" cy="37" r="2.6" /></g></svg>
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                  <h3 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700; color: var(--sd-gray-700);">GA4 purchase event</h3>
+                  <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Sends order value on the thank-you page.</p>
+                </div>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-gray-300); color: var(--sd-gray-700); font-size: 12px; font-weight: 700; align-self: flex-start;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="11" width="12" height="8" rx="1.6" /><path d="M9 11V8.5a3 3 0 0 1 6 0V11" /></svg>Requires WooCommerce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-screen-label="S10b Template sheet 390" style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--sd-gray-50); box-shadow: var(--sd-shadow-lg); overflow: hidden; border-radius: 6px; flex-shrink: 0; position: relative;">
+
+        <div style="display: flex; align-items: center; height: 46px; background: #1E1E1E; color: #F0F0F1; font-size: 14px; flex-shrink: 0; padding: 0 12px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0F0F1" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <span style="padding-left: 10px;">Lumen Coffee</span>
+          <span style="margin-left: auto; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: #3858E9; color: #FFFFFF; font-size: 11px; font-weight: 700;">MC</span>
+        </div>
+        <div style="padding: 12px 12px 0; flex-shrink: 0;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 8px 0 16px; background: var(--sd-white); border-radius: var(--sd-radius-pill); box-shadow: var(--sd-shadow-md);">
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: var(--sd-gradient-dot); flex-shrink: 0;"></span>
+            <span style="font-size: 17px; font-weight: 800; letter-spacing: -0.03em;">scriptdock</span>
+            <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--sd-gray-300); border-radius: 50%; background: var(--sd-white);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></span>
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--sd-ink-900);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1; min-height: 0; overflow: hidden; padding: 16px 12px 0; display: flex; flex-direction: column; gap: 13px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h1 style="margin: 0; font-size: 26px; line-height: 32px; font-weight: 800; letter-spacing: -0.02em;">Library</h1>
+            <span style="display: inline-flex; align-items: center; height: 23px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 12px; font-weight: 700; color: var(--sd-gray-700);">47</span>
+          </div>
+          <div style="position: relative; display: flex;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 15px; top: 13px;"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 20 20" /></svg>
+            <input type="text" placeholder="Search the library…" style="flex: 1; min-width: 0; height: 42px; padding: 0 14px 0 40px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-pill); font-family: inherit; font-size: 14px; background: var(--sd-white); box-sizing: border-box;" />
+          </div>
+          <div style="display: flex; gap: 6px; overflow: hidden;">
+            <span style="display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 13px; font-weight: 700; flex-shrink: 0;">All 47</span>
+            <span style="display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500; flex-shrink: 0;">Analytics 14</span>
+            <span style="display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: var(--sd-radius-pill); border: 1px solid var(--sd-gray-300); background: var(--sd-white); font-size: 13px; font-weight: 500; flex-shrink: 0;">Performance 7</span>
+          </div>
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 16px; display: flex; align-items: flex-start; gap: 13px;">
+            <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M8 40V26" /><path d="M18 40V16" /><path d="M28 40V22" /><path d="M38 40V10" /><path d="M6 40h36" /></g><circle cx="38" cy="10" r="6" fill="#FFCDA8" opacity=".45" /><circle cx="38" cy="10" r="3.2" fill="#FF6400" /></svg>
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <h3 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700;">Google Analytics 4</h3>
+              <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Adds the GA4 gtag to every page.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="position: absolute; inset: 0; background: rgba(17,17,17,.42);"></div>
+
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; max-height: 82%; background: var(--sd-white); border-radius: var(--sd-radius-modal) var(--sd-radius-modal) 0 0; box-shadow: var(--sd-shadow-lg); display: flex; flex-direction: column;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px 16px 0; flex-shrink: 0;">
+            <span style="width: 40px; height: 4px; border-radius: 2px; background: var(--sd-gray-300);"></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 20px 16px; border-bottom: 1px solid var(--sd-gray-200); flex-shrink: 0;">
+            <svg width="26" height="26" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M8 40V26" /><path d="M18 40V16" /><path d="M28 40V22" /><path d="M38 40V10" /><path d="M6 40h36" /></g><circle cx="38" cy="10" r="4" fill="#FF6400" /></svg>
+            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0;"><span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">Google Analytics 4</span><span style="font-size: 12px; color: var(--sd-gray-700);">Analytics &amp; pixels</span></span>
+            <button type="button" aria-label="Close" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--sd-gray-100); cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+          </div>
+          <div style="flex: 1; min-height: 0; overflow: hidden; padding: 18px 20px; display: flex; flex-direction: column; gap: 16px;">
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-size: 13px; font-weight: 600;">Measurement ID <span style="color: var(--sd-danger-text);">*</span></span>
+              <input type="text" placeholder="G-XXXXXXXXXX" style="height: 46px; padding: 0 14px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-input); font-family: var(--sd-font-mono); font-size: 14px; background: var(--sd-white); box-sizing: border-box;" />
+              <span style="font-size: 12px; line-height: 18px; color: var(--sd-gray-700);">Find it in Analytics under Admin › Data streams.</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 11px; padding: 13px 15px; border-radius: var(--sd-radius-input); background: var(--sd-gray-50);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16" /></svg>
+              <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 13px; font-weight: 600;">Site header, entire site</span><span style="font-size: 12px; color: var(--sd-gray-700);">The recommended setup</span></span>
+              <button type="button" style="margin-left: auto; flex-shrink: 0; height: 34px; padding: 0 13px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Change</button>
+            </div>
+            <label style="display: flex; align-items: center; gap: 12px;">
+              <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Activate now</span><span style="font-size: 12px; color: var(--sd-gray-700);">Starts collecting immediately</span></span>
+              <span role="switch" aria-checked="true" aria-label="Activate now" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+            <a href="#" style="font-size: 13px; font-weight: 600;">See the code it adds ▾</a>
+          </div>
+          <div style="display: flex; gap: 10px; padding: 14px 20px 20px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50); flex-shrink: 0;">
+            <button type="button" style="flex: 0 0 auto; height: 48px; padding: 0 20px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Cancel</button>
+            <button type="button" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 9px; height: 48px; padding: 0 6px 0 22px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Add snippet<span style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12" /></svg></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ D · S11 SITE FILES ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px; width: 1280px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S11</span>
+      <span style="font-size: 15px; font-weight: 700;">Site Files · all three status states plus the subfolder warning</span>
+    </div>
+
+    <div data-screen-label="S11 Site Files" style="width: 1280px; background: var(--sd-gray-50); border-radius: var(--sd-radius-card); padding: 22px; box-shadow: var(--sd-shadow-sm); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px;">
+
+      <div style="display: flex; flex-direction: column; gap: 5px; max-width: 74ch; padding: 0 4px;">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 800; letter-spacing: -0.02em;">Site Files</h1>
+        <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--sd-gray-700);">Small text files that live at the root of your domain. Ad networks, security researchers and AI crawlers read them. ScriptDock serves them for you, so you never touch the server.</p>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; padding: 15px 20px; border-radius: var(--sd-radius-card); background: var(--sd-warning-bg); border: 1px solid var(--sd-warning);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 4 21 19H3z" /><path d="M12 10v4" /><circle cx="12" cy="16.6" r=".8" fill="#8A6100" stroke="none" /></svg>
+        <span style="font-size: 14px; line-height: 22px; color: var(--sd-gray-700);"><strong style="color: var(--sd-warning-text);">WordPress is installed in a subfolder.</strong> These files must sit at <code style="font-family: var(--sd-font-mono); font-size: 12px;">lumencoffee.com/ads.txt</code>, not <code style="font-family: var(--sd-font-mono); font-size: 12px;">/blog/ads.txt</code>. Add a redirect at the server, or place the files there by hand.</span>
+        <a href="#" style="margin-left: auto; flex-shrink: 0; font-size: 13px; font-weight: 600;">How to fix this</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start;">
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-family: var(--sd-font-mono); font-size: 15px; font-weight: 500;">ads.txt</span><span style="font-family: var(--sd-font-mono); font-size: 11px; color: var(--sd-gray-600);">lumencoffee.com/ads.txt</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-success-bg); color: var(--sd-success-text); font-size: 11px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--sd-success);"></span>Live</span>
+            <a href="#" style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;">View file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <textarea style="display: block; width: 100%; min-height: 96px; padding: 14px 18px; border: 0; font-family: var(--sd-font-mono); font-size: 12px; line-height: 20px; color: var(--sd-ink-900); resize: vertical; box-sizing: border-box; background: var(--sd-white);">google.com, pub-4839201847362910, DIRECT, f08c47fec0942fa0
+adnxs.com, 3948201, RESELLER</textarea>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50);">
+            <button type="button" style="height: 32px; padding: 0 12px; border: 0; border-radius: var(--sd-radius-pill); background: transparent; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;" style-hover="background: #E7E5E1;">Insert example</button>
+            <span style="margin-left: auto; font-size: 12px; color: var(--sd-gray-600);">2 lines</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--sd-warning); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--sd-gray-200); background: var(--sd-warning-bg); flex-wrap: wrap;">
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-family: var(--sd-font-mono); font-size: 15px; font-weight: 500;">robots.txt</span><span style="font-family: var(--sd-font-mono); font-size: 11px; color: var(--sd-gray-600);">lumencoffee.com/robots.txt</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-warning); color: var(--sd-warning-text); font-size: 11px; font-weight: 700;">Overridden by a server file</span>
+            <a href="#" style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;">View file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <div style="padding: 14px 20px 10px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 13px; font-weight: 600;">Your rules</span>
+            <div style="display: inline-flex; padding: 3px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); gap: 2px;">
+              <span style="display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 600;">Add to WordPress rules</span>
+              <span style="display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: var(--sd-radius-pill); color: var(--sd-gray-700); font-size: 12px; font-weight: 500;">Replace them</span>
+            </div>
+          </div>
+          <textarea style="display: block; width: 100%; min-height: 96px; padding: 8px 18px 14px; border: 0; font-family: var(--sd-font-mono); font-size: 12px; line-height: 20px; color: var(--sd-ink-900); resize: vertical; box-sizing: border-box; background: var(--sd-white);">User-agent: GPTBot
+Disallow: /checkout/
+Disallow: /my-account/</textarea>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-warning-bg);">
+            <span style="font-size: 12px; line-height: 19px; color: var(--sd-gray-700);">A real <code style="font-family: var(--sd-font-mono); font-size: 11px;">robots.txt</code> exists on the server. It wins, and your rules here are ignored until you remove it.</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-family: var(--sd-font-mono); font-size: 15px; font-weight: 500;">llms.txt</span><span style="font-family: var(--sd-font-mono); font-size: 11px; color: var(--sd-gray-600);">lumencoffee.com/llms.txt</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); color: var(--sd-gray-700); font-size: 11px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--sd-gray-400);"></span>Off</span>
+            <label style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;"><span role="switch" aria-checked="false" aria-label="Serve llms.txt" style="display: inline-flex; align-items: center; width: 40px; height: 22px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-300); box-sizing: border-box;"><span style="width: 18px; height: 18px; border-radius: 50%; background: var(--sd-white); box-shadow: var(--sd-shadow-sm);"></span></span>Serve this file</label>
+          </div>
+          <div style="padding: 26px 20px 28px; background: var(--sd-gray-50); display: flex; flex-direction: column; gap: 9px; align-items: flex-start;">
+            <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700); max-width: 56ch;">Tells AI crawlers what your site is about and which pages matter. Switch it on to start editing.</span>
+            <button type="button" style="height: 34px; padding: 0 14px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Insert example</button>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-family: var(--sd-font-mono); font-size: 15px; font-weight: 500;">security.txt</span><span style="font-family: var(--sd-font-mono); font-size: 11px; color: var(--sd-gray-600);">lumencoffee.com/.well-known/security.txt</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-success-bg); color: var(--sd-success-text); font-size: 11px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--sd-success);"></span>Live</span>
+            <a href="#" style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;">View file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></a>
+          </div>
+          <textarea style="display: block; width: 100%; min-height: 96px; padding: 14px 18px; border: 0; font-family: var(--sd-font-mono); font-size: 12px; line-height: 20px; color: var(--sd-ink-900); resize: vertical; box-sizing: border-box; background: var(--sd-white);">Contact: mailto:security@lumencoffee.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en</textarea>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50);">
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--sd-success-text);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Expiry date is still valid</span>
+            <span style="margin-left: auto; font-size: 12px; color: var(--sd-gray-600);">3 lines</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; height: 64px; padding: 0 12px 0 22px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-shadow: var(--sd-shadow-lg);">
+        <span style="display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: var(--sd-white);"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--sd-gradient-dot);"></span>Unsaved changes in robots.txt</span>
+        <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
+          <button type="button" style="height: 40px; padding: 0 16px; border: 0; border-radius: var(--sd-radius-pill); background: transparent; color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;" style-hover="background: rgba(255,255,255,.14);">Discard</button>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 18px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-white); color: var(--sd-ink-900); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">Save changes<span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding: 12px 20px; background: var(--sd-white); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-pill); align-self: flex-start;">
+    <span style="font-size: 13px; color: var(--sd-gray-600);">Phase 7 · S09 Header &amp; Footer · S10 Library · S11 Site Files</span>
+    <a href="ScriptDock Foundations.dc.html" style="font-size: 13px; font-weight: 600;">Foundations ↗</a>
+    <a href="ScriptDock Components.dc.html" style="font-size: 13px; font-weight: 600;">Components ↗</a>
+    <a href="ScriptDock S05 Targeting.dc.html" style="font-size: 13px; font-weight: 600;">S05 ↗</a>
+    <a href="ScriptDock S06-S08 Editor Surfaces.dc.html" style="font-size: 13px; font-weight: 600;">S06–S08 ↗</a>
+  </footer>
+</div>
+
+</x-dc>
+</body>
+</html>

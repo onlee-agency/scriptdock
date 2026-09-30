@@ -1,0 +1,16 @@
+{
+	"name": "scriptdock-dev",
+	"private": true,
+	"description": "Build tooling for the ScriptDock plugin. Nothing here ships; bin/build.sh zips scriptdock/ only.",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js scriptdock/src dev/gallery/src",
+		"lint:css": "wp-scripts lint-style \"scriptdock/assets/css/app/**/*.css\" \"scriptdock/assets/css/block/*.css\" \"dev/gallery/src/*.css\""
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "35.0.0",
+		"axe-core": "4.13.0"
+	}
+}

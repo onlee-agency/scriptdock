@@ -1,0 +1,95 @@
+/**
+ * The page scripts meta box, on posts that do not use the block editor.
+ *
+ * This is the one place ScriptDock still draws WordPress-style markup, so
+ * it follows WordPress's own look rather than the design system: the design
+ * tokens are not loaded here, and a meta box that matched the rest of the
+ * plugin would sit oddly among core's boxes. The block editor's version of
+ * this is assets/css/app/block-editor.css.
+ */
+
+.scriptdock-page-box {
+	--sd-border: #dcdcde;
+}
+
+.scriptdock-page-box .scriptdock-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px;
+	margin: 0 0 10px;
+	border-bottom: 1px solid var(--sd-border);
+}
+
+.scriptdock-tab {
+	position: relative;
+	margin-bottom: -1px;
+	padding: 8px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+	background: none;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.scriptdock-tab.is-active {
+	border-color: var(--sd-border);
+	border-bottom-color: #fff;
+	background: #fff;
+	font-weight: 600;
+}
+
+.scriptdock-tab:focus-visible {
+	outline: 2px solid #2271b1;
+}
+
+.scriptdock-dot {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	margin-left: 4px;
+	border-radius: 50%;
+	background: #00a32a;
+	vertical-align: middle;
+}
+
+.scriptdock-dot--warning {
+	background: #dba617;
+}
+
+.scriptdock-tab-panel .CodeMirror {
+	border: 1px solid var(--sd-border);
+	border-radius: 4px;
+}
+
+/*
+ * Core fills the tag pair under the cursor with orange, which leaves the
+ * tag's green below 4.5:1. An outline marks the pair without covering it.
+ */
+.scriptdock-page-box .CodeMirror-matchingtag {
+	background: none;
+	outline: 1px solid #b26200;
+	outline-offset: -1px;
+}
+
+.scriptdock-snippet-checklist {
+	max-height: 220px;
+	overflow: auto;
+	margin: 6px 0 10px 24px;
+	padding: 8px 12px;
+	border: 1px solid var(--sd-border);
+	border-radius: 4px;
+}
+
+.scriptdock-snippet-checklist label {
+	display: block;
+	margin: 4px 0;
+}
+
+/* Mirrors the block editor's footer note, so both editors say the same thing. */
+.scriptdock-page-box__note {
+	margin: 14px -12px -6px;
+	padding: 10px 12px 0;
+	border-top: 1px solid var(--sd-border);
+	color: #757575;
+	font-size: 12px;
+}

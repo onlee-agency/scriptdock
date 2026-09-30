@@ -1,0 +1,11 @@
+/**
+ * Run the Heartbeat API every 60 seconds and turn it off on the front end.
+ */
+add_filter( 'heartbeat_settings', function ( $settings ) {
+	$settings['interval'] = 60;
+	return $settings;
+} );
+
+add_action( 'wp_enqueue_scripts', function () {
+	wp_deregister_script( 'heartbeat' );
+}, 100 );

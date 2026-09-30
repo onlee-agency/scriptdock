@@ -1,0 +1,1193 @@
+/**
+ * S04 Snippet editor: the editor bar, banners, code type, the code card,
+ * where it runs, loading and the sidebar, with the run console. The code
+ * editor, the smart tags palette and the other components style
+ * themselves; this file lays out the screen and styles what only it has.
+ */
+
+/* Screen ------------------------------------------------------------------- */
+
+.sd-app .sd-editor-screen__inner {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding-block: 4px 32px;
+}
+
+.sd-app .sd-editor-screen__banners {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sd-app .sd-editor-screen__banners:empty {
+	display: none;
+}
+
+.sd-app .sd-editor-screen__layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 340px;
+	align-items: start;
+	gap: 16px;
+}
+
+.sd-app .sd-editor-screen__main,
+.sd-app .sd-editor-screen__side {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-inline-size: 0;
+}
+
+.sd-app.sd-editor-screen .sd-card {
+	gap: 14px;
+	padding: 18px 20px;
+	box-shadow: none;
+}
+
+.sd-app.sd-editor-screen .sd-overline {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-editor-screen__missing {
+	padding-block: 24px;
+}
+
+/* Editor bar: pinned under the top bar. ------------------------------------ */
+
+.sd-app .sd-editbar {
+	position: sticky;
+	inset-block-start: var(--sd-sticky-top);
+	z-index: calc(var(--sd-z-sticky) - 1);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 14px;
+	padding-block: 12px;
+	padding-inline: 20px 14px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-sm);
+}
+
+.sd-app .sd-editbar__heading {
+	display: flex;
+	flex: 1 1 260px;
+	flex-direction: column;
+	gap: 3px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-editbar__crumbs {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+/* A comfortable hit area that stays on top of the title's box. */
+.sd-app .sd-editbar__crumbs a {
+	position: relative;
+	z-index: 1;
+	padding-block: 5px;
+	margin-block: -5px;
+}
+
+.sd-app .sd-editbar__slash {
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-editbar__title {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	min-inline-size: 0;
+}
+
+/* The title reads as a heading and edits in place. */
+.sd-app .sd-editbar__input,
+.sd-app .sd-editbar__input:focus {
+	min-inline-size: 0;
+	max-inline-size: 100%;
+	margin: 0;
+	margin-inline-start: -7px;
+	padding-block: 0;
+	padding-inline: 6px;
+	border: 1px solid transparent;
+	border-radius: var(--sd-radius-sm);
+	background: transparent;
+	box-shadow: none;
+	color: var(--sd-ink-900);
+	font: 700 20px/30px var(--sd-font-sans);
+	letter-spacing: var(--sd-tracking-h2);
+	text-overflow: ellipsis;
+	field-sizing: content;
+}
+
+.sd-app .sd-editbar__input::placeholder {
+	color: var(--sd-gray-600);
+	opacity: 1;
+}
+
+.sd-app .sd-editbar__input:not([readonly]):hover {
+	border-color: var(--sd-gray-300);
+}
+
+.sd-app .sd-editbar__input:focus-visible,
+.sd-app .sd-editbar__input:not([readonly]):focus {
+	border-color: var(--sd-ink-900);
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-editbar__pencil {
+	display: inline-flex;
+	flex-shrink: 0;
+	padding: 4px;
+	border: 0;
+	background: none;
+	color: var(--sd-gray-600);
+	cursor: text;
+}
+
+.sd-app .sd-editbar__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-editbar__unsaved {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sd-gray-700);
+	font: 600 13px/20px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-editbar__dot {
+	flex-shrink: 0;
+	inline-size: 8px;
+	block-size: 8px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+}
+
+.sd-app .sd-editbar__active {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.sd-app .sd-editbar__word {
+	min-inline-size: 58px;
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+/* Phones: back, title and the switch. */
+.sd-app .sd-editbar--phone {
+	flex-wrap: nowrap;
+	gap: 10px;
+	padding: 10px 12px;
+}
+
+.sd-app .sd-editbar__phone-title {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 1px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-editbar__phone-name {
+	overflow: hidden;
+	color: var(--sd-ink-900);
+	font: 700 16px/22px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-editbar__phone-meta {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-editor-screen__phone-title {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+/* Phones: Save stays in reach at the bottom of the screen. */
+.sd-app .sd-editor-savebar {
+	position: sticky;
+	inset-block-end: 0;
+	z-index: calc(var(--sd-z-sticky) - 1);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-inline: calc(0px - var(--sd-shell-inset, 12px));
+	padding: 12px 14px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-white);
+}
+
+.sd-app .sd-editor-savebar.is-dirty {
+	justify-content: space-between;
+}
+
+/* Code type ---------------------------------------------------------------- */
+
+.sd-app .sd-typepicker__options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.sd-app .sd-typepicker__option,
+.sd-app .sd-typepicker__option:focus {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	block-size: 40px;
+	margin: 0;
+	padding-inline: 16px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-white);
+	color: var(--sd-gray-700);
+	font: 500 14px/1 var(--sd-font-sans);
+	cursor: pointer;
+	transition:
+		border-color var(--sd-duration-fast) var(--sd-ease),
+		background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-typepicker__option:hover {
+	border-color: var(--sd-ink-900);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-typepicker__option:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-typepicker__option svg {
+	inline-size: 15px;
+	block-size: 15px;
+}
+
+/* Chosen: a 2px outline and the fill of its type colour. */
+.sd-app .sd-typepicker__option.is-checked {
+	padding-inline: 15px;
+	border-width: 2px;
+	font-weight: 700;
+}
+
+.sd-app .sd-typepicker__option--php.is-checked {
+	border-color: var(--sd-type-php-fg);
+	background: var(--sd-type-php-bg);
+	color: var(--sd-type-php-fg);
+}
+
+.sd-app .sd-typepicker__option--html.is-checked {
+	border-color: var(--sd-type-html-fg);
+	background: var(--sd-type-html-bg);
+	color: var(--sd-type-html-fg);
+}
+
+.sd-app .sd-typepicker__option--css.is-checked {
+	border-color: var(--sd-type-css-fg);
+	background: var(--sd-type-css-bg);
+	color: var(--sd-type-css-fg);
+}
+
+.sd-app .sd-typepicker__option--js.is-checked {
+	border-color: var(--sd-type-js-fg);
+	background: var(--sd-type-js-bg);
+	color: var(--sd-type-js-fg);
+}
+
+.sd-app .sd-typepicker__option--universal.is-checked {
+	border-color: var(--sd-type-universal-fg);
+	background: var(--sd-type-universal-bg);
+	color: var(--sd-type-universal-fg);
+}
+
+/* Locked: listed with a padlock and a dashed edge; never faded. */
+.sd-app .sd-typepicker__option.is-locked,
+.sd-app .sd-typepicker__option.is-locked:hover {
+	border-style: dashed;
+	border-color: var(--sd-gray-400);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-typepicker__option[aria-disabled="true"]:not(.is-locked):not(.is-checked):hover {
+	border-color: var(--sd-gray-300);
+	color: var(--sd-gray-700);
+	cursor: default;
+}
+
+.sd-app .sd-typepicker__hint {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+/* Code card ---------------------------------------------------------------- */
+
+/* 480px to start with; drag the corner to make it taller. */
+.sd-app.sd-editor-screen .sd-editor:not(.is-fullscreen) .CodeMirror {
+	block-size: 480px;
+	min-block-size: 220px;
+	resize: vertical;
+}
+
+/* The example in an empty editor, where the first line starts. */
+.sd-app .sd-editor__placeholder {
+	position: absolute;
+	inset-block-start: 14px;
+	left: 50px;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: var(--sd-gray-600);
+	font: 400 13px/22px var(--sd-font-mono);
+	white-space: pre;
+	text-align: left;
+	direction: ltr;
+	pointer-events: none;
+}
+
+.sd-app .sd-editor--dark .sd-editor__placeholder {
+	color: var(--sd-code-dark-comment);
+}
+
+/* Full screen: the title at the start of the bar, Exit at the end. */
+.sd-app .sd-editor__title {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	min-inline-size: 0;
+	overflow: hidden;
+	color: var(--sd-editor-text);
+	font: 700 15px/22px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+/* The text in a box of its own: an ellipsis only works on a block, not on
+   the loose text of a flex row. */
+.sd-app .sd-editor__title-text {
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sd-app .sd-editor__title-dot {
+	flex-shrink: 0;
+	inline-size: 16px;
+	block-size: 16px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+}
+
+.sd-app .sd-editor__tool--exit kbd {
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: var(--sd-editor-muted);
+	font: 400 11px/1 var(--sd-font-mono);
+}
+
+.sd-app .sd-editor.is-fullscreen .sd-editor__tool,
+.sd-app .sd-editor.is-fullscreen .sd-editor__tools .sd-button {
+	block-size: 36px;
+	font-size: 13px;
+}
+
+/* Where it runs ------------------------------------------------------------ */
+
+.sd-app .sd-where {
+	gap: 16px;
+	padding: 20px;
+}
+
+.sd-app .sd-where__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 14px;
+}
+
+.sd-app .sd-where__head .sd-button {
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-where__sentence .sd-sentence {
+	margin: 0;
+}
+
+.sd-app .sd-where__facts {
+	display: grid;
+	list-style: none;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 14px;
+	margin: 0;
+	padding-block-start: 16px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-where__fact {
+	display: flex;
+	align-items: flex-start;
+	gap: 11px;
+	min-inline-size: 0;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-where__fact > svg {
+	margin-block-start: 2px;
+}
+
+.sd-app .sd-where__fact-text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-where__fact-label {
+	display: block;
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-where__fact-value {
+	display: block;
+	margin: 0;
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+	overflow-wrap: anywhere;
+}
+
+.sd-app .sd-where__extra {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.sd-app .sd-where__shortcode {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+.sd-app .sd-where__note {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-where__usage,
+.sd-app .sd-where__warning {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-where__usage > svg,
+.sd-app .sd-where__warning > svg {
+	margin-block-start: 2px;
+}
+
+.sd-app .sd-where__warning {
+	background: var(--sd-warning-bg);
+	color: var(--sd-warning-text);
+	font-weight: 600;
+}
+
+/* Loading ------------------------------------------------------------------ */
+
+.sd-app .sd-loading {
+	gap: 18px;
+	padding: 20px;
+}
+
+.sd-app .sd-loading__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 16px;
+}
+
+.sd-app .sd-loading__text {
+	display: flex;
+	flex: 1 1 220px;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.sd-app .sd-loading__label {
+	margin: 0;
+	padding: 0;
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-loading__hint {
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-loading__strategies {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	min-inline-size: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.sd-app .sd-loading__strategies > legend {
+	margin-block-end: 9px;
+}
+
+/* Strategy cards: native radios, drawn as cards. */
+.sd-app .sd-choices {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+	gap: 8px;
+}
+
+.sd-app .sd-choice {
+	position: relative;
+	display: flex;
+	gap: 10px;
+	margin: 0;
+	padding: 13px 14px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-white);
+	cursor: pointer;
+	transition: border-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-choice:hover:not(.is-disabled) {
+	border-color: var(--sd-ink-900);
+}
+
+.sd-app .sd-choice.is-checked {
+	padding: 12px 13px;
+	border: 2px solid var(--sd-ink-900);
+}
+
+.sd-app .sd-choice:has(.sd-choice__input:focus-visible) {
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-choice__input {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	margin: 0;
+	opacity: 0;
+}
+
+.sd-app .sd-choice__mark {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	inline-size: 18px;
+	block-size: 18px;
+	margin-block-start: 1px;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: 50%;
+	background: var(--sd-white);
+}
+
+.sd-app .sd-choice.is-checked .sd-choice__mark {
+	border: 2px solid var(--sd-ink-900);
+}
+
+.sd-app .sd-choice.is-checked .sd-choice__mark::after {
+	inline-size: 8px;
+	block-size: 8px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	content: "";
+}
+
+.sd-app .sd-choice__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-choice__title {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	color: var(--sd-ink-900);
+	font: 700 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-choice__badge {
+	display: inline-flex;
+	align-items: center;
+	block-size: 18px;
+	padding-inline: 7px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-ember-100);
+	color: var(--sd-ember-800);
+	font: 700 10px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-choice__desc {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 5px;
+	color: var(--sd-gray-600);
+	font: 400 12px/17px var(--sd-font-sans);
+}
+
+.sd-app .sd-choice__desc svg {
+	flex-shrink: 0;
+	margin-block-start: 2px;
+}
+
+/* Not available here: a dashed edge and the reason; never faded. */
+.sd-app .sd-choice.is-disabled {
+	border-style: dashed;
+	background: var(--sd-gray-50);
+	cursor: not-allowed;
+}
+
+.sd-app .sd-choice.is-disabled .sd-choice__title {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-choice.is-disabled .sd-choice__mark {
+	border-style: dashed;
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-loading__consent {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 12px 16px;
+}
+
+.sd-app .sd-loading__consent .sd-field {
+	flex: 1 1 260px;
+	min-inline-size: 200px;
+}
+
+.sd-app .sd-consent-note {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-block-size: 40px;
+	padding-block: 8px;
+	padding-inline: 14px;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 600 13px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-consent-note.is-found {
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+}
+
+.sd-app .sd-consent-note svg {
+	flex-shrink: 0;
+}
+
+/* Sidebar ------------------------------------------------------------------ */
+
+.sd-app .sd-side-card .sd-setting {
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: none;
+}
+
+.sd-app .sd-side-card__text {
+	margin: 0;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-side-card .sd-button {
+	align-self: flex-start;
+}
+
+/* Priority: the words at the start, the stepper at the end. */
+.sd-app .sd-side-card__priority {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 1px 12px;
+}
+
+.sd-app .sd-side-card__priority > .sd-field__label {
+	grid-row: 1;
+	grid-column: 1;
+}
+
+.sd-app .sd-side-card__priority > .sd-number {
+	grid-row: 1 / span 2;
+	grid-column: 2;
+}
+
+.sd-app .sd-side-card__priority > .sd-field__footer {
+	grid-row: 2;
+	grid-column: 1;
+	margin: 0;
+}
+
+.sd-app .sd-signature {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	padding: 11px 14px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font: 600 13px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-signature svg {
+	flex-shrink: 0;
+}
+
+.sd-app .sd-signature.is-success {
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+}
+
+.sd-app .sd-signature.is-danger {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-last-error {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 11px 14px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-danger-bg);
+}
+
+.sd-app .sd-last-error__title {
+	color: var(--sd-danger-text);
+	font: 700 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-last-error__detail {
+	color: var(--sd-gray-700);
+	font: 400 11px/17px var(--sd-font-mono);
+	overflow-wrap: anywhere;
+	text-align: start;
+	unicode-bidi: isolate;
+}
+
+.sd-app .sd-history-line {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.sd-app .sd-history-line__text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-history-line__count {
+	color: var(--sd-ink-900);
+	font: 600 13px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-history-line__when {
+	color: var(--sd-gray-600);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+/* Run console: dark, rising from the bottom of the screen. ----------------- */
+
+.sd-app .sd-console {
+	position: sticky;
+	inset-block-end: 16px;
+	z-index: var(--sd-z-sticky);
+	display: flex;
+	flex-direction: column;
+	max-block-size: 45vh;
+	overflow: hidden;
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-code-dark-bg);
+	box-shadow: var(--sd-shadow-lg);
+	animation: sd-rise var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-console:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring), var(--sd-shadow-lg);
+}
+
+.sd-app .sd-console__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	padding: 12px 14px 12px 18px;
+	background: var(--sd-code-dark-chrome);
+}
+
+.sd-app .sd-console__status {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sd-code-dark-success-text);
+	font: 700 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-console.is-error .sd-console__status {
+	color: var(--sd-code-dark-error-text);
+}
+
+.sd-app .sd-console__title {
+	color: var(--sd-code-dark-comment);
+	font: 400 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-console__tools {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-console__copy {
+	block-size: 28px;
+	padding-inline: 11px;
+	border: 1px solid var(--sd-code-dark-border);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-code-dark-bg);
+	color: var(--sd-code-dark-text);
+	font: 600 11px/1 var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-console__copy:hover {
+	border-color: var(--sd-code-dark-text);
+}
+
+.sd-app .sd-console__copy:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: 0 0 0 2px var(--sd-white), 0 0 0 4px var(--sd-ember-200);
+}
+
+.sd-app .sd-console__output {
+	flex: 1;
+	min-block-size: 0;
+	margin: 0;
+	padding: 14px 18px;
+	overflow: auto;
+	background: none;
+	color: var(--sd-code-dark-function);
+	font: 400 12px/21px var(--sd-font-mono);
+	white-space: pre;
+	text-align: left;
+}
+
+.sd-app .sd-console.is-error .sd-console__output {
+	color: var(--sd-code-dark-error-text);
+	white-space: pre-wrap;
+}
+
+/* Tablet: the sidebar moves below the main column. ------------------------- */
+
+@media (max-width: 1024px) {
+
+	.sd-app .sd-editor-screen__layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-editor-screen__side {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		align-items: start;
+	}
+
+	.sd-app .sd-editbar__input {
+		font-size: 18px;
+		line-height: 26px;
+	}
+}
+
+/* Phone -------------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-editor-screen__inner {
+		gap: 12px;
+		padding-block-end: 0;
+	}
+
+	.sd-app .sd-editbar {
+		inset-block-start: var(--sd-sticky-top);
+	}
+
+	.sd-app.sd-editor-screen .sd-card {
+		padding: 14px 16px;
+	}
+
+	.sd-app.sd-editor-screen .sd-editor:not(.is-fullscreen) .CodeMirror {
+		block-size: 320px;
+	}
+
+	.sd-app .sd-typepicker__options {
+		flex-wrap: nowrap;
+		margin-inline: -4px;
+		padding: 4px;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+
+	.sd-app .sd-typepicker__option {
+		flex-shrink: 0;
+		block-size: 36px;
+		padding-inline: 14px;
+		font-size: 13px;
+	}
+
+	.sd-app .sd-typepicker__option.is-checked {
+		padding-inline: 13px;
+	}
+
+	.sd-app .sd-editor-screen__tabs {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.sd-app .sd-editor-screen__tabs [role="tabpanel"]:not([hidden]) {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.sd-app .sd-console {
+		inset-block-end: 76px;
+	}
+}
+
+/* S06 History drawer ------------------------------------------------------- */
+
+.sd-app .sd-history {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sd-app .sd-history__panes {
+	display: grid;
+	grid-template-columns: 220px minmax(0, 1fr);
+	gap: 16px;
+	align-items: start;
+}
+
+.sd-app .sd-history__timeline {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-history__now,
+.sd-app .sd-history__item {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	inline-size: 100%;
+	padding: 10px;
+	border: 1px solid transparent;
+	border-radius: var(--sd-radius-input);
+	background: none;
+	text-align: start;
+}
+
+.sd-app .sd-history__now {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-history__item {
+	cursor: pointer;
+}
+
+.sd-app .sd-history__item:hover {
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-history__item.is-picked {
+	border-color: var(--sd-ember-500);
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-history__entry {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-history__who {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-history__author {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-history__when {
+	font-size: 11.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-history__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.sd-app .sd-history__tag {
+	padding: 1px 7px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: 999px;
+	background: var(--sd-white);
+	font-size: 10.5px;
+	font-weight: 600;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-history__tag.is-current {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-history__empty {
+	padding: 10px;
+	font-size: 12.5px;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-history__diff {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-history__what {
+	margin: 0;
+	font-size: 12.5px;
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-history__diff .sd-diff {
+	max-block-size: none;
+}
+
+.sd-app .sd-history__loading {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+}
+
+.sd-app .sd-history__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-history__reason {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	font-size: 12.5px;
+	color: var(--sd-gray-600);
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-history__panes {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-history__timeline {
+		flex-direction: row;
+		gap: 8px;
+		overflow-x: auto;
+		padding-block-end: 4px;
+	}
+
+	.sd-app .sd-history__now,
+	.sd-app .sd-history__item {
+		inline-size: 190px;
+		flex-shrink: 0;
+	}
+
+	.sd-app .sd-diff--split {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-diff__col + .sd-diff__col {
+		border-inline-start: 0;
+		border-block-start: 1px solid var(--sd-gray-200);
+	}
+}

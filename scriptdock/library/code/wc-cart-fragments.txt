@@ -1,0 +1,8 @@
+/**
+ * Stop the cart fragments request on pages outside the shop.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+	if ( function_exists( 'is_woocommerce' ) && ! is_woocommerce() && ! is_cart() && ! is_checkout() ) {
+		wp_dequeue_script( 'wc-cart-fragments' );
+	}
+}, 99 );

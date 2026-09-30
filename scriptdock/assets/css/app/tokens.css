@@ -1,0 +1,308 @@
+/**
+ * ScriptDock design tokens.
+ *
+ * Every colour, font, radius, shadow, motion and layer value used on
+ * ScriptDock's own screens is a custom property on .sd-app. Components read
+ * these tokens and never hard-code colours. Nothing here styles WordPress's
+ * own toolbar, sidebar or notices.
+ *
+ * Values come from the design handoff (README, "Design tokens"). Tokens
+ * marked "added" are not in the README table but are used by the designs.
+ */
+
+/*
+ * Fonts, bundled with the plugin. No CDN and no external requests.
+ * Plus Jakarta Sans and JetBrains Mono, variable weight, SIL Open Font
+ * License 1.1 (see assets/fonts/.../OFL.txt). Each subset loads only when
+ * the page uses characters from its range.
+ */
+
+@font-face {
+	font-family: "Plus Jakarta Sans";
+	font-style: normal;
+	font-weight: 200 800;
+	font-display: swap;
+	src: url(../../fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2) format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "Plus Jakarta Sans";
+	font-style: normal;
+	font-weight: 200 800;
+	font-display: swap;
+	src: url(../../fonts/plus-jakarta-sans/plus-jakarta-sans-latin-ext-wght-normal.woff2) format("woff2");
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+	font-family: "Plus Jakarta Sans";
+	font-style: normal;
+	font-weight: 200 800;
+	font-display: swap;
+	src: url(../../fonts/plus-jakarta-sans/plus-jakarta-sans-vietnamese-wght-normal.woff2) format("woff2");
+	unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+	font-family: "Plus Jakarta Sans";
+	font-style: normal;
+	font-weight: 200 800;
+	font-display: swap;
+	src: url(../../fonts/plus-jakarta-sans/plus-jakarta-sans-cyrillic-ext-wght-normal.woff2) format("woff2");
+	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-latin-wght-normal.woff2) format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-latin-ext-wght-normal.woff2) format("woff2");
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-vietnamese-wght-normal.woff2) format("woff2");
+	unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-cyrillic-wght-normal.woff2) format("woff2");
+	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-cyrillic-ext-wght-normal.woff2) format("woff2");
+	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	font-style: normal;
+	font-weight: 100 800;
+	font-display: swap;
+	src: url(../../fonts/jetbrains-mono/jetbrains-mono-greek-wght-normal.woff2) format("woff2");
+	unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+
+.sd-app {
+
+	/* Ember, the brand scale. Orange is an accent: fills carry ink text
+	   (#111 on #FF6400 is 6.4:1), never white. Orange text on white is
+	   ember-700 (4.7:1). */
+	--sd-ember-50: #fff4ec; /* selected card fill, hover tint */
+	--sd-ember-100: #ffe6d5; /* placeholder highlight, "faster" badge */
+	--sd-ember-200: #ffcda8; /* selected card border, focus halo */
+	--sd-ember-300: #fea969;
+	--sd-ember-400: #ff8a1f; /* dark-theme accents, spinners */
+	--sd-ember-500: #ff6400; /* brand orange: fills only */
+	--sd-ember-600: #e25300; /* pressed orange fills */
+	--sd-ember-700: #c2410c; /* orange text on white, links */
+	--sd-ember-800: #913c05; /* link hover, text on ember-50 */
+	--sd-ember-900: #562b0c; /* gradient stop */
+	--sd-ember-950: #1e160f; /* gradient stop */
+	--sd-amber-400: #fb8e01; /* added: gradient stop */
+	--sd-amber-300: #f79c02; /* added: gradient stop */
+
+	/* Warm neutrals. Ratios are against white. */
+	--sd-ink-950: #0c0c0c; /* pressed ink */
+	--sd-ink-900: #111; /* 19:1 - primary text, primary buttons, switch track */
+	--sd-gray-700: #4f504d; /* 8.1:1 - body text and code gutters */
+	--sd-gray-600: #6b6c69; /* 5.3:1 - secondary text, on white only */
+	--sd-gray-500: #8a8b87; /* 3.4:1 - non-text only */
+	--sd-gray-400: #8f8e8a; /* 3.3:1 - input borders */
+	--sd-gray-300: #d9d8d4; /* secondary button borders */
+	--sd-gray-200: #e7e5e1; /* card borders, dividers */
+	--sd-gray-100: #f3f2ef; /* table headers, chip fills, hover */
+	--sd-gray-50: #f9f8f6; /* app background */
+	--sd-white: #fff; /* surfaces */
+
+	/* Semantic colours, matched to WordPress's notice hues so our banners sit
+	   beside core notices. Info is ink, never WordPress blue: blue belongs to
+	   WordPress's own chrome. */
+	--sd-success: #00a32a;
+	--sd-success-text: #007017;
+	--sd-success-bg: #edfaef;
+	--sd-warning: #dba617;
+	--sd-warning-text: #8a6100;
+	--sd-warning-bg: #fcf9e8;
+	--sd-danger: #d63638;
+	--sd-danger-text: #b32d2e;
+	--sd-danger-bg: #fcf0f1;
+	--sd-info: #111;
+	--sd-info-bg: #f3f2ef;
+
+	/* On ink: fills and text laid over ink-900 surfaces (bulk bar, save bar,
+	   toasts, split button). Added: these are the alphas the designs use. */
+	--sd-on-ink-fill: rgba(255, 255, 255, 0.12); /* round close button */
+	--sd-on-ink-hover: rgba(255, 255, 255, 0.14); /* ghost button hover */
+	--sd-on-ink-strong: rgba(255, 255, 255, 0.16); /* toast action */
+	--sd-on-ink-divider: rgba(255, 255, 255, 0.22); /* split button divider */
+	--sd-on-ink-muted: rgba(255, 255, 255, 0.7); /* counts, 10:1 on ink */
+	--sd-on-ink-disabled: rgba(255, 255, 255, 0.38); /* unavailable control on ink */
+	--sd-spinner-track-on-ink: rgba(255, 255, 255, 0.3);
+
+	/* Backdrop behind modals and drawers. Added: from the S10b modal. */
+	--sd-scrim: rgba(17, 17, 17, 0.42);
+
+	/* Skeleton shimmer. Added. */
+	--sd-skeleton-shimmer: linear-gradient(90deg, #f3f2ef 0%, #e7e5e1 40%, #f3f2ef 80%);
+
+	/* Code types. Always paired with a text label, never colour alone. */
+	--sd-type-php-fg: #5b4bc4; /* 5.6:1 */
+	--sd-type-php-bg: #efedfb;
+	--sd-type-html-fg: #be2d48; /* 5.0:1 */
+	--sd-type-html-bg: #fdecef;
+	--sd-type-css-fg: #1b63b0; /* 5.4:1 */
+	--sd-type-css-bg: #e8f2fc;
+	--sd-type-js-fg: #8a6a00; /* 4.7:1 */
+	--sd-type-js-bg: #fff6d6;
+	--sd-type-universal-fg: #0f7c5a; /* 4.6:1 */
+	--sd-type-universal-bg: #e6f6ef;
+
+	/* Gradients. The dot is the brand mark and the switch knob. The headline
+	   gradient is used once per screen, on display text of 28px or more.
+	   The glow is for heroes and empty states only, never behind tables. */
+	--sd-dot-start: #fb8e01; /* light stop of the dot, also in illustrations */
+	--sd-gradient-dot: linear-gradient(135deg, #fb8e01 0%, #ff6400 55%, #fe6100 100%);
+	--sd-gradient-headline: linear-gradient(90deg, #1e160f 0%, #562b0c 20%, #913c05 40%, #dd5701 65%, #fd6b00 82%, #f79c02 100%);
+	--sd-gradient-glow: radial-gradient(closest-side, rgba(255, 156, 97, 0.34), rgba(255, 205, 168, 0.22) 45%, rgba(255, 239, 231, 0) 100%);
+
+	/* Typography. Each role is a font shorthand plus its letter-spacing. */
+	--sd-font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", "Roboto", sans-serif;
+	--sd-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
+	--sd-text-display: 800 40px/44px var(--sd-font-sans);
+	--sd-text-h1: 800 28px/34px var(--sd-font-sans);
+	--sd-text-h2: 700 20px/28px var(--sd-font-sans);
+	--sd-text-h3: 700 16px/24px var(--sd-font-sans);
+	--sd-text-body: 400 14px/22px var(--sd-font-sans);
+	--sd-text-body-strong: 600 14px/22px var(--sd-font-sans);
+	--sd-text-small: 400 13px/20px var(--sd-font-sans);
+	--sd-text-caption: 500 12px/16px var(--sd-font-sans);
+	--sd-text-overline: 700 11px/16px var(--sd-font-sans);
+	--sd-text-code: 400 13px/20px var(--sd-font-mono);
+	--sd-tracking-display: -0.03em;
+	--sd-tracking-h1: -0.02em;
+	--sd-tracking-h2: -0.01em;
+	--sd-tracking-overline: 0.08em;
+	--sd-tracking-wordmark: -0.03em; /* added: top-bar wordmark */
+
+	/* Spacing, on a 4px base. 24px is card padding. */
+	--sd-space-1: 4px;
+	--sd-space-2: 8px;
+	--sd-space-3: 12px;
+	--sd-space-4: 16px;
+	--sd-space-5: 20px;
+	--sd-space-6: 24px;
+	--sd-space-8: 32px;
+	--sd-space-10: 40px;
+	--sd-space-12: 48px;
+	--sd-space-16: 64px;
+
+	/* Radius. */
+	--sd-radius-pill: 999px; /* buttons, chips, tabs, top bar */
+	--sd-radius-modal: 24px;
+	--sd-radius-card: 20px;
+	--sd-radius-editor: 16px;
+	--sd-radius-input: 12px;
+	--sd-radius-sm: 8px;
+	--sd-radius-xs: 6px; /* added: keyboard hints */
+
+	/* Shadows. Glow is for one element per screen at most. */
+	--sd-shadow-sm: 0 1px 2px rgba(17, 17, 17, 0.06); /* resting cards */
+	--sd-shadow-md: 0 8px 24px rgba(17, 17, 17, 0.06); /* top bar, hover */
+	--sd-shadow-lg: 0 24px 48px rgba(17, 17, 17, 0.1); /* modals, drawers */
+	--sd-shadow-glow: 0 12px 32px rgba(255, 100, 0, 0.18);
+	--sd-shadow-lift: 0 8px 24px rgba(17, 17, 17, 0.14); /* added: primary button hover */
+	--sd-shadow-dot: 0 4px 12px rgba(255, 100, 0, 0.3); /* added: brand dot in the top bar */
+
+	/* Focus. 2px ink plus a 2px ember-200 halo on every interactive element.
+	   The inset form is for items inside containers that clip overflow. */
+	--sd-focus-ring: 0 0 0 2px #111, 0 0 0 4px #ffcda8;
+	--sd-focus-ring-inset: inset 0 0 0 2px #111, inset 0 0 0 4px #ffcda8; /* added */
+
+	/* Motion. Everything respects prefers-reduced-motion (see base.css). */
+	--sd-duration-fast: 120ms;
+	--sd-duration-base: 200ms;
+	--sd-duration-slow: 300ms;
+	--sd-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+	/* Layers. WordPress's toolbar sits at 99999; drawers, modals and toasts
+	   go above it. Popovers stay below WordPress's own menus. */
+	--sd-z-sticky: 900; /* added: the pinned top bar, below WordPress's menus */
+	--sd-z-popover: 1000; /* added: menus inside the content area */
+	--sd-z-drawer: 100000;
+	--sd-z-modal: 100010;
+	--sd-z-toast: 100020;
+
+	/* Controls hold WordPress's 40px height (36px compact, 44px touch). */
+	--sd-control-height: 40px;
+	--sd-control-height-compact: 36px;
+	--sd-control-height-touch: 44px;
+	--sd-button-height-sm: 32px;
+	--sd-button-height-md: 40px;
+	--sd-button-height-lg: 48px;
+
+	/* Code editor, light theme. The gutter is body text, not chrome:
+	   gray-700 on gray-50, never gray-500. */
+	--sd-code-light-bg: #fff;
+	--sd-code-light-chrome: #fff;
+	--sd-code-light-border: #e7e5e1;
+	--sd-code-light-text: #111;
+	--sd-code-light-gutter: #4f504d;
+	--sd-code-light-gutter-bg: #f9f8f6;
+	--sd-code-light-keyword: #c2410c; /* keywords and attributes */
+	--sd-code-light-string: #0f7c5a;
+	--sd-code-light-function: #1b63b0;
+	--sd-code-light-variable: var(--sd-gray-700); /* plain body ink: the commonest token shouldn't compete */
+	--sd-code-light-tag: #be2d48;
+	--sd-code-light-number: #5b4bc4; /* 5.6:1; kept apart from attribute ember */
+	--sd-code-light-constant: #5b4bc4; /* true, false, null */
+	--sd-code-light-comment: #6b6c69;
+	--sd-code-light-error-bg: #fcf0f1;
+	--sd-code-light-error-edge: #d63638;
+	--sd-code-light-selection: #ffe6d5; /* not drawn; ember-100 */
+
+	/* Code editor, dark theme. */
+	--sd-code-dark-bg: #141210;
+	--sd-code-dark-chrome: #1b1916;
+	--sd-code-dark-border: #2a2520;
+	--sd-code-dark-text: #f5f1ec;
+	--sd-code-dark-gutter: #8a847b;
+	--sd-code-dark-gutter-bg: #1b1916;
+	--sd-code-dark-keyword: #ff8a1f;
+	--sd-code-dark-string: #f9c98b;
+	--sd-code-dark-function: #e6d5c3;
+	--sd-code-dark-variable: #9fd3c7;
+	--sd-code-dark-number: #ffb86b;
+	--sd-code-dark-constant: #ffb86b; /* true, false, null: same as numbers */
+	--sd-code-dark-comment: #8a847b;
+	--sd-code-dark-error-bg: #3b1414;
+	--sd-code-dark-error-edge: #d63638;
+	--sd-code-dark-error-text: #ff9a9b;
+	--sd-code-dark-success-text: #7ee2a8;
+	--sd-code-dark-type-php: #9d8cf5; /* the PHP file marker on dark chrome */
+	--sd-code-dark-selection: #3a2a1c; /* not drawn; warm, 1.5:1 on the dark bg */
+}

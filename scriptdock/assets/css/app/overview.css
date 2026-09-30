@@ -1,0 +1,407 @@
+/**
+ * S01 Overview: the hero, the health cards, the stat tiles, the two columns
+ * and the library strip. The cards, tiles, banners and buttons style
+ * themselves; this file lays the screen out.
+ */
+
+.sd-app .sd-overview {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding-block: 4px 32px;
+}
+
+/* Hero --------------------------------------------------------------------- */
+
+.sd-app .sd-hero {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: space-between;
+	padding: 28px 28px 30px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	overflow: hidden;
+}
+
+.sd-app .sd-hero__text {
+	display: flex;
+	position: relative;
+	z-index: 1;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.sd-app .sd-hero__greeting {
+	margin: 0;
+	color: var(--sd-gray-600);
+	font: 400 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-hero__title {
+	margin: 0;
+	color: var(--sd-ink-900);
+	font: 700 32px/38px var(--sd-font-sans);
+	letter-spacing: -0.01em;
+}
+
+.sd-app .sd-hero__accent {
+	background-image: linear-gradient(92deg, var(--sd-ember-600), var(--sd-ember-400));
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.sd-app .sd-hero__health {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 6px 0 0;
+	color: var(--sd-gray-700);
+	font: 500 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-hero__health.is-attention {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-hero__glow {
+	position: absolute;
+	inset-block-start: -120px;
+	inset-inline-end: -80px;
+	inline-size: 380px;
+	block-size: 320px;
+	border-radius: 50%;
+	background-image: radial-gradient(circle, var(--sd-ember-100), rgb(255 255 255 / 0%) 70%);
+	pointer-events: none;
+}
+
+/* Health cards and tiles --------------------------------------------------- */
+
+.sd-app .sd-overview__health {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sd-app .sd-overview__stats {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+}
+
+/* Columns ------------------------------------------------------------------ */
+
+.sd-app .sd-overview__columns {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 340px;
+	align-items: start;
+	gap: 16px;
+}
+
+.sd-app .sd-overview__main,
+.sd-app .sd-overview__side {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-overview__card {
+	padding: 18px;
+}
+
+.sd-app .sd-overview__cardhead {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	margin-block-end: 10px;
+}
+
+.sd-app .sd-overview__cardlink {
+	color: var(--sd-ember-700);
+	font: 600 13px/18px var(--sd-font-sans);
+	text-decoration: none;
+}
+
+.sd-app .sd-overview__cardlink:hover {
+	text-decoration: underline;
+}
+
+/* Recently edited ---------------------------------------------------------- */
+
+.sd-app .sd-recent,
+.sd-app .sd-problems {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-recent__row {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 12px;
+	padding-block: 10px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-recent__row:first-child {
+	border-block-start: 0;
+	padding-block-start: 2px;
+}
+
+.sd-app .sd-recent__text {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-recent__title {
+	color: var(--sd-ink-900);
+	font: 600 14px/20px var(--sd-font-sans);
+	text-decoration: none;
+}
+
+.sd-app .sd-recent__title:hover {
+	color: var(--sd-ember-700);
+}
+
+.sd-app .sd-recent__note,
+.sd-app .sd-recent__where {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-inline-size: 0;
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-recent__where {
+	color: var(--sd-gray-700);
+}
+
+/* The text in a box of its own: an ellipsis only works on a block, not on
+   the loose text of a flex row. */
+.sd-app .sd-recent__clip {
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sd-app .sd-recent__when {
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+/* Recent problems ---------------------------------------------------------- */
+
+.sd-app .sd-problems__row {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 10px;
+	padding-block: 10px;
+	border-block-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-problems__row:first-child {
+	border-block-start: 0;
+	padding-block-start: 2px;
+}
+
+.sd-app .sd-problems__mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 28px;
+	block-size: 28px;
+	border-radius: 50%;
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-problems__row.is-error .sd-problems__mark {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-problems__text {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-problems__title {
+	color: var(--sd-ink-900);
+	font: 600 13.5px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-problems__note {
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Quick actions, checklist and tip ----------------------------------------- */
+
+.sd-app .sd-quick {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+}
+
+.sd-app .sd-checklist {
+	display: flex;
+	align-items: start;
+	gap: 14px;
+}
+
+.sd-app .sd-checklist__body {
+	min-inline-size: 0;
+}
+
+.sd-app .sd-checklist__left {
+	margin: 0 0 6px;
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-checklist__items {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-checklist__item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--sd-ink-900);
+	font: 400 13px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-checklist__item a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.sd-app .sd-checklist__item a:hover {
+	color: var(--sd-ember-700);
+	text-decoration: underline;
+}
+
+.sd-app .sd-checklist__item.is-done {
+	color: var(--sd-gray-600);
+	text-decoration: line-through;
+}
+
+.sd-app .sd-checklist__mark {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 16px;
+	block-size: 16px;
+	border: 1px solid var(--sd-gray-400);
+	border-radius: 50%;
+	color: var(--sd-white);
+}
+
+.sd-app .sd-checklist__item.is-done .sd-checklist__mark {
+	border-color: var(--sd-ember-500);
+	background: var(--sd-ember-500);
+}
+
+.sd-app .sd-tip__text {
+	margin: 0 0 10px;
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+/* Library strip ------------------------------------------------------------ */
+
+.sd-app .sd-overview__libhead {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 12px;
+	margin-block-end: 12px;
+}
+
+.sd-app .sd-overview__libnote {
+	margin: 2px 0 0;
+	color: var(--sd-gray-600);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-overview__libcards {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.sd-app .sd-overview__welcome {
+	padding: 24px;
+}
+
+/* Tablet ------------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+	.sd-app .sd-overview__columns {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-overview__stats {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.sd-app .sd-overview__libcards {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* Phone -------------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-hero {
+		padding: 20px;
+	}
+
+	.sd-app .sd-hero__title {
+		font-size: 24px;
+		line-height: 30px;
+	}
+
+	.sd-app .sd-recent__row {
+		grid-template-columns: auto minmax(0, 1fr) auto;
+	}
+
+	.sd-app .sd-recent__when {
+		display: none;
+	}
+
+	.sd-app .sd-overview__libcards {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.sd-app .sd-quick {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

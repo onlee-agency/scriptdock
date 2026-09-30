@@ -1,0 +1,9 @@
+/**
+ * Don't load the Dashicons font for visitors who are not logged in.
+ * Styles that depend on Dashicons still load it.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+	if ( ! is_user_logged_in() ) {
+		wp_dequeue_style( 'dashicons' );
+	}
+}, 100 );

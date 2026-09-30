@@ -1,0 +1,61 @@
+# Local development environment for the ScriptDock plugin.
+# Usage (from this folder):
+#   docker compose up -d
+#   docker compose run --rm cli core install --url=http://localhost:8089 --title=ScriptDock --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email
+#   docker compose run --rm cli plugin activate scriptdock
+# Site: http://localhost:8089  (admin / admin), bound to 127.0.0.1 only.
+# Dev-only: add ?dev-login=1 to any URL to log in as the admin (mu-plugins/dev-autologin.php).
+name: scriptdock-dev
+
+x-db-env: &db-env
+  WORDPRESS_DB_HOST: db
+  WORDPRESS_DB_USER: wordpress
+  WORDPRESS_DB_PASSWORD: wordpress
+  WORDPRESS_DB_NAME: wordpress
+
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+    volumes:
+      - db:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    depends_on: [db]
+    ports:
+      - "127.0.0.1:8089:80"
+    environment:
+      <<: *db-env
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+        define( 'SCRIPT_DEBUG', true );
+    volumes:
+      - wp:/var/www/html
+      - ../scriptdock:/var/www/html/wp-content/plugins/scriptdock
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins
+
+  cli:
+    image: wordpress:cli-php8.3
+    depends_on: [db, wordpress]
+    user: "33:33"
+    environment:
+      <<: *db-env
+      HOME: /tmp
+    volumes:
+      - wp:/var/www/html
+      - ../scriptdock:/var/www/html/wp-content/plugins/scriptdock
+      - ../tests:/tests
+    entrypoint: ["wp"]
+    command: ["--info"]
+
+volumes:
+  db:
+  wp:

@@ -1,0 +1,73 @@
+# Demo site for screenshots: "Lumen Coffee Roasters" with the sample data
+# from design-brief/05-sample-data.md. Separate from the dev site, so tests
+# there never touch it. DEV ONLY - never ships.
+#
+# Usage (from this folder):
+#   docker compose up -d
+#   docker compose run --rm cli core install --url=http://localhost:8090 --title="Lumen Coffee Roasters" --admin_user=maya --admin_password=maya --admin_email=maya@lumencoffee.com --skip-email
+#   docker compose run --rm cli plugin activate scriptdock
+#   docker compose run --rm -v "$PWD:/demo" cli eval-file /demo/seed.php --user=maya
+# Site: http://localhost:8090 (maya / maya), bound to 127.0.0.1 only.
+# Add ?dev-login=1 to any URL to log in without a password.
+name: scriptdock-demo
+
+x-db-env: &db-env
+  WORDPRESS_DB_HOST: db
+  WORDPRESS_DB_USER: wordpress
+  WORDPRESS_DB_PASSWORD: wordpress
+  WORDPRESS_DB_NAME: wordpress
+
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+    volumes:
+      - db:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    depends_on: [db]
+    ports:
+      - "127.0.0.1:8090:80"
+    environment:
+      <<: *db-env
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+        define( 'AUTOMATIC_UPDATER_DISABLED', true );
+        // Without this, every stylesheet is served as ?ver=1.0.0 and the
+        // browser keeps the copy it cached days ago while the JavaScript
+        // rebuilds — new markup, old styles.
+        define( 'SCRIPT_DEBUG', true );
+    volumes:
+      - wp:/var/www/html
+      - ../../scriptdock:/var/www/html/wp-content/plugins/scriptdock
+      - ../mu-plugins/dev-autologin.php:/var/www/html/wp-content/mu-plugins/dev-autologin.php:ro
+      - ../mu-plugins/dev-rtl.php:/var/www/html/wp-content/mu-plugins/dev-rtl.php:ro
+      - ./demo-content.php:/var/www/html/wp-content/mu-plugins/demo-content.php:ro
+
+  cli:
+    image: wordpress:cli-php8.3
+    depends_on: [db, wordpress]
+    user: "33:33"
+    environment:
+      <<: *db-env
+      HOME: /tmp
+    volumes:
+      - wp:/var/www/html
+      - ../../scriptdock:/var/www/html/wp-content/plugins/scriptdock
+      - ../mu-plugins/dev-autologin.php:/var/www/html/wp-content/mu-plugins/dev-autologin.php:ro
+      - ../mu-plugins/dev-rtl.php:/var/www/html/wp-content/mu-plugins/dev-rtl.php:ro
+      - ./demo-content.php:/var/www/html/wp-content/mu-plugins/demo-content.php:ro
+    entrypoint: ["wp"]
+    command: ["--info"]
+
+volumes:
+  db:
+  wp:

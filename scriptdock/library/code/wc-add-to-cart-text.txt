@@ -1,0 +1,14 @@
+/**
+ * Change the "Add to cart" button text. Edit the text below.
+ */
+add_filter( 'woocommerce_product_single_add_to_cart_text', function () {
+	return 'Buy now';
+} );
+
+add_filter( 'woocommerce_product_add_to_cart_text', function ( $text, $product ) {
+	// Keep "Select options" and "Read more" on variable or unavailable products.
+	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() ) {
+		return 'Buy now';
+	}
+	return $text;
+}, 10, 2 );

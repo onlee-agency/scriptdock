@@ -1,0 +1,957 @@
+/**
+ * Code: sd-CodeEditor (chrome and CodeMirror themes), sd-LintStatus,
+ * sd-CodePreview and sd-SmartTagPalette.
+ *
+ * The editor is WordPress's bundled CodeMirror. These rules give it the
+ * light and dark themes. The gutter is body text, not chrome: gray-700 on
+ * gray-50 in light, #8A847B on #1B1916 in dark, never gray-500.
+ */
+
+/* Editor chrome. -------------------------------------------------------- */
+
+.sd-app .sd-editor {
+	--sd-editor-bg: var(--sd-code-light-bg);
+	--sd-editor-chrome: var(--sd-gray-100);
+	--sd-editor-border: var(--sd-gray-200);
+	--sd-editor-text: var(--sd-code-light-text);
+	--sd-editor-muted: var(--sd-gray-700);
+	--sd-editor-gutter: var(--sd-code-light-gutter);
+	--sd-editor-gutter-bg: var(--sd-code-light-gutter-bg);
+	--sd-editor-control-bg: var(--sd-white);
+	--sd-editor-control-border: var(--sd-gray-300);
+	--sd-editor-danger: var(--sd-danger-text);
+	--sd-editor-error-bg: var(--sd-code-light-error-bg);
+	--sd-editor-error-edge: var(--sd-code-light-error-edge);
+	--sd-editor-selection: var(--sd-code-light-selection);
+	--sd-editor-cursor: var(--sd-ink-900);
+	--sd-editor-keyword: var(--sd-code-light-keyword);
+	--sd-editor-string: var(--sd-code-light-string);
+	--sd-editor-function: var(--sd-code-light-function);
+	--sd-editor-variable: var(--sd-code-light-variable);
+	--sd-editor-identifier: var(--sd-code-light-variable); /* globals such as window */
+	--sd-editor-tag: var(--sd-code-light-tag);
+	--sd-editor-attribute: var(--sd-code-light-keyword);
+	--sd-editor-number: var(--sd-code-light-number);
+	--sd-editor-constant: var(--sd-code-light-constant);
+	--sd-editor-comment: var(--sd-code-light-comment);
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+	overflow: hidden;
+	border: 1px solid var(--sd-editor-border);
+	border-radius: var(--sd-radius-editor);
+	background: var(--sd-editor-bg);
+}
+
+.sd-app .sd-editor--dark {
+	--sd-editor-bg: var(--sd-code-dark-bg);
+	--sd-editor-chrome: var(--sd-code-dark-chrome);
+	--sd-editor-border: var(--sd-code-dark-border);
+	--sd-editor-text: var(--sd-code-dark-text);
+	--sd-editor-muted: var(--sd-code-dark-gutter);
+	--sd-editor-gutter: var(--sd-code-dark-gutter);
+	--sd-editor-gutter-bg: var(--sd-code-dark-gutter-bg);
+	--sd-editor-control-bg: var(--sd-code-dark-bg);
+	--sd-editor-control-border: var(--sd-code-dark-border);
+	--sd-editor-danger: var(--sd-code-dark-error-text);
+	--sd-editor-error-bg: var(--sd-code-dark-error-bg);
+	--sd-editor-error-edge: var(--sd-code-dark-error-edge);
+	--sd-editor-selection: var(--sd-code-dark-selection);
+	--sd-editor-cursor: var(--sd-ember-400);
+	--sd-editor-keyword: var(--sd-code-dark-keyword);
+	--sd-editor-string: var(--sd-code-dark-string);
+	--sd-editor-function: var(--sd-code-dark-function);
+	--sd-editor-variable: var(--sd-code-dark-variable);
+	--sd-editor-identifier: var(--sd-code-dark-text);
+	--sd-editor-tag: var(--sd-code-dark-keyword);
+	--sd-editor-attribute: var(--sd-code-dark-function);
+	--sd-editor-number: var(--sd-code-dark-number);
+	--sd-editor-constant: var(--sd-code-dark-constant);
+	--sd-editor-comment: var(--sd-code-dark-comment);
+}
+
+.sd-app .sd-editor__toolbar {
+	display: flex;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	min-block-size: 48px;
+	padding: 8px 14px;
+	border-block-end: 1px solid var(--sd-editor-border);
+	background: var(--sd-editor-chrome);
+}
+
+.sd-app .sd-editor__file {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	max-inline-size: 100%;
+	block-size: 30px;
+	padding-inline: 12px;
+	overflow: hidden;
+	border: 1px solid var(--sd-editor-border);
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-editor-control-bg);
+	color: var(--sd-editor-text);
+	font: 500 12px/1 var(--sd-font-mono);
+	white-space: nowrap;
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+.sd-app .sd-editor__file-dot {
+	flex-shrink: 0;
+	inline-size: 8px;
+	block-size: 8px;
+	border-radius: 2px;
+	background: currentcolor;
+}
+
+.sd-app .sd-editor__file-dot--php {
+	background: var(--sd-type-php-fg);
+}
+
+.sd-app .sd-editor__file-dot--html {
+	background: var(--sd-type-html-fg);
+}
+
+.sd-app .sd-editor__file-dot--css {
+	background: var(--sd-type-css-fg);
+}
+
+.sd-app .sd-editor__file-dot--js {
+	background: var(--sd-type-js-fg);
+}
+
+.sd-app .sd-editor__file-dot--universal {
+	background: var(--sd-type-universal-fg);
+}
+
+.sd-app .sd-editor--dark .sd-editor__file-dot--php {
+	background: var(--sd-code-dark-type-php);
+}
+
+.sd-app .sd-editor__tools {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-inline-start: auto;
+}
+
+.sd-app .sd-editor__tool,
+.sd-app .sd-editor__tool:focus {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-inline-size: 30px;
+	block-size: 30px;
+	padding-inline: 11px;
+	border: 1px solid var(--sd-editor-control-border);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-editor-control-bg);
+	color: var(--sd-editor-text);
+	font: 600 12px/1 var(--sd-font-sans);
+	cursor: pointer;
+}
+
+.sd-app .sd-editor__tool:hover,
+.sd-app .sd-editor__tool[aria-expanded="true"],
+.sd-app .sd-editor__tool[aria-pressed="true"] {
+	border-color: var(--sd-editor-text);
+	color: var(--sd-editor-text);
+}
+
+.sd-app .sd-editor__tool--icon {
+	inline-size: 30px;
+	padding: 0;
+	border-radius: 50%;
+}
+
+.sd-app .sd-editor__tool svg {
+	inline-size: 15px;
+	block-size: 15px;
+	stroke-width: 1.6;
+}
+
+/* The palette hangs out of the card, so the card stops clipping while it is
+   open; the toolbar and status bar keep the corners rounded meanwhile. */
+.sd-app .sd-editor:has(.sd-editor__palette) {
+	overflow: visible;
+}
+
+.sd-app .sd-editor:has(.sd-editor__palette) .sd-editor__toolbar {
+	border-start-start-radius: calc(var(--sd-radius-editor) - 1px);
+	border-start-end-radius: calc(var(--sd-radius-editor) - 1px);
+}
+
+.sd-app .sd-editor:has(.sd-editor__palette) .sd-editor__status {
+	border-end-start-radius: calc(var(--sd-radius-editor) - 1px);
+	border-end-end-radius: calc(var(--sd-radius-editor) - 1px);
+}
+
+/* The code area. */
+.sd-app .sd-editor__body {
+	position: relative;
+	flex: 1;
+	min-block-size: 0;
+}
+
+.sd-app .sd-editor__status {
+	display: flex;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	min-block-size: 36px;
+	padding: 8px 14px;
+	border-block-start: 1px solid var(--sd-editor-border);
+	background: var(--sd-editor-chrome);
+	color: var(--sd-editor-muted);
+	font: 400 11px/16px var(--sd-font-mono);
+
+	/* Line numbers, encoding and the save shortcut read the same way in
+	   every language. */
+	direction: ltr;
+}
+
+.sd-app .sd-editor--light .sd-editor__status {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-editor__status-problems {
+	color: var(--sd-editor-danger);
+}
+
+.sd-app .sd-editor__status-end {
+	margin-inline-start: auto;
+}
+
+/* Full screen: the editor covers everything, the toolbar included. */
+.sd-app .sd-editor.is-fullscreen {
+	position: fixed;
+	inset: 0;
+	z-index: var(--sd-z-modal);
+	border: 0;
+	border-radius: 0;
+}
+
+/* CodeMirror, themed. The selectors carry .sd-editor so they replace
+   WordPress's default CodeMirror theme without touching it elsewhere. ---- */
+
+/* A definite height, never auto: CodeMirror's own scroller is height:100%,
+   which cannot resolve against an auto parent. It would collapse to the
+   height of the code and leave a bare strip below it, with the edge of the
+   scroller reading as a stray rule across the editor. */
+.sd-app .sd-editor .CodeMirror {
+	block-size: 220px;
+	background: var(--sd-editor-bg);
+	color: var(--sd-editor-text);
+	font: 400 13px/22px var(--sd-font-mono);
+	direction: ltr;
+}
+
+/* Whatever height the editor is given, the scroller fills it, so one line of
+   code and five hundred look the same from the outside. */
+.sd-app .sd-editor .CodeMirror-scroll {
+	block-size: 100%;
+}
+
+.sd-app .sd-editor.is-fullscreen .CodeMirror {
+	block-size: 100%;
+}
+
+.sd-app .sd-editor .CodeMirror-lines {
+	padding: 14px 0;
+}
+
+.sd-app .sd-editor .CodeMirror pre.CodeMirror-line,
+.sd-app .sd-editor .CodeMirror pre.CodeMirror-line-like {
+	padding-inline: 16px;
+	font: inherit;
+}
+
+/* The example shown while an editor is empty. It sits over the first line,
+   past the gutter, and never takes a click. */
+
+.sd-app .sd-editor__placeholder {
+	position: absolute;
+	inset-block-start: 14px;
+	inset-inline-start: 68px;
+	inset-inline-end: 16px;
+	z-index: 1;
+	margin: 0;
+	color: var(--sd-editor-gutter);
+	font: 400 13px/22px var(--sd-font-mono);
+	white-space: pre-wrap;
+	pointer-events: none;
+}
+
+.sd-app .sd-editor .CodeMirror-gutters {
+	border-inline-end: 1px solid var(--sd-editor-border);
+	background: var(--sd-editor-gutter-bg);
+}
+
+.sd-app .sd-editor--dark .CodeMirror-gutters {
+	border-inline-end: 0;
+}
+
+.sd-app .sd-editor .CodeMirror-linenumber {
+	min-inline-size: 32px;
+	padding-inline: 10px;
+	color: var(--sd-editor-gutter);
+	white-space: nowrap;
+	text-align: end;
+}
+
+.sd-app .sd-editor .CodeMirror-cursor {
+	border-inline-start: 2px solid var(--sd-editor-cursor);
+}
+
+.sd-app .sd-editor .CodeMirror-selected,
+.sd-app .sd-editor .CodeMirror-focused .CodeMirror-selected,
+.sd-app .sd-editor .CodeMirror-line::selection,
+.sd-app .sd-editor .CodeMirror-line > span::selection {
+	background: var(--sd-editor-selection);
+}
+
+.sd-app .sd-editor .CodeMirror-activeline-background {
+	background: transparent;
+}
+
+.sd-app .sd-editor .CodeMirror-matchingbracket {
+	outline: 1px solid var(--sd-editor-muted);
+	color: inherit !important;
+}
+
+/* CodeMirror's own wash behind a matching tag is too weak to read
+   attribute colour against; ours keeps 4.5:1 in both themes. */
+.sd-app .sd-editor--light .CodeMirror-matchingtag {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-editor--dark .CodeMirror-matchingtag {
+	background: rgb(255 255 255 / 10%);
+}
+
+/* Tokens. */
+.sd-app .sd-editor .cm-keyword,
+.sd-app .sd-editor .cm-meta {
+	color: var(--sd-editor-keyword);
+}
+
+.sd-app .sd-editor .cm-string,
+.sd-app .sd-editor .cm-string-2 {
+	color: var(--sd-editor-string);
+}
+
+.sd-app .sd-editor .cm-def,
+.sd-app .sd-editor .cm-property,
+.sd-app .sd-editor .cm-builtin {
+	color: var(--sd-editor-function);
+}
+
+.sd-app .sd-editor .cm-variable-2,
+.sd-app .sd-editor .cm-variable-3,
+.sd-app .sd-editor .cm-type {
+	color: var(--sd-editor-variable);
+}
+
+.sd-app .sd-editor .cm-variable {
+	color: var(--sd-editor-identifier);
+}
+
+.sd-app .sd-editor .cm-operator,
+.sd-app .sd-editor .cm-bracket {
+	color: var(--sd-editor-text);
+}
+
+.sd-app .sd-editor .cm-number {
+	color: var(--sd-editor-number);
+}
+
+.sd-app .sd-editor .cm-atom {
+	color: var(--sd-editor-constant);
+}
+
+.sd-app .sd-editor .cm-comment {
+	color: var(--sd-editor-comment);
+	font-style: italic;
+}
+
+.sd-app .sd-editor .cm-tag {
+	color: var(--sd-editor-tag);
+}
+
+.sd-app .sd-editor .cm-attribute {
+	color: var(--sd-editor-attribute);
+}
+
+/* CSS reads differently: selectors like strings, properties like
+   variables (the Page code modal's dark CSS). */
+.sd-app .sd-editor--css .cm-qualifier,
+.sd-app .sd-editor--css .cm-tag,
+.sd-app .sd-editor--css .cm-builtin {
+	color: var(--sd-editor-string);
+}
+
+.sd-app .sd-editor--css .cm-property {
+	color: var(--sd-editor-variable);
+}
+
+.sd-app .sd-editor--css .cm-keyword {
+	color: var(--sd-editor-keyword);
+}
+
+.sd-app .sd-editor .cm-error {
+	background: none;
+	color: inherit;
+	text-decoration: underline wavy var(--sd-editor-error-edge);
+}
+
+/* Lint: the error line gets a wash, a 2px edge and a marked gutter. */
+.sd-app .sd-editor .sd-cm-error-line {
+	background: var(--sd-editor-error-bg);
+	box-shadow: inset 2px 0 0 var(--sd-editor-error-edge);
+}
+
+.rtl .sd-app .sd-editor .sd-cm-error-line,
+.sd-app [dir="rtl"] .sd-editor .sd-cm-error-line {
+	box-shadow: inset -2px 0 0 var(--sd-editor-error-edge);
+}
+
+.sd-app .sd-editor .sd-cm-error-gutter .CodeMirror-linenumber {
+	color: var(--sd-editor-danger);
+	font-weight: 700;
+}
+
+.sd-app .sd-editor .sd-cm-error-gutter .CodeMirror-linenumber::after {
+	content: " ●";
+}
+
+.sd-app .sd-editor .sd-cm-error-token {
+	text-decoration: underline wavy var(--sd-editor-error-edge);
+	text-decoration-skip-ink: none;
+}
+
+/* Smart tags inside code read as one token. */
+.sd-app .sd-editor .sd-cm-smart-tag {
+	border-radius: 3px;
+	background: var(--sd-ember-100);
+	color: var(--sd-ember-800);
+}
+
+.sd-app .sd-editor--dark .sd-cm-smart-tag {
+	background: var(--sd-code-dark-selection);
+	color: var(--sd-ember-300);
+}
+
+/* The error tooltip, drawn by the editor component inside .sd-app. */
+.sd-app .sd-editor__tip {
+	position: absolute;
+	z-index: var(--sd-z-popover);
+	max-inline-size: 360px;
+	padding: 4px 11px;
+	border-radius: var(--sd-radius-sm);
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+	font: 500 12px/18px var(--sd-font-sans);
+	pointer-events: none;
+}
+
+/* Lint status: No syntax errors, Line N, Checking…, Read-only. ---------- */
+
+.sd-app .sd-lint {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 6px;
+	max-inline-size: 100%;
+	block-size: 26px;
+	padding-inline: 11px;
+	border: 1px solid transparent;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+	font: 700 12px/1 var(--sd-font-sans);
+	white-space: nowrap;
+}
+
+.sd-app .sd-lint--lg {
+	block-size: 28px;
+	padding-inline: 12px;
+}
+
+.sd-app .sd-lint svg {
+	inline-size: 13px;
+	block-size: 13px;
+	stroke-width: 3;
+}
+
+.sd-app .sd-lint__text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sd-app .sd-lint--error {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-lint--error svg {
+	stroke-width: 2;
+}
+
+.sd-app button.sd-lint {
+	cursor: pointer;
+}
+
+.sd-app .sd-lint--checking {
+	gap: 7px;
+	background: var(--sd-gray-100);
+	color: var(--sd-gray-700);
+	font-weight: 600;
+}
+
+.sd-app .sd-lint--readonly {
+	background: var(--sd-warning-bg);
+	color: var(--sd-warning-text);
+}
+
+.sd-app .sd-lint--readonly svg {
+	stroke-width: 2;
+}
+
+.sd-app .sd-editor--dark .sd-lint {
+	background: transparent;
+	color: var(--sd-code-dark-success-text);
+}
+
+.sd-app .sd-editor--dark .sd-lint--error {
+	border-color: var(--sd-code-dark-error-edge);
+	background: var(--sd-code-dark-error-bg);
+	color: var(--sd-code-dark-error-text);
+}
+
+.sd-app .sd-editor--dark .sd-lint--checking {
+	color: var(--sd-code-dark-gutter);
+}
+
+/* Code preview: read-only, static. Every line is its own block in both
+   the gutter and the code column. ---------------------------------------- */
+
+.sd-app .sd-preview {
+	overflow: hidden;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-editor);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-preview__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-preview__title {
+	color: var(--sd-ink-900);
+	font: 600 12px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-preview__locked {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	margin-inline-start: auto;
+	color: var(--sd-gray-600);
+	font: 700 11px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-preview__locked svg {
+	inline-size: 12px;
+	block-size: 12px;
+	stroke-width: 2;
+}
+
+.sd-app .sd-preview__code {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	margin: 0;
+	overflow-x: auto;
+	color: var(--sd-gray-700);
+	font: 400 12px/21px var(--sd-font-mono);
+	direction: ltr;
+	text-align: left;
+}
+
+.sd-app .sd-preview__code--numbered {
+	grid-template-columns: auto minmax(0, 1fr);
+}
+
+.sd-app .sd-preview__gutter {
+	min-inline-size: 44px;
+	padding: 14px 10px;
+	border-inline-end: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	text-align: right;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.sd-app .sd-preview__lines {
+	padding: 14px 16px;
+	background: var(--sd-gray-50);
+	white-space: pre;
+}
+
+.sd-app .sd-preview__code--numbered .sd-preview__lines {
+	background: var(--sd-white);
+}
+
+.sd-app .sd-preview__line {
+	display: block;
+	inline-size: max-content;
+	min-inline-size: 100%;
+	min-block-size: 21px;
+}
+
+.sd-app .sd-placeholder {
+	padding: 1px 4px;
+	border-radius: 4px;
+	background: var(--sd-ember-100);
+	color: var(--sd-ember-800);
+	font-weight: 700;
+}
+
+.sd-app .sd-preview__note {
+	padding: 10px 16px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-white);
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+/* Smart tags palette. ---------------------------------------------------- */
+
+.sd-app .sd-tags {
+	display: flex;
+	flex-direction: column;
+	inline-size: 380px;
+	max-inline-size: calc(100vw - 32px);
+	max-block-size: min(520px, 80vh);
+	overflow: hidden;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	box-shadow: var(--sd-shadow-md);
+}
+
+.sd-app .sd-tags__head {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: 8px;
+	padding: 14px 16px;
+	border-block-end: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-tags__head .sd-search {
+	flex: 1;
+}
+
+.sd-app .sd-tags__list {
+	flex: 1;
+	min-block-size: 0;
+	overflow: auto;
+	padding-block-end: 6px;
+}
+
+.sd-app .sd-tags__group {
+	padding: 10px 16px 4px;
+	color: var(--sd-gray-600);
+	font: var(--sd-text-overline);
+	letter-spacing: var(--sd-tracking-overline);
+	text-transform: uppercase;
+}
+
+.sd-app .sd-tags__item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	inline-size: 100%;
+	padding: 8px 16px;
+	border: 0;
+	background: none;
+	text-align: start;
+	cursor: pointer;
+}
+
+.sd-app .sd-tags__item:hover,
+.sd-app .sd-tags__item.is-active {
+	background: var(--sd-ember-50);
+}
+
+.sd-app .sd-tags__item:focus-visible {
+	box-shadow: var(--sd-focus-ring-inset);
+}
+
+.sd-app .sd-tags__tag {
+	flex-shrink: 0;
+	padding: 0;
+	background: none;
+	color: var(--sd-ember-700);
+	font: 500 12px/20px var(--sd-font-mono);
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+.sd-app .sd-tags__desc {
+	overflow: hidden;
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-tags__insert {
+	display: none;
+	margin-inline-start: auto;
+	color: var(--sd-ember-700);
+	font: 700 11px/16px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags__item:is(:hover, .is-active) .sd-tags__insert {
+	display: inline;
+}
+
+/* Listed but empty here (WooCommerce tags outside order pages). */
+.sd-app .sd-tags__item.is-unavailable .sd-tags__tag {
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-tags__note {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin: 6px 16px;
+	padding: 11px 13px;
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-info-bg);
+	color: var(--sd-gray-700);
+	font: 400 12px/19px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags__note svg {
+	flex-shrink: 0;
+	inline-size: 16px;
+	block-size: 16px;
+	stroke-width: 1.8;
+}
+
+.sd-app .sd-tags__empty {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: flex-start;
+	padding: 22px 20px 16px;
+}
+
+.sd-app .sd-tags__empty-title {
+	color: var(--sd-ink-900);
+	font: 700 14px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags__empty-text {
+	color: var(--sd-gray-700);
+	font: 400 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags__foot {
+	flex-shrink: 0;
+	padding: 12px 16px;
+	border-block-start: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	font: 400 12px/19px var(--sd-font-sans);
+}
+
+.sd-app .sd-tags__foot code {
+	padding: 0;
+	background: none;
+	font: 400 11px/19px var(--sd-font-mono);
+}
+
+.sd-app .sd-tags__example {
+	display: block;
+	margin-block-start: 6px;
+	color: var(--sd-ink-900);
+	white-space: pre-wrap;
+	direction: ltr;
+	text-align: left;
+}
+
+/* The palette opens under the editor's "Smart tags" button. */
+.sd-app .sd-editor__palette {
+	position: absolute;
+	inset-block-start: calc(100% + 8px);
+	inset-inline-end: 0;
+	z-index: var(--sd-z-popover);
+}
+
+.sd-app .sd-editor.is-fullscreen .sd-editor__palette {
+	z-index: calc(var(--sd-z-modal) + 1);
+}
+
+/*
+ * Diff: changed lines with a little context. A 3px edge and a + or − in
+ * the gutter mark every change, so colour is never the only signal. Each
+ * line is its own block, as wide as its text, so a tint spans the whole
+ * line when it scrolls sideways; the gutter stays put, and the background
+ * paints its strip behind it. Code reads left to right in every language.
+ */
+.sd-app .sd-diff {
+	max-block-size: 320px;
+	overflow: auto;
+	padding-block: 10px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	background: linear-gradient(to right, var(--sd-gray-50) 56px, var(--sd-gray-200) 56px 57px, var(--sd-white) 57px);
+	color: var(--sd-gray-700);
+	font: 400 12px/22px var(--sd-font-mono);
+	direction: ltr;
+	text-align: left;
+}
+
+.sd-app .sd-diff:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-diff__line {
+	display: flex;
+	inline-size: max-content;
+	min-inline-size: 100%;
+}
+
+.sd-app .sd-diff__gutter {
+	position: sticky;
+	left: 0;
+	z-index: 1;
+	display: flex;
+	flex-shrink: 0;
+	justify-content: flex-end;
+	gap: 4px;
+	box-sizing: border-box;
+	inline-size: 57px;
+	padding-inline: 6px 9px;
+	border-right: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-700);
+	white-space: nowrap;
+	user-select: none;
+}
+
+.sd-app .sd-diff__marker {
+	inline-size: 8px;
+	text-align: center;
+}
+
+.sd-app code.sd-diff__code {
+	flex: 1 0 auto;
+	margin: 0;
+	padding-block: 0;
+	padding-inline: 13px 16px;
+	border-left: 3px solid transparent;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	white-space: pre;
+}
+
+.sd-app .sd-diff__line.is-add code.sd-diff__code {
+	border-left-color: var(--sd-success);
+	background: var(--sd-success-bg);
+	color: var(--sd-ink-900);
+	font-weight: 500;
+}
+
+.sd-app .sd-diff__line.is-remove code.sd-diff__code {
+	border-left-color: var(--sd-danger);
+	background: var(--sd-danger-bg);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-diff__line.is-add .sd-diff__gutter {
+	color: var(--sd-success-text);
+	font-weight: 700;
+}
+
+.sd-app .sd-diff__line.is-remove .sd-diff__gutter {
+	color: var(--sd-danger-text);
+	font-weight: 700;
+}
+
+/* Side by side: two columns that scroll together, each line kept level with
+   its pair so the two versions read across. */
+
+.sd-app .sd-diff--split {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	padding-block: 0;
+	background: var(--sd-white);
+}
+
+.sd-app .sd-diff__col {
+	min-inline-size: 0;
+	overflow-x: auto;
+	padding-block-end: 10px;
+}
+
+.sd-app .sd-diff__col:focus-visible {
+	outline: 2px solid transparent;
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-diff__col + .sd-diff__col {
+	border-inline-start: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-diff__head {
+	position: sticky;
+	inset-block-start: 0;
+	inset-inline-start: 0;
+	z-index: 2;
+	padding: 6px 12px;
+	border-block-end: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	color: var(--sd-gray-600);
+	font: 700 10px/16px var(--sd-font-sans);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.sd-app .sd-diff--split .sd-diff__line.is-blank {
+	block-size: 22px;
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-diff--split .sd-diff__skip {
+	padding-inline: 16px;
+}
+
+/* "3 unchanged lines" between hunks. */
+.sd-app .sd-diff__skip {
+	position: sticky;
+	left: 0;
+	padding-block: 3px;
+	padding-inline: 73px 16px;
+	color: var(--sd-gray-600);
+	font: 400 11px/16px var(--sd-font-sans);
+}

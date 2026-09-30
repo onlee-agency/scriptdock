@@ -1,0 +1,6 @@
+/**
+ * Show the same message for every failed login.
+ */
+add_filter( 'login_errors', function () {
+	return '<strong>Error:</strong> The username or password you entered is incorrect.';
+} );

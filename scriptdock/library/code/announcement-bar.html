@@ -1,0 +1,32 @@
+<div class="sd-announcement" role="region" aria-label="Announcement">
+	<p>Free shipping on all orders this week. <a href="/shop/">Shop now</a></p>
+	<button type="button" class="sd-announcement__close" aria-label="Dismiss announcement">&times;</button>
+</div>
+<style>
+	.sd-announcement{position:relative;background:#111827;color:#fff;text-align:center;padding:10px 48px;font-size:15px;line-height:1.4}
+	.sd-announcement p{margin:0}
+	.sd-announcement a{color:#fde68a;text-decoration:underline}
+	.sd-announcement__close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer;padding:4px 8px}
+	.sd-announcement.is-hidden{display:none}
+</style>
+<script>
+	( function () {
+		var bar = document.querySelector( '.sd-announcement' );
+		if ( ! bar ) {
+			return;
+		}
+		// Change this key when you change the message, so everyone sees the new one.
+		var key = 'sd-announcement-1';
+		try {
+			if ( window.localStorage.getItem( key ) ) {
+				bar.classList.add( 'is-hidden' );
+			}
+		} catch ( e ) {}
+		bar.querySelector( '.sd-announcement__close' ).addEventListener( 'click', function () {
+			bar.classList.add( 'is-hidden' );
+			try {
+				window.localStorage.setItem( key, '1' );
+			} catch ( e ) {}
+		} );
+	} )();
+</script>

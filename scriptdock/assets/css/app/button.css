@@ -1,0 +1,685 @@
+/**
+ * sd-Button, sd-IconButton, sd-SplitButton, sd-CopyChip and sd-Link.
+ *
+ * Heights: sm 32, md 40, lg 48. Labels sit flush to the start; the primary
+ * button carries the orange dot with a dark icon at the end.
+ */
+
+/* Button ----------------------------------------------------------------- */
+
+.sd-app .sd-button {
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	block-size: var(--sd-button-height-md);
+	padding-block: 0;
+	padding-inline: 20px;
+	border: 1px solid transparent;
+	border-radius: var(--sd-radius-pill);
+	background: transparent;
+	color: var(--sd-ink-900);
+	font: 600 14px/1 var(--sd-font-sans);
+	white-space: nowrap;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		transform var(--sd-duration-base) var(--sd-ease),
+		box-shadow var(--sd-duration-base) var(--sd-ease),
+		background-color var(--sd-duration-base) var(--sd-ease),
+		border-color var(--sd-duration-base) var(--sd-ease),
+		color var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-button:focus,
+.sd-app .sd-button:hover {
+	text-decoration: none;
+}
+
+.sd-app .sd-button:is(:disabled, [aria-disabled="true"]) {
+	cursor: not-allowed;
+}
+
+/* Primary: ink pill. Hover lifts 2px; pressed drops 1px and the dot goes
+   ember-600. */
+
+.sd-app .sd-button--primary,
+.sd-app .sd-button--primary:focus,
+.sd-app .sd-button--primary:hover {
+	border-color: transparent;
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-button--primary {
+	padding-inline: 18px;
+}
+
+.sd-app .sd-button--primary:has(> .sd-button__dot) {
+	padding-inline: 18px 6px;
+}
+
+.sd-app .sd-button--primary:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--sd-shadow-lift);
+}
+
+.sd-app .sd-button--primary:focus-visible {
+	box-shadow: var(--sd-focus-ring);
+}
+
+.sd-app .sd-button--primary:hover:focus-visible {
+	box-shadow: var(--sd-focus-ring), var(--sd-shadow-lift);
+}
+
+.sd-app .sd-button--primary:active {
+	transform: translateY(1px);
+	background: var(--sd-ink-950);
+	box-shadow: none;
+}
+
+.sd-app .sd-button--primary:active > .sd-button__dot {
+	background: var(--sd-ember-600);
+}
+
+/* Secondary: outlined. */
+
+.sd-app .sd-button--secondary,
+.sd-app .sd-button--secondary:focus {
+	border-color: var(--sd-gray-300);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-button--secondary:has(> .sd-button__dot) {
+	padding-inline: 18px 6px;
+}
+
+.sd-app .sd-button--secondary:hover {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-gray-50);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-button--secondary:active {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-950);
+}
+
+/* Outline: ink border on white, the action inside a banner ("Exit safe
+   mode"). */
+
+.sd-app .sd-button--outline,
+.sd-app .sd-button--outline:focus {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-button--outline:hover,
+.sd-app .sd-button--outline:active {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-gray-50);
+	color: var(--sd-ink-900);
+}
+
+/* Tertiary: text only. */
+
+.sd-app .sd-button--tertiary,
+.sd-app .sd-button--tertiary:focus {
+	padding-inline: 14px;
+	background: transparent;
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-button--tertiary:hover,
+.sd-app .sd-button--tertiary:active {
+	background: var(--sd-gray-100);
+	color: var(--sd-ink-900);
+}
+
+/* Accent: the orange gradient carries ink text only, never white. */
+
+.sd-app .sd-button--accent,
+.sd-app .sd-button--accent:focus,
+.sd-app .sd-button--accent:hover {
+	background: var(--sd-gradient-dot);
+	box-shadow: var(--sd-shadow-glow);
+	color: var(--sd-ink-900);
+	font-weight: 700;
+}
+
+.sd-app .sd-button--accent:hover {
+	transform: translateY(-2px);
+}
+
+.sd-app .sd-button--accent:focus-visible {
+	box-shadow: var(--sd-focus-ring), var(--sd-shadow-glow);
+}
+
+.sd-app .sd-button--accent:active {
+	transform: translateY(1px);
+	background: var(--sd-ember-600);
+}
+
+/* Danger: outlined for a step you can undo, solid for the final confirm. */
+
+.sd-app .sd-button--danger,
+.sd-app .sd-button--danger:focus {
+	border-color: var(--sd-danger);
+	background: var(--sd-white);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-button--danger:hover,
+.sd-app .sd-button--danger:active {
+	border-color: var(--sd-danger);
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-button--danger-solid,
+.sd-app .sd-button--danger-solid:focus,
+.sd-app .sd-button--danger-solid:hover {
+	border-color: transparent;
+	background: var(--sd-danger);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-button--danger-solid:hover,
+.sd-app .sd-button--danger-solid:active {
+	background: var(--sd-danger-text);
+}
+
+/* Inverse: the white primary on ink surfaces (save bar). */
+
+.sd-app .sd-button--inverse,
+.sd-app .sd-button--inverse:focus,
+.sd-app .sd-button--inverse:hover {
+	padding-inline: 18px 6px;
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	font-weight: 700;
+}
+
+.sd-app .sd-button--inverse:hover {
+	transform: translateY(-2px);
+}
+
+.sd-app .sd-button--inverse:active {
+	transform: translateY(1px);
+	background: var(--sd-gray-100);
+}
+
+/* On ink: ghost buttons inside the bulk bar and save bar. */
+
+.sd-app .sd-button--on-ink,
+.sd-app .sd-button--on-ink:focus {
+	padding-inline: 14px;
+	background: transparent;
+	color: var(--sd-white);
+}
+
+.sd-app .sd-button--on-ink:hover,
+.sd-app .sd-button--on-ink:active {
+	background: var(--sd-on-ink-hover);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-button--on-ink:focus-visible {
+	box-shadow: 0 0 0 2px var(--sd-white), 0 0 0 4px var(--sd-ember-200);
+}
+
+/* Orange text on ink is 7.2:1. */
+.sd-app .sd-button--on-ink.sd-button--danger-text {
+	color: var(--sd-ember-400);
+}
+
+/* Text-only in danger red: the lighter destructive action beside another
+   ("Delete permanently" next to "Restore", "Trash" in a footer). */
+.sd-app .sd-button--tertiary.sd-button--danger-text,
+.sd-app .sd-button--tertiary.sd-button--danger-text:focus {
+	color: var(--sd-danger-text);
+}
+
+.sd-app .sd-button--tertiary.sd-button--danger-text:hover,
+.sd-app .sd-button--tertiary.sd-button--danger-text:active {
+	background: var(--sd-danger-bg);
+	color: var(--sd-danger-text);
+}
+
+/* Disabled: tokens, never opacity. */
+
+.sd-app .sd-button:is(:disabled, [aria-disabled="true"]):is(.sd-button--primary, .sd-button--accent, .sd-button--danger-solid, .sd-button--inverse) {
+	padding-inline: 18px;
+	transform: none;
+	border-color: transparent;
+	background: var(--sd-gray-200);
+	box-shadow: none;
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-button:is(:disabled, [aria-disabled="true"]):is(.sd-button--secondary, .sd-button--danger) {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-white);
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-button:is(:disabled, [aria-disabled="true"]).sd-button--tertiary {
+	background: transparent;
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-button:is(:disabled, [aria-disabled="true"]) > .sd-button__dot {
+	display: none;
+}
+
+/* Loading: a spinner replaces the dot and the label says what is
+   happening ("Saving…"). */
+
+.sd-app .sd-button.is-loading {
+	gap: 10px;
+	padding-inline: 18px;
+	cursor: progress;
+}
+
+.sd-app .sd-button.is-loading .sd-spinner {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+.sd-app .sd-button--primary.is-loading,
+.sd-app .sd-button--primary.is-loading:hover {
+	transform: none;
+	box-shadow: none;
+}
+
+/* Sizes. */
+
+.sd-app .sd-button--sm {
+	block-size: var(--sd-button-height-sm);
+	padding-inline: 14px;
+	font-size: 13px;
+}
+
+.sd-app .sd-button--sm.sd-button--primary:has(> .sd-button__dot) {
+	gap: 6px;
+	padding-inline: 14px 4px;
+}
+
+.sd-app .sd-button--sm > .sd-button__dot {
+	inline-size: 24px;
+	block-size: 24px;
+}
+
+.sd-app .sd-button--sm > .sd-button__dot svg {
+	inline-size: 12px;
+	block-size: 12px;
+}
+
+/* 36px: the compact height used in banners, toasts and row actions. */
+.sd-app .sd-button--compact {
+	block-size: var(--sd-control-height-compact);
+	padding-inline: 16px;
+	font-size: 13px;
+}
+
+.sd-app .sd-button--lg {
+	gap: 10px;
+	block-size: var(--sd-button-height-lg);
+	padding-inline: 24px;
+	font-size: 15px;
+}
+
+.sd-app .sd-button--lg.sd-button--primary:has(> .sd-button__dot) {
+	padding-inline: 24px 8px;
+}
+
+.sd-app .sd-button--lg > .sd-button__dot {
+	inline-size: 32px;
+	block-size: 32px;
+}
+
+.sd-app .sd-button--lg > .sd-button__dot svg {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+.sd-app .sd-button__dot {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 28px;
+	block-size: 28px;
+	border-radius: 50%;
+	background: var(--sd-gradient-dot);
+	color: var(--sd-ink-900);
+	transition: background-color var(--sd-duration-base) var(--sd-ease);
+}
+
+.sd-app .sd-button__dot svg {
+	inline-size: 14px;
+	block-size: 14px;
+	stroke-width: 2.4;
+}
+
+.sd-app .sd-button > svg {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+/* Icon button: circles. The hit area grows to 44px on touch screens. ----- */
+
+.sd-app .sd-icon-button {
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: var(--sd-control-height);
+	block-size: var(--sd-control-height);
+	padding: 0;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: 50%;
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	cursor: pointer;
+	transition:
+		border-color var(--sd-duration-fast) var(--sd-ease),
+		background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-icon-button:focus {
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-icon-button:hover {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-icon-button svg {
+	inline-size: 18px;
+	block-size: 18px;
+}
+
+/* Muted icon: the search button in the top bar. */
+.sd-app .sd-icon-button--muted,
+.sd-app .sd-icon-button--muted:focus,
+.sd-app .sd-icon-button--muted:hover {
+	color: var(--sd-gray-600);
+}
+
+/* Soft: gray-100 fill, no border ("More actions"). */
+.sd-app .sd-icon-button--soft,
+.sd-app .sd-icon-button--soft:focus {
+	border-color: transparent;
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-icon-button--soft:hover {
+	border-color: transparent;
+	background: var(--sd-gray-200);
+}
+
+/* Ghost: transparent until hovered (row menus). */
+.sd-app .sd-icon-button--ghost,
+.sd-app .sd-icon-button--ghost:focus {
+	border-color: transparent;
+	background: transparent;
+}
+
+.sd-app .sd-icon-button--ghost:hover {
+	border-color: transparent;
+	background: var(--sd-gray-100);
+}
+
+/* Ink: filled, white icon ("Close", the phone "New snippet"). */
+.sd-app .sd-icon-button--ink,
+.sd-app .sd-icon-button--ink:focus,
+.sd-app .sd-icon-button--ink:hover {
+	border-color: var(--sd-ink-900);
+	background: var(--sd-ink-900);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-icon-button--ink:active {
+	background: var(--sd-ink-950);
+}
+
+/* On ink: the round close button in the bulk bar. */
+.sd-app .sd-icon-button--on-ink,
+.sd-app .sd-icon-button--on-ink:focus {
+	border-color: transparent;
+	background: var(--sd-on-ink-fill);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-icon-button--on-ink:hover {
+	border-color: transparent;
+	background: var(--sd-on-ink-hover);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-icon-button--on-ink:focus-visible {
+	box-shadow: 0 0 0 2px var(--sd-white), 0 0 0 4px var(--sd-ember-200);
+}
+
+.sd-app .sd-icon-button:is(:disabled, [aria-disabled="true"]) {
+	border-color: var(--sd-gray-200);
+	background: var(--sd-white);
+	color: var(--sd-gray-500);
+	cursor: not-allowed;
+}
+
+/* Sizes: 44 for stand-alone navigation, 36 and 32 inside dense rows. */
+.sd-app .sd-icon-button--lg {
+	inline-size: var(--sd-control-height-touch);
+	block-size: var(--sd-control-height-touch);
+}
+
+.sd-app .sd-icon-button--md {
+	inline-size: var(--sd-control-height-compact);
+	block-size: var(--sd-control-height-compact);
+}
+
+.sd-app .sd-icon-button--md svg {
+	inline-size: 15px;
+	block-size: 15px;
+}
+
+.sd-app .sd-icon-button--sm {
+	inline-size: 32px;
+	block-size: 32px;
+}
+
+.sd-app .sd-icon-button--sm svg {
+	inline-size: 16px;
+	block-size: 16px;
+}
+
+.sd-app .sd-icon-button--xs {
+	inline-size: 30px;
+	block-size: 30px;
+}
+
+.sd-app .sd-icon-button--xs svg {
+	inline-size: 15px;
+	block-size: 15px;
+}
+
+@media (pointer: coarse) {
+
+	.sd-app .sd-icon-button::before {
+		position: absolute;
+		inset: -4px;
+		content: "";
+	}
+}
+
+/* Split button: Save plus a menu of save options. ------------------------ */
+
+.sd-app .sd-split-button {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: stretch;
+	overflow: hidden;
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-ink-900);
+}
+
+.sd-app .sd-split-button:has(:focus-visible) {
+	overflow: visible;
+}
+
+.sd-app .sd-split-button__main,
+.sd-app .sd-split-button__menu {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	background: transparent;
+	color: var(--sd-white);
+	cursor: pointer;
+	transition: background-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-split-button__main {
+	block-size: var(--sd-button-height-md);
+	padding-inline: 18px;
+	border-start-start-radius: var(--sd-radius-pill);
+	border-end-start-radius: var(--sd-radius-pill);
+	font: 600 14px/1 var(--sd-font-sans);
+}
+
+.sd-app .sd-split-button__menu {
+	inline-size: 36px;
+	border-start-end-radius: var(--sd-radius-pill);
+	border-end-end-radius: var(--sd-radius-pill);
+}
+
+.sd-app .sd-split-button__main:hover,
+.sd-app .sd-split-button__menu:hover,
+.sd-app .sd-split-button__menu[aria-expanded="true"] {
+	background: var(--sd-on-ink-hover);
+	color: var(--sd-white);
+}
+
+.sd-app .sd-split-button__main:focus,
+.sd-app .sd-split-button__menu:focus {
+	color: var(--sd-white);
+}
+
+.sd-app .sd-split-button__menu svg {
+	inline-size: 16px;
+	block-size: 16px;
+	stroke-width: 2;
+}
+
+.sd-app .sd-split-button__divider {
+	inline-size: 1px;
+	margin-block: 8px;
+	background: var(--sd-on-ink-divider);
+}
+
+.sd-app .sd-split-button :disabled {
+	cursor: not-allowed;
+}
+
+/*
+ * The whole button turns grey only when Save itself is unavailable. A new
+ * snippet can have something to save before the menu has anything to
+ * offer; then the button stays ink and only the arrow dims.
+ */
+.sd-app .sd-split-button__menu:disabled {
+	color: var(--sd-on-ink-disabled);
+}
+
+.sd-app .sd-split-button:has(.sd-split-button__main:disabled) {
+	background: var(--sd-gray-200);
+}
+
+.sd-app .sd-split-button:has(.sd-split-button__main:disabled) :disabled {
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-split-button:has(.sd-split-button__main:disabled) .sd-split-button__divider {
+	background: var(--sd-gray-300);
+}
+
+/* Nothing to save, but the menu (Save as copy) still works. */
+.sd-app .sd-split-button:has(.sd-split-button__main:disabled) .sd-split-button__menu:not(:disabled) {
+	color: var(--sd-ink-900);
+}
+
+.sd-app .sd-split-button:has(.sd-split-button__main:disabled) .sd-split-button__menu:not(:disabled):is(:hover, [aria-expanded="true"]) {
+	background: var(--sd-gray-300);
+}
+
+/* Copy chip: a value you can copy, such as a shortcode. ------------------ */
+
+.sd-app .sd-copy-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	max-inline-size: 100%;
+	block-size: 34px;
+	padding-inline: 12px;
+	border: 1px solid var(--sd-gray-300);
+	border-radius: var(--sd-radius-pill);
+	background: var(--sd-gray-50);
+	color: var(--sd-ink-900);
+	font: 400 12px/1 var(--sd-font-mono);
+	cursor: pointer;
+	transition: border-color var(--sd-duration-fast) var(--sd-ease);
+}
+
+.sd-app .sd-copy-chip:hover {
+	border-color: var(--sd-ink-900);
+}
+
+.sd-app .sd-copy-chip__value {
+	overflow: hidden;
+	direction: ltr;
+	unicode-bidi: isolate;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-copy-chip svg {
+	inline-size: 14px;
+	block-size: 14px;
+}
+
+.sd-app .sd-copy-chip.is-copied {
+	border-color: var(--sd-success);
+	background: var(--sd-success-bg);
+	color: var(--sd-success-text);
+	font-weight: 500;
+}
+
+/* Link with a trailing icon ("View file ↗"). ---------------------------- */
+
+.sd-app .sd-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-weight: 600;
+}
+
+.sd-app .sd-link svg {
+	inline-size: 14px;
+	block-size: 14px;
+	stroke-width: 2;
+}
+
+/* Arrow icons point along the reading direction. */
+.sd-app [dir="rtl"] .sd-flip,
+.rtl .sd-app .sd-flip {
+	transform: scaleX(-1);
+}

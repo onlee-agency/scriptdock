@@ -1,0 +1,12 @@
+/**
+ * Add each post's featured image to the top of its feed content.
+ */
+$add_featured_image = function ( $content ) {
+	$post = get_post();
+	if ( $post && has_post_thumbnail( $post ) ) {
+		$content = '<p>' . get_the_post_thumbnail( $post, 'large' ) . '</p>' . $content;
+	}
+	return $content;
+};
+add_filter( 'the_excerpt_rss', $add_featured_image );
+add_filter( 'the_content_feed', $add_featured_image );

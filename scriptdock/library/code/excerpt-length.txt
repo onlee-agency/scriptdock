@@ -1,0 +1,6 @@
+/**
+ * Set the length of automatic excerpts, in words.
+ */
+add_filter( 'excerpt_length', function () {
+	return %%words%%;
+}, 999 );

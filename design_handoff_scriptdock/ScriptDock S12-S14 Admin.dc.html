@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  body { margin: 0; background: #E9E7E3; -webkit-font-smoothing: antialiased; }
+  a { color: #C2410C; text-decoration: none; }
+  a:hover { color: #913C05; text-decoration: underline; }
+  @keyframes sdPulse { 0%, 100% { transform: scale(1); opacity: 1 } 50% { transform: scale(1.5); opacity: .25 } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important } }
+</style>
+</helmet>
+
+<div class="sd-app" style="--sd-ember-50:#FFF4EC; --sd-ember-100:#FFE6D5; --sd-ember-200:#FFCDA8; --sd-ember-300:#FEA969; --sd-ember-400:#FF8A1F; --sd-ember-500:#FF6400; --sd-ember-600:#E25300; --sd-ember-700:#C2410C; --sd-ember-800:#913C05; --sd-ink-950:#0C0C0C; --sd-ink-900:#111111; --sd-gray-700:#4F504D; --sd-gray-600:#6B6C69; --sd-gray-500:#8A8B87; --sd-gray-400:#8F8E8A; --sd-gray-300:#D9D8D4; --sd-gray-200:#E7E5E1; --sd-gray-100:#F3F2EF; --sd-gray-50:#F9F8F6; --sd-white:#FFFFFF; --sd-success:#00A32A; --sd-success-text:#007017; --sd-success-bg:#EDFAEF; --sd-warning:#DBA617; --sd-warning-text:#8A6100; --sd-warning-bg:#FCF9E8; --sd-danger:#D63638; --sd-danger-text:#B32D2E; --sd-danger-bg:#FCF0F1; --sd-info-bg:#F3F2EF; --sd-type-php-fg:#5B4BC4; --sd-type-php-bg:#EFEDFB; --sd-type-html-fg:#BE2D48; --sd-type-html-bg:#FDECEF; --sd-type-css-fg:#1B63B0; --sd-type-css-bg:#E8F2FC; --sd-type-js-fg:#8A6A00; --sd-type-js-bg:#FFF6D6; --sd-type-universal-fg:#0F7C5A; --sd-type-universal-bg:#E6F6EF; --sd-gradient-dot:linear-gradient(135deg,#FB8E01 0%,#FF6400 55%,#FE6100 100%); --sd-font-sans:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; --sd-font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace; --sd-radius-pill:999px; --sd-radius-card:20px; --sd-radius-modal:24px; --sd-radius-input:12px; --sd-radius-editor:16px; --sd-radius-sm:8px; --sd-shadow-sm:0 1px 2px rgba(17,17,17,.06); --sd-shadow-md:0 8px 24px rgba(17,17,17,.06); --sd-shadow-lg:0 24px 48px rgba(17,17,17,.10); --sd-shadow-glow:0 12px 32px rgba(255,100,0,.18); --sd-focus-ring:0 0 0 2px #111111, 0 0 0 4px #FFCDA8; font-family: var(--sd-font-sans); color: var(--sd-ink-900); padding: 48px; display: flex; flex-direction: column; gap: 64px; box-sizing: border-box;">
+
+  <!-- ══════════ A · S12 IMPORT & EXPORT ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px; width: 1280px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S12</span>
+      <span style="font-size: 15px; font-weight: 700;">Import &amp; Export</span>
+      <span style="font-size: 13px; color: var(--sd-gray-700);">Two plugins detected, a file selected in the dropzone, and the export card.</span>
+    </div>
+
+    <div data-screen-label="S12 Import and Export" style="width: 1280px; background: var(--sd-gray-50); border-radius: var(--sd-radius-card); padding: 22px; box-shadow: var(--sd-shadow-sm); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px;">
+
+      <div style="display: flex; flex-direction: column; gap: 5px; max-width: 72ch; padding: 0 4px;">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 800; letter-spacing: -0.02em;">Import &amp; Export</h1>
+        <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--sd-gray-700);">Bring snippets over from another plugin, restore a backup, or move your setup to a different site.</p>
+      </div>
+
+      <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+        <div style="display: flex; flex-direction: column; gap: 3px; padding: 20px 22px 16px;">
+          <h2 style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 700; letter-spacing: -0.01em;">Move from another plugin</h2>
+          <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">We found these on your site. Importing copies the snippets across and leaves the originals untouched.</p>
+        </div>
+
+        <div style="padding: 0 22px 16px;">
+          <div style="display: flex; align-items: center; gap: 14px; padding: 15px 18px; border-radius: var(--sd-radius-card); background: var(--sd-warning-bg); border: 1px solid var(--sd-warning);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 4 21 19H3z" /><path d="M12 10v4" /><circle cx="12" cy="16.6" r=".8" fill="#8A6100" stroke="none" /></svg>
+            <span style="font-size: 14px; line-height: 22px; color: var(--sd-gray-700);"><strong style="color: var(--sd-warning-text);">WPCode is still active.</strong> Deactivate it after importing, or the same code will run twice on every page.</span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; padding: 16px 22px; border-top: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--sd-radius-input); background: var(--sd-gray-100); flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7 4.5 12 9 17" /><path d="M15 7l4.5 5L15 17" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700;">WPCode<span style="display: inline-flex; align-items: center; height: 21px; padding: 0 9px; border-radius: var(--sd-radius-pill); background: var(--sd-warning-bg); color: var(--sd-warning-text); font-size: 10px; font-weight: 700;">Still active</span></span><span style="font-size: 13px; color: var(--sd-gray-700);">12 snippets found · 9 would be active</span></span>
+          <label style="display: inline-flex; align-items: center; gap: 9px; margin-left: auto; font-size: 13px; font-weight: 600; flex-shrink: 0;"><span role="switch" aria-checked="false" aria-label="Keep imported snippets active" style="display: inline-flex; align-items: center; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-300); box-sizing: border-box;"><span style="width: 20px; height: 20px; border-radius: 50%; background: var(--sd-white); box-shadow: var(--sd-shadow-sm);"></span></span>Keep active</label>
+          <button type="button" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 6px 0 18px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Import 12<span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11" /><path d="M8 11l4 4 4-4" /><path d="M5 19h14" /></svg></span></button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; padding: 16px 22px; border-top: 1px solid var(--sd-gray-200); flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--sd-radius-input); background: var(--sd-gray-100); flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16" /><path d="M4 15.5h16" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 15px; font-weight: 700;">Header Footer Code Manager</span><span style="font-size: 13px; color: var(--sd-gray-700);">3 snippets found · all would be active</span></span>
+          <label style="display: inline-flex; align-items: center; gap: 9px; margin-left: auto; font-size: 13px; font-weight: 600; flex-shrink: 0;"><span role="switch" aria-checked="true" aria-label="Keep imported snippets active" style="display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>Keep active</label>
+          <button type="button" style="flex-shrink: 0; height: 42px; padding: 0 20px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Import 3</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; align-items: start;">
+
+        <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 20px 22px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <h2 style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 700; letter-spacing: -0.01em;">Import a file</h2>
+            <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">A ScriptDock export, or a JSON file from WPCode or Code Snippets.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; padding: 15px 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-input); background: var(--sd-white);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--sd-radius-sm); background: var(--sd-gray-100); flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4" /></svg></span>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-family: var(--sd-font-mono); font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">wpcode-export-2026-09-18.json</span><span style="font-size: 12px; color: var(--sd-gray-600);">48 KB · 12 snippets · read successfully</span></span>
+            <button type="button" aria-label="Remove file" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 0; border-radius: 50%; background: var(--sd-gray-100); cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+          </div>
+
+          <label style="display: flex; align-items: center; gap: 12px;">
+            <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Keep snippets active</span><span style="font-size: 12px; line-height: 18px; color: var(--sd-gray-600);">Off is safer — check them first, then switch them on.</span></span>
+            <span role="switch" aria-checked="false" aria-label="Keep snippets active" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-300); box-sizing: border-box;"><span style="width: 20px; height: 20px; border-radius: 50%; background: var(--sd-white); box-shadow: var(--sd-shadow-sm);"></span></span>
+          </label>
+
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 6px 0 20px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Import file<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11" /><path d="M8 11l4 4 4-4" /><path d="M5 19h14" /></svg></span></button>
+
+          <div style="display: flex; flex-direction: column; gap: 9px; padding-top: 12px; border-top: 1px solid var(--sd-gray-200);">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sd-gray-700);">Empty and drag-over states</span>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 92px; border: 2px dashed var(--sd-gray-300); border-radius: var(--sd-radius-input); background: var(--sd-gray-50); padding: 16px;">
+              <span style="font-size: 14px; font-weight: 600;">Drop a .json export here</span>
+              <span style="font-size: 13px; color: var(--sd-gray-700);">or <a href="#">browse your computer</a></span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 92px; border: 2px dashed var(--sd-ember-500); border-radius: var(--sd-radius-input); background: var(--sd-ember-50); padding: 16px; box-shadow: var(--sd-shadow-glow);">
+              <span style="font-size: 14px; font-weight: 700; color: var(--sd-ember-800);">Release to import</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 20px 22px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+              <h2 style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 700; letter-spacing: -0.01em;">Export</h2>
+              <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">A JSON file with your code, settings and targeting. Passwords and keys inside your code are exported too, so store it somewhere safe.</p>
+            </div>
+            <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 6px 0 20px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;">Export all 24 snippets<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V8" /><path d="M8 12l4-4 4 4" /><path d="M5 19h14" /></svg></span></button>
+            <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Select rows on the <a href="#">snippet list</a> to export only some of them.</span>
+            <div style="display: flex; flex-direction: column; gap: 7px; padding-top: 12px; border-top: 1px solid var(--sd-gray-200);">
+              <span style="font-size: 12px; font-weight: 600;">From the command line</span>
+              <code style="font-family: var(--sd-font-mono); font-size: 12px; line-height: 19px; color: var(--sd-gray-700); background: var(--sd-gray-50); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-sm); padding: 9px 11px; display: block; overflow-x: auto; white-space: pre;">wp scriptdock export --file=backup.json</code>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); padding: 20px 22px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sd-gray-700);">No plugins found</span>
+            <div style="display: flex; align-items: center; gap: 13px; padding: 16px 0 6px;">
+              <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="flex-shrink: 0;"><g stroke="#111111" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="9" y="13" width="30" height="22" rx="3" /><path d="M9 20h30" /></g><circle cx="24" cy="27" r="5" fill="#FFCDA8" opacity=".45" /><circle cx="24" cy="27" r="2.6" fill="#FF6400" /></svg>
+              <span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">No other snippet plugins found</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Nothing to migrate. If you have an export file, use the card on the left.</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ B · S12b IMPORT RESULTS + S14 TAGS ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S12b · S14</span>
+      <span style="font-size: 15px; font-weight: 700;">Import results · Tags management modal</span>
+    </div>
+
+    <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+
+      <div data-screen-label="S12b Import results" style="width: 640px; display: flex; flex-direction: column; background: var(--sd-white); border-radius: var(--sd-radius-modal); box-shadow: var(--sd-shadow-lg); overflow: hidden; flex-shrink: 0;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 24px 24px 18px;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--sd-success-bg); flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#007017" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 20px; font-weight: 700; letter-spacing: -0.01em;">Imported 12 snippets</span><span style="font-size: 13px; color: var(--sd-gray-700);">9 are active · 3 stayed off · 2 need a look</span></span>
+          <button type="button" aria-label="Close" style="margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--sd-gray-300); border-radius: 50%; background: var(--sd-white); cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+        </div>
+
+        <div style="padding: 0 24px 18px; display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sd-gray-600);">Worth checking</span>
+          <div style="display: flex; gap: 12px; padding: 14px 16px; border-radius: var(--sd-radius-input); background: var(--sd-warning-bg); border: 1px solid var(--sd-warning);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 4 21 19H3z" /><path d="M12 10v4" /><circle cx="12" cy="16.6" r=".8" fill="#8A6100" stroke="none" /></svg>
+            <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; font-weight: 700;">Promo popup</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Was written in SCSS and imported as plain CSS. Nested rules will not work until you flatten them.</span></span>
+            <a href="#" style="margin-left: auto; align-self: center; flex-shrink: 0; font-size: 12px; font-weight: 600;">Open</a>
+          </div>
+          <div style="display: flex; gap: 12px; padding: 14px 16px; border-radius: var(--sd-radius-input); background: var(--sd-warning-bg); border: 1px solid var(--sd-warning);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 4 21 19H3z" /><path d="M12 10v4" /><circle cx="12" cy="16.6" r=".8" fill="#8A6100" stroke="none" /></svg>
+            <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; font-weight: 700;">Mobile hero</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Used a WPCode condition with no ScriptDock equivalent. Its targeting was left empty, so it runs everywhere — check it before switching it on.</span></span>
+            <a href="#" style="margin-left: auto; align-self: center; flex-shrink: 0; font-size: 12px; font-weight: 600;">Open</a>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding: 18px 24px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50);">
+          <span style="font-size: 13px; color: var(--sd-gray-700);">WPCode is still active.</span>
+          <div style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+            <button type="button" style="height: 44px; padding: 0 18px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Deactivate WPCode</button>
+            <button type="button" style="display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 6px 0 20px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">View imported snippets<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 6l6 6-6 6" /></svg></span></button>
+          </div>
+        </div>
+      </div>
+
+      <div data-screen-label="S14 Tags modal" style="width: 520px; display: flex; flex-direction: column; background: var(--sd-white); border-radius: var(--sd-radius-modal); box-shadow: var(--sd-shadow-lg); overflow: hidden; flex-shrink: 0;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 20px 24px; border-bottom: 1px solid var(--sd-gray-200);">
+          <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Manage tags</span><span style="font-size: 13px; color: var(--sd-gray-700);">Tags are shared across all snippets.</span></span>
+          <button type="button" aria-label="Close" style="margin-left: auto; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--sd-gray-300); border-radius: 50%; background: var(--sd-white); cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--sd-gray-200);">
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 13px; font-weight: 600;">analytics</span>
+            <span style="font-size: 12px; color: var(--sd-gray-600);">3 snippets</span>
+            <span style="margin-left: auto; display: flex; gap: 6px;">
+              <button type="button" style="height: 32px; padding: 0 12px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Rename</button>
+              <button type="button" aria-label="Delete analytics tag" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; cursor: pointer;" style-hover="background: #FCF0F1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14" /><path d="M8 7V5h8v2" /><path d="M6.5 7l1 13h9l1-13" /></svg></button>
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--sd-gray-200); background: var(--sd-ember-50);">
+            <input type="text" value="woocommerce" style="flex: 1; min-width: 0; height: 38px; padding: 0 13px; border: 1px solid var(--sd-ink-900); border-radius: var(--sd-radius-input); font-family: inherit; font-size: 14px; background: var(--sd-white); box-shadow: var(--sd-focus-ring); box-sizing: border-box;" />
+            <span style="display: flex; gap: 6px; flex-shrink: 0;">
+              <button type="button" style="height: 38px; padding: 0 14px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Save</button>
+              <button type="button" style="height: 38px; padding: 0 12px; border: 0; border-radius: var(--sd-radius-pill); background: transparent; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cancel</button>
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--sd-gray-200);">
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 13px; font-weight: 600;">tracking</span>
+            <span style="font-size: 12px; color: var(--sd-gray-600);">2 snippets</span>
+            <span style="margin-left: auto; display: flex; gap: 6px;">
+              <button type="button" style="height: 32px; padding: 0 12px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Rename</button>
+              <button type="button" aria-label="Delete tracking tag" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14" /><path d="M8 7V5h8v2" /><path d="M6.5 7l1 13h9l1-13" /></svg></button>
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; padding: 13px 24px; border-bottom: 1px solid var(--sd-gray-200);">
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 13px; font-weight: 600;">design</span>
+            <span style="font-size: 12px; color: var(--sd-gray-600);">4 snippets</span>
+            <span style="margin-left: auto; display: flex; gap: 6px;">
+              <button type="button" style="height: 32px; padding: 0 12px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Rename</button>
+              <button type="button" aria-label="Delete design tag" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14" /><path d="M8 7V5h8v2" /><path d="M6.5 7l1 13h9l1-13" /></svg></button>
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; padding: 13px 24px;">
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 13px; font-weight: 600; color: var(--sd-gray-700);">seasonal</span>
+            <span style="font-size: 12px; color: var(--sd-gray-600);">Not used</span>
+            <span style="margin-left: auto; display: flex; gap: 6px;">
+              <button type="button" style="height: 32px; padding: 0 12px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;">Rename</button>
+              <button type="button" aria-label="Delete seasonal tag" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B6C69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14" /><path d="M8 7V5h8v2" /><path d="M6.5 7l1 13h9l1-13" /></svg></button>
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50);">
+          <button type="button" style="height: 40px; padding: 0 16px; border: 1px dashed var(--sd-gray-400); border-radius: var(--sd-radius-pill); background: transparent; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">+ New tag</button>
+          <button type="button" style="margin-left: auto; height: 40px; padding: 0 20px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Done</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ C · S13 SETTINGS ══════════ -->
+  <section style="display: flex; flex-direction: column; gap: 14px; width: 1280px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-size: 12px; font-weight: 700; letter-spacing: .04em;">S13</span>
+      <span style="font-size: 15px; font-weight: 700;">Settings · sticky section nav, all eight sections</span>
+    </div>
+
+    <div data-screen-label="S13 Settings" style="width: 1280px; background: var(--sd-gray-50); border-radius: var(--sd-radius-card); padding: 22px; box-shadow: var(--sd-shadow-sm); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px;">
+
+      <div style="display: flex; flex-direction: column; gap: 5px; padding: 0 4px;">
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 800; letter-spacing: -0.02em;">Settings</h1>
+        <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--sd-gray-700);">Everything is on by default and safe to leave alone.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 20px; align-items: start;">
+
+        <nav style="display: flex; flex-direction: column; gap: 1px; border-left: 2px solid var(--sd-gray-200);">
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; margin-left: -2px; border-left: 2px solid var(--sd-ink-900); font-size: 13px; font-weight: 700;">General</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Error protection</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Page scripts</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Performance</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Editor</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Safety &amp; security <span style="margin-left: auto; display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--sd-danger); color: var(--sd-white); font-size: 10px; font-weight: 700;">1</span></span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">Uninstall</span>
+          <span style="display: flex; align-items: center; gap: 9px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--sd-gray-700);">About</span>
+        </nav>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">General</h2></div>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px;">
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Admin bar inspector</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Adds a "ScriptDock" menu to the toolbar on the front end, listing which snippets ran on the page you are looking at. Only administrators see it.</span></span>
+              <span role="switch" aria-checked="true" aria-label="Admin bar inspector" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">Error protection</h2></div>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200);">
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Switch off broken snippets automatically</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">If a snippet causes a fatal error, ScriptDock disables it instead of letting your site go down. Strongly recommended.</span></span>
+              <span role="switch" aria-checked="true" aria-label="Auto-deactivate broken snippets" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px;">
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Email me when that happens</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Sent to <strong style="font-weight: 600;">maya@lumencoffee.com</strong> with the error, the line number and a link to fix it. <a href="#">Change address</a></span></span>
+              <span role="switch" aria-checked="true" aria-label="Email alerts" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">Page scripts</h2><p style="margin: 5px 0 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Which content types get their own code box in the editor.</p></div>
+            <div style="padding: 18px 22px; display: flex; gap: 22px; flex-wrap: wrap;">
+              <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 6px; background: var(--sd-ink-900);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Posts</label>
+              <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 6px; background: var(--sd-ink-900);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Pages</label>
+              <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 6px; background: var(--sd-ink-900);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Products</label>
+              <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;"><span style="display: inline-flex; width: 20px; height: 20px; border: 1px solid var(--sd-gray-400); border-radius: 6px; background: var(--sd-white);"></span>Workshops</label>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">Performance</h2></div>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200);">
+              <span style="display: flex; flex-direction: column; gap: 5px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Serve CSS and JavaScript as cached files</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Faster than printing the same code inline on every page, and browsers can cache it between visits. Files are written to:</span><code style="font-family: var(--sd-font-mono); font-size: 12px; line-height: 19px; color: var(--sd-gray-700); background: var(--sd-gray-50); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-sm); padding: 8px 10px; overflow-x: auto; white-space: nowrap;">/wp-content/uploads/scriptdock/</code></span>
+              <span role="switch" aria-checked="true" aria-label="Serve as cached files" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200);">
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Minify CSS</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Strips comments and spacing from cached CSS files. Your original code is never changed.</span></span>
+              <span role="switch" aria-checked="true" aria-label="Minify CSS" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; justify-content: flex-end; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); box-sizing: border-box;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span></span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 16px 22px; background: var(--sd-gray-50);">
+              <span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">6 cached files · 18 KB total</span>
+              <button type="button" style="margin-left: auto; height: 36px; padding: 0 15px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Rebuild files</button>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">Editor</h2></div>
+            <div style="padding: 18px 22px; display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-size: 15px; font-weight: 600;">Theme</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 460px;">
+                  <label style="border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-input); overflow: hidden; cursor: pointer;">
+                    <span style="display: block; padding: 12px 14px; background: var(--sd-white); font-family: var(--sd-font-mono); font-size: 11px; line-height: 18px; white-space: pre;"><span style="color: #BE2D48;">&lt;script&gt;</span>
+  <span style="color: #1B63B0;">gtag</span>(<span style="color: #0F7C5A;">'js'</span>);</span>
+                    <span style="display: flex; align-items: center; gap: 9px; padding: 11px 14px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-gray-50); font-size: 13px; font-weight: 600;"><span style="display: inline-flex; width: 18px; height: 18px; border: 1px solid var(--sd-gray-400); border-radius: 50%; background: var(--sd-white); flex-shrink: 0;"></span>Light</span>
+                  </label>
+                  <label style="border: 2px solid var(--sd-ink-900); border-radius: var(--sd-radius-input); overflow: hidden; cursor: pointer;">
+                    <span style="display: block; padding: 12px 14px; background: #141210; font-family: var(--sd-font-mono); font-size: 11px; line-height: 18px; color: #F5F1EC; white-space: pre;"><span style="color: #FF8A1F;">&lt;script&gt;</span>
+  <span style="color: #E6D5C3;">gtag</span>(<span style="color: #F9C98B;">'js'</span>);</span>
+                    <span style="display: flex; align-items: center; gap: 9px; padding: 11px 14px; border-top: 1px solid var(--sd-gray-200); background: var(--sd-white); font-size: 13px; font-weight: 700;"><span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 2px solid var(--sd-ink-900); border-radius: 50%; box-sizing: border-box; flex-shrink: 0;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--sd-gradient-dot);"></span></span>Dark</span>
+                  </label>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 15px; font-weight: 600;">Revisions to keep</span><span style="font-size: 13px; color: var(--sd-gray-700);">Per snippet. Older ones are deleted.</span></span>
+                <span style="margin-left: auto; display: inline-flex; align-items: center; height: 40px; border: 1px solid var(--sd-gray-400); border-radius: var(--sd-radius-input); background: var(--sd-white); overflow: hidden;"><button type="button" aria-label="Fewer revisions" style="width: 34px; height: 100%; border: 0; background: transparent; font-size: 17px; cursor: pointer;">−</button><span style="width: 40px; text-align: center; font-family: var(--sd-font-mono); font-size: 14px; font-weight: 500;">20</span><button type="button" aria-label="More revisions" style="width: 34px; height: 100%; border: 0; background: transparent; font-size: 17px; cursor: pointer;">+</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">Safety &amp; security</h2></div>
+
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200); display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 4.5 19 7v5.5c0 3.6-2.8 6.4-7 7.5-4.2-1.1-7-3.9-7-7.5V7z" /><path d="M9 12.2l2.2 2.2L15.2 10" /></svg>
+                <span style="font-size: 15px; font-weight: 700;">Safe mode link</span>
+              </div>
+              <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700); max-width: 72ch;">Open this link and every snippet pauses in your browser only — visitors still see the site as normal. Save it somewhere outside WordPress, because you will need it when the admin will not load.</p>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <code style="flex: 1 1 380px; min-width: 0; font-family: var(--sd-font-mono); font-size: 12px; line-height: 20px; color: var(--sd-gray-700); background: var(--sd-gray-50); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-sm); padding: 10px 12px; overflow-x: auto; white-space: nowrap;">https://lumencoffee.com/wp-admin/index.php?scriptdock_safe_mode=q7m2x9w4k8r1t5v3n6p0</code>
+                <button type="button" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 15px; border: 1px solid var(--sd-gray-300); border-radius: var(--sd-radius-pill); background: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M15 5H6a1 1 0 0 0-1 1v9" /></svg>Copy</button>
+                <button type="button" style="flex-shrink: 0; height: 40px; padding: 0 15px; border: 1px solid var(--sd-danger); border-radius: var(--sd-radius-pill); background: var(--sd-white); color: var(--sd-danger-text); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Generate new link</button>
+              </div>
+              <span style="font-size: 12px; line-height: 19px; color: var(--sd-gray-600);">Generating a new link breaks the old one immediately. You can also set <code style="font-family: var(--sd-font-mono); font-size: 11px;">SCRIPTDOCK_SAFE_MODE</code> in wp-config.php to force safe mode for everyone.</span>
+            </div>
+
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--sd-gray-200); display: flex; flex-direction: column; gap: 12px; background: var(--sd-danger-bg);">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 4.5 19 7v5.5c0 3.6-2.8 6.4-7 7.5-4.2-1.1-7-3.9-7-7.5V7z" /></svg>
+                <span style="font-size: 15px; font-weight: 700;">Tamper protection</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-white); border: 1px solid var(--sd-success); color: var(--sd-success-text); font-size: 11px; font-weight: 700;">On</span>
+                <span style="font-size: 12px; color: var(--sd-gray-700);">Signing with your WordPress security keys.</span>
+              </div>
+              <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700); max-width: 72ch;">Every snippet is signed when you save it. If the code changes in the database without going through ScriptDock, it stops running until you approve it.</p>
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--sd-danger-text);"><span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sd-danger); color: var(--sd-white); font-size: 12px; font-weight: 800;">1</span>snippet needs review</span>
+                <span style="display: flex; gap: 8px; margin-left: auto;">
+                  <button type="button" style="height: 38px; padding: 0 16px; border: 0; border-radius: var(--sd-radius-pill); background: var(--sd-ink-900); color: var(--sd-white); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Review it</button>
+                  <button type="button" style="height: 38px; padding: 0 16px; border: 1px solid var(--sd-danger); border-radius: var(--sd-radius-pill); background: var(--sd-white); color: var(--sd-danger-text); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Approve all</button>
+                </span>
+              </div>
+            </div>
+
+            <div style="padding: 18px 22px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M9 7 4.5 12 9 17" /><path d="M15 7l4.5 5L15 17" /></svg>
+                <span style="font-size: 15px; font-weight: 700;">PHP snippets</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: var(--sd-radius-pill); background: var(--sd-success-bg); color: var(--sd-success-text); font-size: 11px; font-weight: 700;">Available</span>
+              </div>
+              <p style="margin: 0; font-size: 13px; line-height: 20px; color: var(--sd-gray-700); max-width: 72ch;">Administrators can add PHP. To switch this off for everyone, add one of these to wp-config.php:</p>
+              <code style="font-family: var(--sd-font-mono); font-size: 12px; line-height: 21px; color: var(--sd-gray-700); background: var(--sd-gray-50); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-sm); padding: 10px 12px; display: block; overflow-x: auto; white-space: pre;">define( 'SCRIPTDOCK_DISALLOW_PHP', true );
+define( 'DISALLOW_FILE_EDIT', true );</code>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--sd-danger); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200); background: var(--sd-danger-bg);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em; color: var(--sd-danger-text);">Uninstall</h2></div>
+            <label style="display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px;">
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;"><span style="font-size: 15px; font-weight: 600;">Delete all data when the plugin is deleted</span><span style="font-size: 13px; line-height: 20px; color: var(--sd-gray-700);">Removes every snippet, revision and setting. This cannot be undone, and deactivating the plugin does not trigger it.</span></span>
+              <span role="switch" aria-checked="false" aria-label="Delete all data on uninstall" style="margin-left: auto; flex-shrink: 0; margin-top: 2px; display: inline-flex; align-items: center; width: 44px; height: 24px; padding: 2px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-300); box-sizing: border-box;"><span style="width: 20px; height: 20px; border-radius: 50%; background: var(--sd-white); box-shadow: var(--sd-shadow-sm);"></span></span>
+            </label>
+          </div>
+
+          <div style="border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-card); background: var(--sd-white); overflow: hidden;">
+            <div style="padding: 18px 22px 14px; border-bottom: 1px solid var(--sd-gray-200);"><h2 style="margin: 0; font-size: 17px; line-height: 25px; font-weight: 700; letter-spacing: -0.01em;">About</h2></div>
+            <div style="padding: 20px 22px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 11px;"><span style="width: 20px; height: 20px; border-radius: 50%; background: var(--sd-gradient-dot);"></span><span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 16px; font-weight: 800; letter-spacing: -0.03em;">scriptdock</span><span style="font-size: 12px; color: var(--sd-gray-600);">Version 1.0.0 · 20 snippets running</span></span></span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 11px; font-weight: 700; color: var(--sd-gray-700);">Free &amp; open source</span>
+              <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 11px; font-weight: 700; color: var(--sd-gray-700);">No tracking</span>
+              <span style="display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: var(--sd-radius-pill); background: var(--sd-gray-100); font-size: 11px; font-weight: 700; color: var(--sd-gray-700);">No ads</span>
+            </div>
+            <div style="display: flex; gap: 14px; margin-left: auto;"><a href="#" style="font-size: 13px; font-weight: 600;">GitHub ↗</a><a href="#" style="font-size: 13px; font-weight: 600;">Changelog ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding: 12px 20px; background: var(--sd-white); border: 1px solid var(--sd-gray-200); border-radius: var(--sd-radius-pill); align-self: flex-start;">
+    <span style="font-size: 13px; color: var(--sd-gray-600);">Phase 8 · S12 Import &amp; Export · S13 Settings · S14 Tags</span>
+    <a href="ScriptDock Foundations.dc.html" style="font-size: 13px; font-weight: 600;">Foundations ↗</a>
+    <a href="ScriptDock Components.dc.html" style="font-size: 13px; font-weight: 600;">Components ↗</a>
+    <a href="ScriptDock S09-S11 Content Screens.dc.html" style="font-size: 13px; font-weight: 600;">S09–S11 ↗</a>
+  </footer>
+</div>
+
+</x-dc>
+</body>
+</html>

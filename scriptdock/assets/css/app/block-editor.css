@@ -1,0 +1,290 @@
+/**
+ * S08a and S08b: ScriptDock inside the block editor.
+ *
+ * The panel sits in WordPress's own sidebar, so it keeps the block editor's
+ * measurements — 280px wide, 13px text, 2px radii, #e0e0e0 rules — while its
+ * insides are ScriptDock components. Nothing here restyles Gutenberg itself.
+ * The two rules outside .sd-app are for the toolbar button, which WordPress
+ * draws for us and which only holds our dot and its badge.
+ */
+
+/* The toolbar button ---------------------------------------------------- */
+
+.sd-sidebar-dot {
+	display: block;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #fb8e01, #c2410c);
+}
+
+.sd-sidebar-icon {
+	position: relative;
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
+.sd-sidebar-icon__badge {
+	position: absolute;
+	top: -7px;
+	inset-inline-end: -8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 16px;
+	height: 16px;
+	padding: 0 4px;
+	box-sizing: border-box;
+	border: 1.5px solid #fff;
+	border-radius: 8px;
+	background: #ff6400;
+	color: #111;
+	font-size: 10px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+/* The panel ------------------------------------------------------------- */
+
+.sd-app.sd-pagepanel {
+	font: var(--sd-text-small);
+	color: var(--sd-ink-900);
+}
+
+.sd-app.sd-pagepanel .sd-pagepanel__section {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--sd-gray-200);
+}
+
+.sd-app.sd-pagepanel .sd-pagepanel__section--last {
+	border-bottom: 0;
+}
+
+.sd-app.sd-pagepanel .sd-pagepanel__heading {
+	color: var(--sd-gray-600);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+/* Page code rows -------------------------------------------------------- */
+
+.sd-app .sd-pagepanel__slots {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-pagepanel__slot-open {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	padding: 5px 6px;
+	border: 0;
+	border-radius: var(--sd-radius-input);
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: start;
+	cursor: pointer;
+}
+
+.sd-app .sd-pagepanel__slot-open:hover {
+	background: var(--sd-gray-100);
+}
+
+.sd-app .sd-pagepanel__slot-name {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sd-app .sd-pagepanel__slot-state {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-inline-start: auto;
+	flex-shrink: 0;
+	color: var(--sd-gray-600);
+}
+
+.sd-app .sd-pagepanel__slot-state.is-filled {
+	color: var(--sd-gray-700);
+}
+
+.sd-app .sd-pagepanel__slot-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--sd-success);
+}
+
+.sd-app .sd-pagepanel__edit {
+	height: 36px;
+	margin-top: 4px;
+	border: 1px solid var(--sd-ink-900);
+	border-radius: 2px;
+	background: var(--sd-white);
+	color: var(--sd-ink-900);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.sd-app .sd-pagepanel__edit:hover {
+	background: var(--sd-gray-100);
+}
+
+/* Site-wide snippets ---------------------------------------------------- */
+
+.sd-app .sd-pagepanel__snippets {
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sd-app .sd-pagepanel__snippet {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.sd-app .sd-pagepanel__snippet-name {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Switched off here: said with a line through the name, never with
+   opacity, so the text keeps its contrast. */
+.sd-app .sd-pagepanel__snippet.is-off .sd-pagepanel__snippet-name {
+	color: var(--sd-gray-600);
+	text-decoration: line-through;
+}
+
+.sd-app .sd-pagepanel__snippet .sd-switch {
+	margin-inline-start: auto;
+	flex-shrink: 0;
+}
+
+.sd-app .sd-pagepanel__all {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding-top: 12px;
+	border-top: 1px solid var(--sd-gray-200);
+}
+
+.sd-app .sd-pagepanel__all .sd-switch {
+	margin-inline-start: auto;
+	flex-shrink: 0;
+}
+
+.sd-app .sd-pagepanel__empty,
+.sd-app .sd-pagepanel__note {
+	color: var(--sd-gray-600);
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.sd-app .sd-pagepanel__manage {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+/* S08b · the Page code window ------------------------------------------- */
+
+.sd-app .sd-pagewin {
+	max-inline-size: 1040px;
+	block-size: min(720px, 86vh);
+}
+
+.sd-app .sd-pagewin .sd-modal__body {
+	display: flex;
+	min-block-size: 0;
+	padding: 0;
+}
+
+.sd-app .sd-pagewin__layout {
+	display: flex;
+	flex: 1;
+	min-inline-size: 0;
+	min-block-size: 0;
+}
+
+.sd-app .sd-pagewin__tabs {
+	inline-size: 210px;
+	flex-shrink: 0;
+	padding: 14px 10px;
+	border-inline-end: 1px solid var(--sd-gray-200);
+	background: var(--sd-gray-50);
+	overflow-y: auto;
+}
+
+.sd-app .sd-pagewin__panel {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 14px;
+	min-inline-size: 0;
+	min-block-size: 0;
+	padding: 20px 24px;
+}
+
+.sd-app .sd-pagewin__intro {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.sd-app .sd-pagewin__title {
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.sd-app .sd-pagewin__desc {
+	color: var(--sd-gray-700);
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.sd-app .sd-pagewin__panel .sd-editor {
+	flex: 1;
+	min-block-size: 0;
+}
+
+/* The window gives the editor a fixed frame, so the code area fills what is
+   left rather than growing with the code. */
+.sd-app .sd-pagewin .sd-editor:not(.is-fullscreen) .CodeMirror {
+	block-size: 100%;
+	min-block-size: 0;
+}
+
+.sd-app .sd-pagewin .sd-editor__body {
+	overflow: hidden;
+}
+
+.sd-app .sd-pagewin__note {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-inline-end: auto;
+	color: var(--sd-gray-700);
+	font-size: 13px;
+}

@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "scriptdock/snippet",
+	"version": "1.0.0",
+	"title": "ScriptDock Snippet",
+	"category": "widgets",
+	"icon": "editor-code",
+	"description": "Output a ScriptDock snippet whose location is set to “Shortcode or block only”.",
+	"keywords": [ "code", "snippet", "html", "php", "script" ],
+	"textdomain": "scriptdock",
+	"attributes": {
+		"snippetId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"html": false,
+		"className": false,
+		"customClassName": false,
+		"reusable": true
+	},
+	"editorStyle": "scriptdock-snippet-block"
+}

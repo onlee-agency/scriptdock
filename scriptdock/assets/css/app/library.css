@@ -1,0 +1,166 @@
+/**
+ * S10 Library: the hero, the category pills, the cards and the add modal.
+ * The template cards, pills and modal style themselves; this file lays the
+ * screen out.
+ */
+
+.sd-app .sd-library {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-block: 4px 32px;
+}
+
+.sd-app .sd-library__hero {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: space-between;
+	padding: 22px 24px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-card);
+	background: var(--sd-white);
+	overflow: hidden;
+}
+
+.sd-app .sd-library__heading {
+	position: relative;
+	z-index: 1;
+}
+
+.sd-app .sd-library .sd-screen__title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.sd-app .sd-library__intro {
+	margin: 4px 0 0;
+	max-inline-size: 64ch;
+	color: var(--sd-gray-600);
+	font: 400 13.5px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-library__glow {
+	position: absolute;
+	inset-block-start: -140px;
+	inset-inline-end: -60px;
+	inline-size: 320px;
+	block-size: 280px;
+	border-radius: 50%;
+	background-image: radial-gradient(circle, var(--sd-ember-100), rgb(255 255 255 / 0%) 70%);
+	pointer-events: none;
+}
+
+.sd-app .sd-library__tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.sd-app .sd-library__tools .sd-field {
+	min-inline-size: 260px;
+}
+
+.sd-app .sd-library__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+}
+
+/* Add modal ---------------------------------------------------------------- */
+
+.sd-app .sd-addmodal__body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 300px;
+	gap: 20px;
+	align-items: start;
+}
+
+.sd-app .sd-addmodal__code {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	min-inline-size: 0;
+}
+
+.sd-app .sd-addmodal__parts {
+	margin: 0;
+	color: var(--sd-gray-600);
+	font: 600 12.5px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-addmodal__partline {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 6px;
+	color: var(--sd-ink-900);
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-addmodal__where {
+	margin-inline-start: auto;
+	color: var(--sd-gray-600);
+	font: 400 12px/18px var(--sd-font-sans);
+}
+
+.sd-app .sd-addmodal__form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.sd-app .sd-addmodal__where-card {
+	padding: 12px;
+	border: 1px solid var(--sd-gray-200);
+	border-radius: var(--sd-radius-input);
+	background: var(--sd-gray-50);
+}
+
+.sd-app .sd-addmodal__placement {
+	margin: 6px 0 0;
+	color: var(--sd-ink-900);
+	font: 600 13px/20px var(--sd-font-sans);
+}
+
+.sd-app .sd-addmodal__hint {
+	margin: 2px 0 0;
+	color: var(--sd-gray-600);
+	font: 400 12.5px/18px var(--sd-font-sans);
+}
+
+@media (max-width: 1100px) {
+
+	.sd-app .sd-library__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.sd-app .sd-addmodal__body {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+@media (max-width: 782px) {
+
+	.sd-app .sd-library__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* The drawing on a card, one per category. ------------------------------- */
+
+.sd-app .sd-catart {
+	color: var(--sd-gray-500);
+}
+
+.sd-app .sd-catart__dot {
+	fill: var(--sd-ember-500);
+	stroke: none;
+}
+
+.sd-app .sd-template.is-blocked .sd-catart {
+	color: var(--sd-gray-400);
+}
